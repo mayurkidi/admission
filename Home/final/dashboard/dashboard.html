@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon icon-->
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png">
+    <!-- Libs CSS -->
+    <link href="assets/fonts/feather/feather.css" rel="stylesheet">
+    <link href="assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="assets/libs/dragula/dist/dragula.min.css" rel="stylesheet" />
+    <link href="assets/libs/%40mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
+    <link href="assets/libs/dropzone/dist/dropzone.css" rel="stylesheet" />
+    <link href="assets/libs/magnific-popup/dist/magnific-popup.css" rel="stylesheet" />
+    <link href="assets/libs/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="assets/libs/%40yaireo/tagify/dist/tagify.css" rel="stylesheet">
+    <link href="assets/libs/tiny-slider/dist/tiny-slider.css" rel="stylesheet">
+    <link href="assets/libs/tippy.js/dist/tippy.css" rel="stylesheet">
+    <link href="assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="assets/libs/prismjs/themes/prism-okaidia.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/kushalcodes/konvert-table-to-card@main/konvert-table-to-card.min.js"
+        type="text/javascript">
+        </script>
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="assets/css/theme.min.css">
+    <title>RKU | Dashboard</title>
+</head>
+
+<body>
+    <!-- Wrapper -->
+    <div id="db-wrapper">
+        <!-- navbar vertical -->
+        <!-- Sidebar -->
+        <nav class="navbar-vertical navbar ">
+            <div class="nav-scroller ">
+                <!-- Brand logo -->
+                <a class="navbar-brand" href="dashboard.html">
+                    <img src="assets/images/rkuw.png" alt="" />
+                </a>
+                <!-- Navbar nav -->
+                <ul class="navbar-nav flex-column" id="sideNavbar">
+                    <li class="nav-item">
+                        <a class="nav-link  " href="dashboard.html">
+                            <i class="nav-icon fe fe-home me-2"></i> Dashboard
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link   collapsed " href="add-course.html">
+                            <i class="nav-icon fe fe-book me-2"></i> Under Graduate Programs
+                        </a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link   collapsed " href="add-course.html">
+                            <i class="nav-icon fe fe-book me-2"></i> Post Graduate Programs
+                        </a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link   collapsed " href="add-course.html">
+                            <i class="nav-icon fe fe-book me-2"></i> Diploma Programs
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="nav-divider"></div>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+        <!-- Page Content -->
+        <div id="page-content">
+            <div class="header">
+                <!-- navbar -->
+                <nav class="navbar-default navbar navbar-expand-lg">
+                    <a id="nav-toggle" href="#">
+                        <i class="fe fe-menu"></i>
+                    </a>
+                    <div class="ms-lg-3 d-none d-md-none d-lg-block">
+                        <!-- Form -->
+                        <h3 class="mb-0 h3 fw-bold">RKU ADMISSION DASHBOARD</h3>
+                    </div>
+
+                    <!--Navbar nav -->
+                    <ul class="navbar-nav navbar-right-wrap ms-auto d-flex nav-top-wrap">
+
+                        <!-- List -->
+                        <li class="dropdown ms-2">
+                            <a class="rounded-circle" href="#" role="button" id="dropdownUser" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <div class="avatar avatar-md avatar-indicators avatar-online">
+                                    <img alt="avatar" src="assets/images/user.png" class="rounded-circle" />
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
+                                <div class="dropdown-item">
+                                    <div class="d-flex">
+                                        <div class="avatar avatar-md avatar-indicators avatar-online">
+                                            <img alt="avatar" src="assets/images/user.png" class="rounded-circle" />
+                                        </div>
+                                        <div class="ms-3 lh-1">
+                                            <h5 class="mb-1">Annette Black</h5>
+                                            <p class="mb-0 text-muted">annette@geeksui.com</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <a class="dropdown-item" href="myprofile.html">
+                                            <i class="fe fe-user me-2"></i> Profile
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="dropdown-divider"></div>
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fe fe-power me-2"></i> Sign Out
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- Container fluid -->
+            <div class="container-fluid p-4 ">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-12 mb-4">
+                        <!-- card -->
+                        <div class="card h-100">
+                            <!-- card body -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <!-- col -->
+                                    <div class="col-12">
+                                        <span class="fw-semi-bold text-uppercase fs-3">Application in Progress</span>
+                                    </div>
+                                    <!-- col -->
+                                    <div class="col-6">
+
+                                        <h1 class="fw-bold mt-2 mb-0 h2">0</h1>
+                                        <!-- <p class="text-success fw-semi-bold mb-0"><i class="fe fe-trending-up me-1"></i>+1200</p> -->
+                                    </div>
+                                    <!-- chart -->
+                                    <div class="col-6 d-flex flex-row-reverse">
+                                        <i class="nav-icon fe fe-clock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-12 mb-4">
+                        <!-- card -->
+                        <div class="card h-100">
+                            <!-- card body -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <!-- col -->
+                                    <div class="col-12">
+                                        <span class="fw-semi-bold text-uppercase fs-3">Application Completed</span>
+                                    </div>
+                                    <!-- col -->
+                                    <div class="col-6">
+                                        <h1 class="fw-bold mt-2 mb-0 h2">0</h1>
+                                        <!-- <p class="text-success fw-semi-bold mb-0"><i class="fe fe-trending-up me-1"></i>12%</p> -->
+                                    </div>
+                                    <!-- chart -->
+                                    <div class="col-6 d-flex flex-row-reverse">
+                                        <div><i class="nav-icon fe fe-check-circle"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container displayDesktopCard">
+                    <div class="col-12 col-md-12 col-lg-12 col-xl-12 mb-12">
+                        <div class="card h-100">
+                            <div class="card-header bg-danger">
+                                <h4 class="mb-0 text-white">Under Graduate Programs</h4>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-responsive-stack mb-0" id="tableOne">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th scope="col" class="">Application Form</th>
+                                            <th scope="col" class="text-end">Application No.</th>
+                                            <th scope="col" class="text-end">Application Submitted On</th>
+                                            <th scope="col" class="text-end">Application Fees</th>
+                                            <th scope="col" class="text-end">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>UG Application Form</td>
+                                            <td class=" text-end">-</td>
+                                            <td class=" text-end ">-</td>
+                                            <td class=" text-end ">1500</td>
+                                            <td class=" text-end "><a href="add-course.html" class="btn btn-primary">Register</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container displayDesktopCard">
+                    <div class="col-12 col-md-12 col-lg-12 col-xl-12 mb-12">
+                        <div class="card h-100">
+                            <div class="card-header bg-danger">
+                                <h4 class="mb-0 text-white">Post Graduate Programs</h4>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th scope="col" class="">Application Form</th>
+                                            <th scope="col" class="text-end ">Application No.</th>
+                                            <th scope="col" class="text-end ">Application Submitted On</th>
+                                            <th scope="col" class="text-end ">Application Fees</th>
+                                            <th scope="col" class="text-end ">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>PG Application Form</td>
+                                            <td class=" text-end">-</td>
+                                            <td class=" text-end ">-</td>
+                                            <td class=" text-end ">1200</td>
+                                            <td class=" text-end "><a href="add-course.html" class="btn btn-primary">Register</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container displayDesktopCard">
+                    <div class="col-12 col-md-12 col-lg-12 col-xl-12 mb-12">
+                        <div class="card h-100">
+                            <div class="card-header bg-danger">
+                                <h4 class="mb-0 text-white">Diploma Programs</h4>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th scope="col" class="">Application Form</th>
+                                            <th scope="col" class="text-end ">Application No.</th>
+                                            <th scope="col" class="text-end ">Application Submitted On</th>
+                                            <th scope="col" class="text-end ">Application Fees</th>
+                                            <th scope="col" class="text-end ">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Diploma Application Form</td>
+                                            <td class=" text-end">-</td>
+                                            <td class=" text-end ">-</td>
+                                            <td class=" text-end ">1200</td>
+                                            <td class=" text-end "><a href="add-course.html" class="btn btn-primary">Register</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="displayMobileCard">
+                    <div class="container mt-5 mb-3">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card mb-2">
+                                    <div class="card-header d-flex justify-content-between align-items-center bg-danger">
+                                        <h4 class="mb-0 text-white">Under Graduate Form</h4>
+                                        <div class="badge"> 
+                                            <span><button class="btn btn-light"> Apply</button></span> 
+                                        </div>
+                                    </div>
+                                    <div class="p-3 text-black">
+                                        <p class="mb-2">Application Form : Under Graduate Form</p>    
+                                        <p class="mb-2">Application Number : 1200</p>    
+                                        <p class="mb-2">Application Submitted On : 21/02/22</p>    
+                                        <p class="mb-2">Application Fees : 1500</p>    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="displayMobileCard">
+                    <div class="container mt-5 mb-3">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card mb-2">
+                                    <div class="card-header d-flex justify-content-between align-items-center bg-danger">
+                                        <h4 class="mb-0 text-white">Post Graduate Form</h4>
+                                        <div class="badge"> 
+                                            <span><button class="btn btn-light"> Apply</button></span> 
+                                        </div>
+                                    </div>
+                                    <div class="p-3 text-black">
+                                        <p class="mb-2">Application Form : Post Graduate Form</p>    
+                                        <p class="mb-2">Application Number : 1200</p>    
+                                        <p class="mb-2">Application Submitted On : 21/02/22</p>    
+                                        <p class="mb-2">Application Fees : 1500</p>    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="displayMobileCard">
+                    <div class="container mt-5 mb-3">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card mb-2">
+                                    <div class="card-header d-flex justify-content-between align-items-center bg-danger">
+                                        <h4 class="mb-0 text-white">Diploma Form</h4>
+                                        <div class="badge"> 
+                                            <span><button class="btn btn-light"> Apply</button></span> 
+                                        </div>
+                                    </div>
+                                    <div class="p-3 text-black">
+                                        <p class="mb-2">Application Form : Diploma Form</p>    
+                                        <p class="mb-2">Application Number : 1200</p>    
+                                        <p class="mb-2">Application Submitted On : 21/02/22</p>    
+                                        <p class="mb-2">Application Fees : 1500</p>    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scripts -->
+                <!-- Libs JS -->
+                <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+                <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="assets/libs/odometer/odometer.min.js"></script>
+                <script src="assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+                <script src="assets/libs/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
+                <script src="assets/libs/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+                <script src="assets/libs/flatpickr/dist/flatpickr.min.js"></script>
+                <script src="assets/libs/inputmask/dist/jquery.inputmask.min.js"></script>
+                <script src="assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+                <script src="assets/libs/quill/dist/quill.min.js"></script>
+                <script src="assets/libs/file-upload-with-preview/dist/file-upload-with-preview.min.js"></script>
+                <script src="assets/libs/dragula/dist/dragula.min.js"></script>
+                <script src="assets/libs/bs-stepper/dist/js/bs-stepper.min.js"></script>
+                <script src="assets/libs/dropzone/dist/min/dropzone.min.js"></script>
+                <script src="assets/libs/jQuery.print/jQuery.print.js"></script>
+                <script src="assets/libs/prismjs/prism.js"></script>
+                <script src="assets/libs/prismjs/components/prism-scss.min.js"></script>
+                <script src="assets/libs/%40yaireo/tagify/dist/tagify.min.js"></script>
+                <script src="assets/libs/tiny-slider/dist/min/tiny-slider.js"></script>
+                <script src="assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>
+                <script src="assets/libs/tippy.js/dist/tippy-bundle.umd.min.js"></script>
+                <script src="assets/libs/typed.js/lib/typed.min.js"></script>
+                <script src="assets/libs/jsvectormap/dist/js/jsvectormap.min.js"></script>
+                <script src="assets/libs/jsvectormap/dist/maps/world.js"></script>
+                <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+                <script src="assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+                <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+                <script src="assets/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+                <script src="assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+                <script src="assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+                <script src="assets/libs/fullcalendar/main.min.js"></script>
+                <!-- Theme JS -->
+
+                <script>$(document).ready(function () {
+
+                        $('.table-responsive-stack').each(function (i) {
+                            var id = $(this).attr('id');
+                            //alert(id);
+                            $(this).find("th").each(function (i) {
+                                $('#' + id + ' td:nth-child(' + (i + 1) + ')').prepend('<span class="table-responsive-stack-thead">' + $(this).text() + ':</span> ');
+                                $('.table-responsive-stack-thead').hide();
+                            });
+                        });
+
+                        $('.table-responsive-stack').each(function () {
+                            var thCount = $(this).find("th").length;
+                            var rowGrow = 100 / thCount + '%';
+                            //console.log(rowGrow);
+                            $(this).find("th, td").css('flex-basis', rowGrow);
+                        });
+
+
+
+
+                        function flexTable() {
+                            if ($(window).width() < 768) {
+
+                                $(".table-responsive-stack").each(function (i) {
+                                    $(this).find(".table-responsive-stack-thead").show();
+                                    $(this).find('thead').hide();
+                                });
+                            } else {
+                                $(".table-responsive-stack").each(function (i) {
+                                    $(this).find(".table-responsive-stack-thead").hide();
+                                    $(this).find('thead').show();
+                                });
+                            }
+                            // flextable   
+                        }
+
+                        function flexTable2() {
+                            if ($(window).width() < 768) {
+
+                                $(document).ready(function () {
+                                    $(this).find(".table-responsive-stack-thead1").hide();
+                                    $(this).find('.displayCard').show();
+                                });
+                            } else {
+                                $(document).ready(function () {
+                                    $(this).find(".table-responsive-stack-thead1").show();
+                                    $(this).find('.displayCard').hide();
+                                });
+                            }
+                        }
+                        flexTable();
+                        flexTable2();
+                        window.onresize = function (event) {
+                            flexTable();
+                        };
+
+
+
+
+
+
+                        // document ready  
+                    });</script>
+                <script src="assets/js/theme.min.js"></script>
+                <script
+                    src="https://cdn.jsdelivr.net/gh/kushalcodes/konvert-table-to-card@main/konvert-table-to-card.min.js"></script>
+
+                <script>
+                    TABLE_KONVERTER.init(".test1", {
+                        style: 'simple',
+                        // stickyHeader: {
+                        //   tableHeadingName: 'Action'
+                        // }
+                    });
+                </script>
+</body>
+
+</html>
