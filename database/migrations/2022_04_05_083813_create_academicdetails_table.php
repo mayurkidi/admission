@@ -16,12 +16,12 @@ class CreateAcademicdetailsTable extends Migration
         Schema::create('academicdetails', function (Blueprint $table) {
             $table->id('id');
             $table->string('userid');
-            $table->string('leavingcertificate');
-            $table->string('aadharcard');
-            $table->string('marksheet10');
-            $table->string('marksheetd2d');
-            $table->string('marksheet12');
-            $table->string('marksheetgraduation');
+            $table->string('leavingcertificate')->nullable();
+            $table->string('aadharcard')->nullable();
+            $table->string('marksheet10')->nullable();
+            $table->string('marksheetd2d')->nullable();
+            $table->string('marksheet12')->nullable();
+            $table->string('marksheetgraduation')->nullable();
             $table->timestamps();
         });
     }

@@ -117,7 +117,7 @@
                                                     Save & Exit
                                                 </button>
                                             </div> -->
-                                    <div class="col-lg-6 text-center d-flex justify-content-around">
+                                    <div class="col-lg-6 offset-lg-6 text-center d-flex justify-content-around">
                                         <button type="button" class="btn btn-primary col-lg-6" onclick="courseForm.next()">
                                             Next
                                         </button>
@@ -320,7 +320,7 @@
                                 <!-- Button -->
                                 <div class="row">
                                     <div class="col-lg-4 text-center">
-                                        <button type="button" class="btn btn-primary col-lg-3" onclick="courseForm.back()">
+                                        <button type="button" class="btn btn-primary col-lg-6" onclick="courseForm.back()">
                                             Back
                                         </button>
                                     </div>
@@ -329,8 +329,8 @@
                                                     Save & Exit
                                                 </button>
                                             </div> -->
-                                    <div class="col-lg-4 text-center">
-                                        <button type="button" class="btn btn-primary col-lg-3" onclick="courseForm.next()">
+                                    <div class="col-lg-4 offset-lg-4 text-center">
+                                        <button type="button" class="btn btn-primary col-lg-6" onclick="courseForm.next()">
                                             Next
                                         </button>
                                     </div>
@@ -347,7 +347,7 @@
                                         <div class="row mb-3">
                                             <div class="col-lg-4">
                                                 <label for="courseTitle" class="form-label">Leaving Certificate</label>
-                                                <input id="courseTitle" class="form-control" type="file" name="leavingcertificate" />
+                                                <input id="courseTitle" class="form-control" type="file" name="leavingcertificate" id="leavingcertificate" />
                                             </div>
                                             <div class="col-lg-4">
                                                 <label for="courseTitle" class="form-label">Adharcard</label>
@@ -385,7 +385,7 @@
                                                     Save & Exit
                                                 </button>
                                             </div> -->
-                                    <div class="col-lg-4 text-center">
+                                    <div class="col-lg-4 offset-lg-4 text-center">
                                         <button type="submit" class="btn btn-primary col-lg-3" onclick="courseForm.next()">
                                             Submit
                                         </button>
