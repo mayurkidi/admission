@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Applicationdetail;
 use App\Models\Academicdetail;
+use App\Models\Payment;
 use App\Models\User;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use SebastianBergmann\Environment\Console;
@@ -47,8 +48,16 @@ class AddCourseController extends Controller
         $add->userid = \Auth::user()->id;
         $add->course = $request->course;
         $add->specialization = $request->specialization;
-        $add->applicationstatus = 0;
+        $add->applicationstatus = 1;
         $add->save();
+
+        
+       $lc=null;
+       $aadharcard=null;
+       $marksheet10=null;
+       $marksheet12=null;
+       $marksheetd2d=null;
+       $marksheetgraduation=null;
 
         // $dirname=File::makeDirectory('uploads'.public_path( Auth::user()->id.'_'.$request->name));
         if ($request->hasFile('leavingcertificate')) {
@@ -136,7 +145,22 @@ class AddCourseController extends Controller
             // Upload Image
             $request->file('marksheetgraduation')->move(public_path('uploads'), $marksheetgraduation);
   
-        }  
+        } 
+         
+        if ($request->hasFile('payment')) {
+            // Get filename with the extension
+            $filenameWithExt = $request->file('payment')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('payment')->getClientOriginalExtension();
+            // Filename to store
+            $payment = Auth::user()->id . '_' . $request->name . '_' . 'PaymentSS' .'.' . $extension;
+            // Upload Image
+            $request->file('payment')->move(public_path('uploads'), $payment);
+  
+        } 
+
         $addd = new Academicdetail;
         $addd->userid = \Auth::user()->id;
         $addd->leavingcertificate = $lc;
@@ -146,6 +170,13 @@ class AddCourseController extends Controller
         $addd->marksheetd2d = $marksheetd2d;
         $addd->marksheetgraduation = $marksheetgraduation;
         $addd->save();
+
+        $paymentt=new Payment;
+        $paymentt->user_id=\Auth::user()->id;
+        $paymentt->amount=1500;
+        $paymentt->paymentstatus=1;
+        $paymentt->paymentproof=$payment;
+        $paymentt->save();
         
         $user = User::find(Auth::user()->id);
         $user->update([

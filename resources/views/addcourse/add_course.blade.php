@@ -117,7 +117,7 @@
                                                     Save & Exit
                                                 </button>
                                             </div> -->
-                                    <div class="col-lg-6 offset-lg-6 text-center d-flex justify-content-around">
+                                    <div class="col-lg-6 offset-lg-6 text-center d-flex justify-content-end">
                                         <button type="button" class="btn btn-primary col-lg-6" onclick="courseForm.next()">
                                             Next
                                         </button>
@@ -236,11 +236,11 @@
                                     <div class="card-header border-bottom px-4 py-3">
                                         <h4 class="mb-0"><strong class="text-danger"> Address for Correspondence </strong></h4>
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-body form-group">
                                         <div class="row mb-3">
                                             <div class="col-lg-4">
                                                 <label class="form-label">Country</label>
-                                                <select class="selectpicker @error('country') is-invalid @enderror" name="country" data-width="100%">
+                                                <select class="form-control @error('country') is-invalid @enderror" name="country" data-width="100%">
                                                     <option @if(auth()->user()->country == 'Afghanistan')selected @endif>Afghanistan</option>
                                                     <option @if(auth()->user()->country == 'Zimbabwe')selected @endif>Zimbabwe</option>
                                                 </select>
@@ -249,6 +249,7 @@
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                                 @enderror
+                                                
                                             </div>
                                             <div class="col-lg-4">
                                                 <label class="form-label">Select State</label>
@@ -276,20 +277,16 @@
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-8">
                                                 <label for="courseTitle" class="form-label">Address Line 1</label>
-                                                <input id="courseTitle" name="address" class="form-control @error('address') is-invalid @enderror" type="text" placeholder="Enter Address Line 1" />
+                                                <input id="courseTitle" name="address" class="form-control @error('address') is-invalid @enderror" type="text" placeholder="Enter Address" />
 
                                                 @error('address')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                                 @enderror
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <label for="courseTitle" class="form-label">Address Line 2</label>
-                                                <input id="courseTitle" class="form-control" type="text" placeholder="Enter Address Line 2" />
-                                            </div>
+                                            </div>                                            
                                             <div class="col-lg-4">
                                                 <label for="courseTitle" class="form-label">Pincode</label>
                                                 <input id="courseTitle" name="pincode" class="form-control @error('pincode') is-invalid @enderror" type="text" placeholder="Enter Pincode" />
@@ -319,17 +316,12 @@
                                 </div>
                                 <!-- Button -->
                                 <div class="row">
-                                    <div class="col-lg-4 text-center">
+                                    <div class="col-lg-6 text-left">
                                         <button type="button" class="btn btn-primary col-lg-6" onclick="courseForm.back()">
                                             Back
                                         </button>
                                     </div>
-                                    <!-- <div class="col-lg-4 text-center">
-                                                <button class="btn btn-primary col-lg-6" onclick="courseForm.next()">
-                                                    Save & Exit
-                                                </button>
-                                            </div> -->
-                                    <div class="col-lg-4 offset-lg-4 text-center">
+                                    <div class="col-lg-6 d-flex justify-content-end">
                                         <button type="button" class="btn btn-primary col-lg-6" onclick="courseForm.next()">
                                             Next
                                         </button>
@@ -359,15 +351,15 @@
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-4" @if( request()->id == 3 ) hidden @endif>
                                                 <label for="courseTitle" class="form-label">12th Marksheet</label>
                                                 <input id="courseTitle" class="form-control" type="file" name="marksheet12" />
                                             </div>
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-4" @if( request()->id == 1 || request()->id == 3 ) hidden @endif>
                                                 <label for="courseTitle" class="form-label">Graduation Certificate</label>
                                                 <input id="courseTitle" class="form-control" type="file" name="marksheetgraduation" />
                                             </div>
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-4" @if( request()->id == 1 || request()->id == 2 ) hidden @endif >
                                                 <label for="courseTitle" class="form-label">Marksheet D2D</label>
                                                 <input id="courseTitle" class="form-control" type="file" name="marksheetd2d" />
                                             </div>
@@ -375,7 +367,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-4 text-center">
+                                    <div class="col-lg-6 text-right">
                                         <button type="button" class="btn btn-primary col-lg-3" onclick="courseForm.back()">
                                             Back
                                         </button>
@@ -385,8 +377,8 @@
                                                     Save & Exit
                                                 </button>
                                             </div> -->
-                                    <div class="col-lg-4 offset-lg-4 text-center">
-                                        <button type="submit" class="btn btn-primary col-lg-3" onclick="courseForm.next()">
+                                    <div class="col-lg-6 d-flex justify-content-end">
+                                        <button type="button" class="btn btn-primary col-lg-3" onclick="courseForm.next()">
                                             Submit
                                         </button>
                                     </div>
@@ -397,15 +389,16 @@
                             <div id="test-l-4" role="tabpanel" class="bs-stepper-pane fade" aria-labelledby="courseFormtrigger4">
                                 <!-- Card -->
                                 <div class="card mb-3  border-0">
-                                    <div class="card-header border-bottom px-4 py-3">
-                                        <h4 class="mb-0">Requirements</h4>
-                                    </div>
-                                    <!-- Card body -->
                                     <div class="card-body">
-                                        <input name='tags' value='jquery, bootstrap' autofocus>
+                                        <div class="row mb-3">
+                                            <div class="col-lg-4">
+                                                <label for="courseTitle" class="form-label">Enter Payment Screenshot</label>
+                                                <input id="courseTitle" class="form-control" type="file" name="payment" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row text-center">
                                     <!-- <div class="col-lg-4 text-center">
                                                 <button class="btn btn-primary col-lg-3" onclick="courseForm.back()">
                                                     Back
@@ -416,8 +409,8 @@
                                                     Save & Exit
                                                 </button>
                                             </div> -->
-                                    <div class="col-lg-4 text-center">
-                                        <button type="button" class="btn btn-primary col-lg-3" onclick="courseForm.next()">
+                                    <div class="col-lg-12 text-center">
+                                        <button type="submit" class="btn btn-primary col-lg-2" onclick="courseForm.next()">
                                             Submit
                                         </button>
                                     </div>

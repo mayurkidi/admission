@@ -74,7 +74,7 @@
                                             <td class=" text-end">-</td>
                                             <td class=" text-end ">-</td>
                                             <td class=" text-end ">1500</td>
-                                            <td class=" text-end "><a href="{{ route('stu.addcousrse') }}" class="btn btn-primary">Register</a></td>
+                                            <td class=" text-end "><a href="{{ route('stu.addcousrse',['id' => 1]) }}" class="btn btn-primary">Register</a></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -106,7 +106,7 @@
                                             <td class=" text-end">-</td>
                                             <td class=" text-end ">-</td>
                                             <td class=" text-end ">1200</td>
-                                            <td class=" text-end "><a href="{{ route('stu.addcousrse') }}" class="btn btn-primary">Register</a></td>
+                                            <td class=" text-end "><a href="{{ route('stu.addcousrse',['id' => 2]) }}" class="btn btn-primary">Register</a></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -137,7 +137,7 @@
                                             <td class=" text-end">-</td>
                                             <td class=" text-end ">-</td>
                                             <td class=" text-end ">1200</td>
-                                            <td class=" text-end "><a href="{{ route('stu.addcousrse') }}" class="btn btn-primary">Register</a></td>
+                                            <td class=" text-end "><a href="{{ route('stu.addcousrse',['id' => 3]) }}" class="btn btn-primary">Register</a></td>
                                         </tr>
                                     </tbody>
                                 </table>
