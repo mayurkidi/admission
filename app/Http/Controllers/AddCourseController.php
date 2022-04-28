@@ -5,8 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Applicationdetail;
 use App\Models\Academicdetail;
-use App\Models\Payment;
+use App\Models\Payments;
 use App\Models\User;
+use App\Models\City;
+use App\Models\Course;
+use App\Models\Program;
+use App\Models\State;
+use Illuminate\Console\Application;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use SebastianBergmann\Environment\Console;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +26,18 @@ class AddCourseController extends Controller
      */
     public function index()
     {
+        $userid = User::all();
+        $Applicationdetail = Applicationdetail::all();
+        // $city= City::all()->pluck('name');
+        // $cities=City::select('name','state_id')->get();
+        $states= State::all()->pluck('id','name');
+        $cities= City::all()->pluck('id','name','state_id');
+        $courses= Course::all()->pluck('id','name');
+        $programs= Program::all()->pluck('id','name','course_id');
+        // return compact('city','state');
+        // return compact('states');
+        // return gettype(compact('states'));
+        return view('addcourse.add_course', compact('Applicationdetail', 'userid','cities','states','programs','courses'));
     }
 
     /**
@@ -30,9 +47,7 @@ class AddCourseController extends Controller
      */
     public function create()
     {
-        $userid = User::all();
-        $Applicationdetail = Applicationdetail::all();
-        return view('addcourse.add_course', compact('Applicationdetail', 'userid'));
+        
     }
     /**
      * Store a newly created resource in storage.
@@ -56,7 +71,7 @@ class AddCourseController extends Controller
        $aadharcard=null;
        $marksheet10=null;
        $marksheet12=null;
-       $marksheetd2d=null;
+       $marksheetdiploma=null;
        $marksheetgraduation=null;
 
         // $dirname=File::makeDirectory('uploads'.public_path( Auth::user()->id.'_'.$request->name));
@@ -68,7 +83,7 @@ class AddCourseController extends Controller
             // Get just ext
             $extension = $request->file('leavingcertificate')->getClientOriginalExtension();
             // Filename to store
-            $lc = Auth::user()->id . '_' . $request->name . '_' . 'Leaving_certificate' .'.' . $extension;          
+            $lc = 'uploads/'.Auth::user()->id . '_' . $request->name . '_' . 'Leaving_certificate' .'.' . $extension;          
             // Upload Image
             $request->file('leavingcertificate')->move(public_path('uploads'), $lc);
         }
@@ -81,7 +96,7 @@ class AddCourseController extends Controller
             // Get just ext
             $extension = $request->file('aadharcard')->getClientOriginalExtension();
             // Filename to store
-            $aadharcard = Auth::user()->id . '_' . $request->name . '_' . 'Aadharcard' .'.' . $extension;
+            $aadharcard = 'uploads/'.Auth::user()->id . '_' . $request->name . '_' . 'Aadharcard' .'.' . $extension;
             // Upload Image
             $request->file('aadharcard')->move(public_path('uploads'), $aadharcard);
 
@@ -96,7 +111,7 @@ class AddCourseController extends Controller
             // Get just ext
             $extension = $request->file('marksheet10')->getClientOriginalExtension();
             // Filename to store
-            $marksheet10 = Auth::user()->id . '_' . $request->name . '_' . 'Marksheet_10th' .'.' . $extension;
+            $marksheet10 = 'uploads/'.Auth::user()->id . '_' . $request->name . '_' . 'Marksheet_10th' .'.' . $extension;
             // Upload Image
             $request->file('marksheet10')->move(public_path('uploads'), $marksheet10);
 
@@ -111,24 +126,24 @@ class AddCourseController extends Controller
             // Get just ext
             $extension = $request->file('marksheet12')->getClientOriginalExtension();
             // Filename to store
-            $marksheet12 = Auth::user()->id . '_' . $request->name . '_' . 'Marksheet_12th' .'.' . $extension;
+            $marksheet12 = 'uploads/'.Auth::user()->id . '_' . $request->name . '_' . 'Marksheet_12th' .'.' . $extension;
             // Upload Image
             $request->file('marksheet12')->move(public_path('uploads'), $marksheet12);
 
             
         }
 
-        if ($request->hasFile('marksheetd2d')) {
+        if ($request->hasFile('marksheetdiploma')) {
             // Get filename with the extension
-            $filenameWithExt = $request->file('marksheetd2d')->getClientOriginalName();
+            $filenameWithExt = $request->file('marksheetdiploma')->getClientOriginalName();
             // Get just filename
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             // Get just ext
-            $extension = $request->file('marksheetd2d')->getClientOriginalExtension();
+            $extension = $request->file('marksheetdiploma')->getClientOriginalExtension();
             // Filename to store
-            $marksheetd2d = Auth::user()->id . '_' . $request->name . '_' . 'Marksheet_D2D' .'.' . $extension;
+            $marksheetdiploma = 'uploads/'.Auth::user()->id . '_' . $request->name . '_' . 'Marksheet_Diploma' .'.' . $extension;
             // Upload Image
-            $request->file('marksheetd2d')->move(public_path('uploads'), $marksheetd2d);
+            $request->file('marksheetdiploma')->move(public_path('uploads'), $marksheetdiploma);
 
            
         }
@@ -141,7 +156,7 @@ class AddCourseController extends Controller
             // Get just ext
             $extension = $request->file('marksheetgraduation')->getClientOriginalExtension();
             // Filename to store
-            $marksheetgraduation = Auth::user()->id . '_' . $request->name . '_' . 'Marksheet_Graduation' .'.' . $extension;
+            $marksheetgraduation = 'uploads/'.Auth::user()->id . '_' . $request->name . '_' . 'Marksheet_Graduation' .'.' . $extension;
             // Upload Image
             $request->file('marksheetgraduation')->move(public_path('uploads'), $marksheetgraduation);
   
@@ -155,7 +170,7 @@ class AddCourseController extends Controller
             // Get just ext
             $extension = $request->file('payment')->getClientOriginalExtension();
             // Filename to store
-            $payment = Auth::user()->id . '_' . $request->name . '_' . 'PaymentSS' .'.' . $extension;
+            $payment = 'uploads/'.Auth::user()->id . '_' . $request->name . '_' . 'PaymentSS' .'.' . $extension;
             // Upload Image
             $request->file('payment')->move(public_path('uploads'), $payment);
   
@@ -167,11 +182,11 @@ class AddCourseController extends Controller
         $addd->aadharcard = $aadharcard;
         $addd->marksheet10 = $marksheet10;
         $addd->marksheet12 = $marksheet12;
-        $addd->marksheetd2d = $marksheetd2d;
+        $addd->marksheetdiploma = $marksheetdiploma;
         $addd->marksheetgraduation = $marksheetgraduation;
         $addd->save();
 
-        $paymentt=new Payment;
+        $paymentt=new Payments;
         $paymentt->user_id=\Auth::user()->id;
         $paymentt->amount=1500;
         $paymentt->paymentstatus=1;

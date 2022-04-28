@@ -14,19 +14,19 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link   collapsed " href="add-course.html">
+                        <a class="nav-link   collapsed " href="{{ route('stu.addcousrse',['id' => 1]) }}">
                             <i class="nav-icon fe fe-book me-2"></i> Under Graduate Programs
                         </a>
 
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link   collapsed " href="add-course.html">
+                        <a class="nav-link   collapsed " href="{{ route('stu.addcousrse',['id' => 2]) }}">
                             <i class="nav-icon fe fe-book me-2"></i> Post Graduate Programs
                         </a>
 
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link   collapsed " href="add-course.html">
+                        <a class="nav-link   collapsed " href="{{ route('stu.addcousrse',['id' => 3]) }}">
                             <i class="nav-icon fe fe-book me-2"></i> Diploma Programs
                         </a>
                     </li>

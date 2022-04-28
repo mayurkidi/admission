@@ -24,9 +24,10 @@ Route::group(['middleware'=>'auth','verified'], function () {
     Route::view('profile','user.profile')->name('user.profile');
     Route::resource('user', UserController::class);
     Route::view('dashboard','dashboard')->name('dashboard');
-    Route::get('addcourse', [AddCourseController::class, 'create'])->name('stu.addcousrse');
+    Route::get('addcourse', [AddCourseController::class, 'index'])->name('stu.addcousrse');
     Route::Post('addcourse/store', [AddCourseController::class, 'store'])->name('app.store');
-
+    Route::post('fetch-states', [DropdownController::class, 'fetchState']);
+    Route::post('fetch-cities', [DropdownController::class, 'fetchCity']);  
 });
 
 Auth::routes(['verify' => true]);

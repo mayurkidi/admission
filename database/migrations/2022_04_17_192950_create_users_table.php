@@ -31,7 +31,6 @@ class CreateUsersTable extends Migration
             $table->string('state');
             $table->string('course');
             $table->string('specialization');
-            $table->string('institute');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

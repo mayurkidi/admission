@@ -1,56 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-  <div class="container-fluid p-4 ">
-                <div class="row">
-                    <div class="col-xl-6 col-lg-6 col-md-12 col-12 mb-4">
-                        <!-- card -->
-                        <div class="card h-100">
-                            <!-- card body -->
-                            <div class="card-body">
-                                <div class="row">
-                                    <!-- col -->
-                                    <div class="col-12">
-                                        <span class="fw-semi-bold text-uppercase fs-3">Application in Progress</span>
-                                    </div>
-                                    <!-- col -->
-                                    <div class="col-6">
-
-                                        <h1 class="fw-bold mt-2 mb-0 h2">0</h1>
-                                        <!-- <p class="text-success fw-semi-bold mb-0"><i class="fe fe-trending-up me-1"></i>+1200</p> -->
-                                    </div>
-                                    <!-- chart -->
-                                    <div class="col-6 d-flex flex-row-reverse">
-                                        <i class="nav-icon fe fe-clock"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-md-12 col-12 mb-4">
-                        <!-- card -->
-                        <div class="card h-100">
-                            <!-- card body -->
-                            <div class="card-body">
-                                <div class="row">
-                                    <!-- col -->
-                                    <div class="col-12">
-                                        <span class="fw-semi-bold text-uppercase fs-3">Application Completed</span>
-                                    </div>
-                                    <!-- col -->
-                                    <div class="col-6">
-                                        <h1 class="fw-bold mt-2 mb-0 h2">0</h1>
-                                        <!-- <p class="text-success fw-semi-bold mb-0"><i class="fe fe-trending-up me-1"></i>12%</p> -->
-                                    </div>
-                                    <!-- chart -->
-                                    <div class="col-6 d-flex flex-row-reverse">
-                                        <div><i class="nav-icon fe fe-check-circle"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <div class="container-fluid p-4 ">     
                 <div class="container displayDesktopCard">
                     <div class="col-12 col-md-12 col-lg-12 col-xl-12 mb-12">
                         <div class="card h-100">

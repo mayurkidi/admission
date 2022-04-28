@@ -24,10 +24,10 @@
                         </div>
                         <div class="lh-1">
                            <h2 class="mb-0">
-                              Stella Flores <a href="#"> <i class="fe fe-edit me-2"></i>
+                            {{auth()->user()->name}} <a href="#" disabled> <i class="fe fe-edit me-2"></i>
                               </a>
                            </h2>
-                           <p class="mb-0 d-block">@stellaflores</p>
+                           <p class="mb-0 d-block">{{auth()->user()->email}}</p>
                         </div>
                      </div>
                      <div>
@@ -69,8 +69,8 @@
                                  <label class="form-label">Gender</label>
                                  <select name="gender" class="gender form-control" id="gender">
                                     <option value="">Select Gender</option>
-                                    <option @if(auth()->user()->state == 'Male')selected @endif>Male</option>
-                                    <option @if(auth()->user()->state == 'Female')selected @endif>Female</option>
+                                    <option @if(auth()->user()->gender == 'Male')selected @endif>Male</option>
+                                    <option @if(auth()->user()->gender == 'Female')selected @endif>Female</option>
                                  </select>
                               </div>
                               <!-- Birthday -->

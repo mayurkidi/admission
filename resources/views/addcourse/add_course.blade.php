@@ -3,6 +3,20 @@
 @section('content')
 
 <!-- Container fluid -->
+<script>
+    $(document).ready(function() {
+        $("#city").blur(function() {
+            var stateid = $("#state").find(":selected").val();
+            $("#state").each(function() {
+                if ($(this).val() == stateid) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+    });
+</script>
 <div class="pb-6 pt-6">
     <div class="container-fluid">
         <div id="courseForm" class="bs-stepper">
@@ -83,25 +97,19 @@
                                                     <div class="col-lg-6">
                                                         <label class="form-label">Select Program</label>
                                                         <select class="selectpicker" name="course" data-width="100%">
-                                                            <option value="">Select Program</option>
-                                                            <option value="Agriculture">Agriculture</option>
-                                                            <option value="Basic Science">Basic Science</option>
-                                                            <option value="Business Management">Business Management</option>
-                                                            <option value="Computer Application">Computer Application</option>
-                                                            <option value="Engineering">Engineering</option>
-                                                            <option value="Hotel Management">Hotel Management</option>
-                                                            <option value="Law">Law</option>
-                                                            <option value="Nursing">Nursing</option>
-                                                            <option value="Paramedical Science">Paramedical Science</option>
-                                                            <option value="Pharmacy">Pharmacy</option>
-                                                            <option value="Physiotherapy">Physiotherapy</option>
+                                                            <option selected disabled>Select Program</option>
+                                                            @foreach ($programs as $key => $value)
+                                                            <option value="{{$value}}">{{ $key}}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <label class="form-label">Select Specialization</label>
                                                         <select class="selectpicker" name="specialization" data-width="100%">
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
+                                                        <option selected disabled>Select Specialization</option>
+                                                            @foreach ($courses as $key => $value)
+                                                            <option value="{{$value}}">{{ $key}}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
@@ -179,7 +187,7 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <label class="form-label">Gender</label>
-                                                <select class="selectpicker @error('gender') is-invalid @enderror" name="gender" data-width="100%">
+                                                <select style="line-height: 40px;" class="selectpicker @error('gender') is-invalid @enderror" name="gender" data-width="100%">
                                                     <option value="">Select Gender</option>
                                                     <option @if(auth()->user()->gender == 'Male')selected @endif>Male</option>
                                                     <option @if(auth()->user()->gender == 'Female')selected @endif>Female</option>
@@ -238,24 +246,14 @@
                                     </div>
                                     <div class="card-body form-group">
                                         <div class="row mb-3">
-                                            <div class="col-lg-4">
-                                                <label class="form-label">Country</label>
-                                                <select class="form-control @error('country') is-invalid @enderror" name="country" data-width="100%">
-                                                    <option @if(auth()->user()->country == 'Afghanistan')selected @endif>Afghanistan</option>
-                                                    <option @if(auth()->user()->country == 'Zimbabwe')selected @endif>Zimbabwe</option>
-                                                </select>
-                                                @error('country')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror
-                                                
-                                            </div>
-                                            <div class="col-lg-4">
+
+                                            <div class="col-lg-6">
                                                 <label class="form-label">Select State</label>
-                                                <select class="selectpicker @error('state') is-invalid @enderror" name="state" data-width="100%">
-                                                    <option @if(auth()->user()->state == 'Andhra Pradesh')selected @endif>Andhra Pradesh</option>
-                                                    <option @if(auth()->user()->state == 'Andaman and Nicobar Islands')selected @endif>Andaman and Nicobar Islands</option>
+                                                <select class="state selectpicker @error('state') is-invalid @enderror" name="state" id="state" data-width="100%">
+                                                    <option selected disabled>Select State</option>
+                                                    @foreach ($states as $key => $value)
+                                                    <option value="{{$value}}">{{ $key}}</option>
+                                                    @endforeach
                                                 </select>
                                                 @error('state')
                                                 <span class="invalid-feedback" role="alert">
@@ -263,11 +261,13 @@
                                                 </span>
                                                 @enderror
                                             </div>
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-6">
                                                 <label class="form-label">Select City</label>
-                                                <select class="selectpicker @error('city') is-invalid @enderror" name="city" data-width="100%">
-                                                    <option @if(auth()->user()->city == 'Rajkot')selected @endif>Rajkot</option>
-                                                    <option @if(auth()->user()->city == 'surat')selected @endif>surat</option>
+                                                <select class="selectpicker @error('city') is-invalid @enderror" name="city" id="city" data-width="100%">
+                                                    <option selected disabled>Select City</option>
+                                                    @foreach ($cities as $key => $value)
+                                                    <option value="{{$value}}">{{ $key}}</option>
+                                                    @endforeach
                                                 </select>
                                                 @error('city')
                                                 <span class="invalid-feedback" role="alert">
@@ -286,7 +286,7 @@
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                                 @enderror
-                                            </div>                                            
+                                            </div>
                                             <div class="col-lg-4">
                                                 <label for="courseTitle" class="form-label">Pincode</label>
                                                 <input id="courseTitle" name="pincode" class="form-control @error('pincode') is-invalid @enderror" type="text" placeholder="Enter Pincode" />
@@ -360,8 +360,8 @@
                                                 <input id="courseTitle" class="form-control" type="file" name="marksheetgraduation" />
                                             </div>
                                             <div class="col-lg-4" @if( request()->id == 1 || request()->id == 2 ) hidden @endif >
-                                                <label for="courseTitle" class="form-label">Marksheet D2D</label>
-                                                <input id="courseTitle" class="form-control" type="file" name="marksheetd2d" />
+                                                <label for="courseTitle" class="form-label">Marksheet Diploma</label>
+                                                <input id="courseTitle" class="form-control" type="file" name="marksheetdiploma" />
                                             </div>
                                         </div>
                                     </div>

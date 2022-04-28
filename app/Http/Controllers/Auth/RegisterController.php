@@ -57,7 +57,6 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8'],
             'mobile'=>['required','digits:10'],
             'course'=>['required'],
-            'institute'=>['required'],
         ]);
     }
 
@@ -79,7 +78,6 @@ class RegisterController extends Controller
             'state' => $data['state'],
             'course'=>$data['course'],
             'specialization'=>$data['specialization'],
-            'institute'=>$data['institute'],
         ]);
     }
 }

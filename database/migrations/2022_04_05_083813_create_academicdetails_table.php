@@ -19,7 +19,7 @@ class CreateAcademicdetailsTable extends Migration
             $table->string('leavingcertificate')->nullable();
             $table->string('aadharcard')->nullable();
             $table->string('marksheet10')->nullable();
-            $table->string('marksheetd2d')->nullable();
+            $table->string('marksheetdiploma')->nullable();
             $table->string('marksheet12')->nullable();
             $table->string('marksheetgraduation')->nullable();
             $table->timestamps();
