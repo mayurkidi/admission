@@ -55,12 +55,15 @@
                                                 <ul>
                                                     <li>
                                                         <span class="text-dark">
-                                                            fields marked with <span class="text-danger">*</span> need to be completely filled.
+                                                            fields marked with <span class="text-danger">*</span> need
+                                                            to be completely filled.
                                                         </span>
                                                     </li>
                                                     <li>
                                                         <span class="text-dark">
-                                                            An online application number will be displayed, once you successfully submit the online form by making an online payment.
+                                                            An online application number will be displayed, once you
+                                                            successfully submit the online form by making an online
+                                                            payment.
                                                         </span>
                                                     </li>
                                                     <li>
@@ -70,20 +73,23 @@
                                                     </li>
                                                     <li>
                                                         <span class="text-dark">
-                                                            Please keep scanned copies handy of your Coloured Photograph, Signature, 10th Marksheet & 12th Marksheet (If passed) for uploading . Upload size is limited to 2 MB only.
+                                                            Please keep scanned copies handy of your Coloured
+                                                            Photograph, Signature, 10th Marksheet & 12th Marksheet (If
+                                                            passed) for uploading . Upload size is limited to 2 MB only.
                                                         </span>
                                                     </li>
                                                     <li>
                                                         <span class="text-dark">
-                                                            Allocation of Seat to a Course selected is subject to availability of seats.
+                                                            Allocation of Seat to a Course selected is subject to
+                                                            availability of seats.
                                                         </span>
                                                     </li>
                                                 </ul>
                                                 <div class="row mb-3">
                                                     <div class="col-lg-6">
                                                         <label class="form-label">Select Program</label>
-                                                        <select class="selectpicker" name="course" data-width="100%">
-                                                            <option selected disabled>Select Program</option>
+                                                        <select class="selectpicker" id="course" name="course" data-width="100%" required>
+                                                            <option selected disabled value="">Select Program</option>
                                                             @foreach ($programs as $key => $value)
                                                             <option value="{{$value}}">{{ $key}}</option>
                                                             @endforeach
@@ -91,11 +97,8 @@
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <label class="form-label">Select Specialization</label>
-                                                        <select class="selectpicker" name="specialization" data-width="100%">
-                                                            <option selected disabled>Select Specialization</option>
-                                                            @foreach ($courses as $key => $value)
-                                                            <option value="{{$value}}">{{ $key}}</option>
-                                                            @endforeach
+                                                        <select class="selectpicker" id="specialization" name="specialization" data-width="100%" required>
+                                                            <option value="" disabled selected>Select Specialization</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -111,8 +114,8 @@
                                                     Save & Exit
                                                 </button>
                                             </div> -->
-                                    <div class="col-lg-6 offset-lg-6 text-center d-flex justify-content-end">
-                                        <button type="button" class="btn btn-primary col-lg-6" onclick="courseForm.next()">
+                                    <div class="col-lg-6 offset-lg-6 text-center d-flex justify-content-around">
+                                        <button type="button" id="addcourse" class="btn btn-primary col-lg-6">
                                             Next
                                         </button>
                                     </div>
@@ -129,8 +132,8 @@
                                     <div class="card-body">
                                         <div class="row mb-3">
                                             <div class="col-lg-4">
-                                                <label for="courseTitle" class="form-label">Name</label>
-                                                <input id="courseTitle" class="form-control @error('name') is-invalid @enderror" name="name" type="text" value="{{auth()->user()->name}}" placeholder="Enter Name" value="" {{auth()->user()->email}}"" />
+                                                <label for="name" class="form-label">Name</label>
+                                                <input id="name" class="form-control @error('name') is-invalid @enderror" name="name" type="text" value="{{auth()->user()->name}}" placeholder="Enter Name" value="{{auth()->user()->email}}" required />
 
                                                 @error('name')
                                                 <span class="invalid-feedback" role="alert">
@@ -139,8 +142,8 @@
                                                 @enderror
                                             </div>
                                             <div class="col-lg-4">
-                                                <label for="courseTitle" class="form-label">Email</label>
-                                                <input id="courseTitle" class="form-control @error('email') is-invalid @enderror" name="email" type="email" value="{{auth()->user()->email}}" placeholder="Enter Email" />
+                                                <label for="email" class="form-label">Email</label>
+                                                <input id="email" class="form-control @error('email') is-invalid @enderror" name="email" type="email" value="{{auth()->user()->email}}" placeholder="Enter Email" required />
 
                                                 @error('email')
                                                 <span class="invalid-feedback" role="alert">
@@ -149,8 +152,8 @@
                                                 @enderror
                                             </div>
                                             <div class="col-lg-4">
-                                                <label for="courseTitle" class="form-label">Mobile No.</label>
-                                                <input id="courseTitle" class="form-control @error('mobile') is-invalid @enderror" name="mobile" type="text" value="{{auth()->user()->mobile}}" placeholder="Enter Mobile No" />
+                                                <label for="mobile" class="form-label">Mobile No.</label>
+                                                <input id="mobile" class="form-control @error('mobile') is-invalid @enderror" name="mobile" type="text" value="{{auth()->user()->mobile}}" placeholder="Enter Mobile No" required />
 
                                                 @error('mobile')
                                                 <span class="invalid-feedback" role="alert">
@@ -162,8 +165,8 @@
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-lg-6">
-                                                <label for="courseTitle" class="form-label">Date of Birth</label>
-                                                <input id="courseTitle" class="form-control @error('dateofbirth') is-invalid @enderror" name="dateofbirth" type="date" />
+                                                <label for="dateofbirth" class="form-label">Date of Birth</label>
+                                                <input id="dateofbirth" class="form-control @error('dateofbirth') is-invalid @enderror" name="dateofbirth" type="date" required />
 
                                                 @error('dateofbirth')
                                                 <span class="invalid-feedback" role="alert">
@@ -173,11 +176,14 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <label class="form-label">Gender</label>
-                                                <select style="line-height: 40px;" class="selectpicker @error('gender') is-invalid @enderror" name="gender" data-width="100%">
+                                                <select class="selectpicker @error('gender') is-invalid @enderror" id="gender" name="gender" data-width="100%">
                                                     <option value="">Select Gender</option>
-                                                    <option @if(auth()->user()->gender == 'Male')selected @endif>Male</option>
-                                                    <option @if(auth()->user()->gender == 'Female')selected @endif>Female</option>
-                                                    <option @if(auth()->user()->gender == 'Transgender')selected @endif>Transgender</option>
+                                                    <option @if(auth()->user()->gender == 'Male')selected @endif>Male
+                                                    </option>
+                                                    <option @if(auth()->user()->gender == 'Female')selected
+                                                        @endif>Female</option>
+                                                    <option @if(auth()->user()->gender == 'Transgender')selected
+                                                        @endif>Transgender</option>
                                                 </select>
 
                                                 @error('gender')
@@ -206,8 +212,8 @@
                                                         </select>
                                                     </div> -->
                                             <div class="col-lg-6">
-                                                <label for="courseTitle" class="form-label">Father Name</label>
-                                                <input id="courseTitle" class="form-control @error('fathername') is-invalid @enderror" type="text" name="fathername" placeholder="Enter Father Name" />
+                                                <label for="fathername" class="form-label">Father Name</label>
+                                                <input id="fathername" class="form-control @error('fathername') is-invalid @enderror" type="text" name="fathername" placeholder="Enter Father Name" />
 
                                                 @error('fathername')
                                                 <span class="invalid-feedback" role="alert">
@@ -216,8 +222,8 @@
                                                 @enderror
                                             </div>
                                             <div class="col-lg-6">
-                                                <label for="courseTitle" class="form-label">Father No.</label>
-                                                <input id="courseTitle" class="form-control @error('fathermobile') is-invalid @enderror" type="text" name="fathermobile" placeholder="Enter Father Mobile No." />
+                                                <label for="fathermobile" class="form-label">Father Mobile Number.</label>
+                                                <input id="fathermobile" class="form-control @error('fathermobile') is-invalid @enderror" type="text" name="fathermobile" placeholder="Enter Father Mobile No." />
 
                                                 @error('fathermobile')
                                                 <span class="invalid-feedback" role="alert">
@@ -228,9 +234,10 @@
                                         </div>
                                     </div>
                                     <div class="card-header border-bottom px-4 py-3">
-                                        <h4 class="mb-0"><strong class="text-danger"> Address for Correspondence </strong></h4>
+                                        <h4 class="mb-0"><strong class="text-danger"> Address for Correspondence
+                                            </strong></h4>
                                     </div>
-                                    <div class="card-body form-group">
+                                    <div class="card-body">
                                         <div class="row mb-3">
 
                                             <div class="col-lg-6">
@@ -261,8 +268,8 @@
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-lg-8">
-                                                <label for="courseTitle" class="form-label">Address Line 1</label>
-                                                <input id="courseTitle" name="address" class="form-control @error('address') is-invalid @enderror" type="text" placeholder="Enter Address" />
+                                                <label for="address" class="form-label">Address.</label>
+                                                <input id="address" name="address" class="form-control @error('address') is-invalid @enderror" type="text" placeholder="Enter Address Line 1" />
 
                                                 @error('address')
                                                 <span class="invalid-feedback" role="alert">
@@ -270,9 +277,10 @@
                                                 </span>
                                                 @enderror
                                             </div>
+                        
                                             <div class="col-lg-4">
-                                                <label for="courseTitle" class="form-label">Pincode</label>
-                                                <input id="courseTitle" name="pincode" class="form-control @error('pincode') is-invalid @enderror" type="text" placeholder="Enter Pincode" />
+                                                <label for="pincode" class="form-label">Pincode</label>
+                                                <input id="pincode" name="pincode" class="form-control @error('pincode') is-invalid @enderror" type="text" placeholder="Enter Pincode" />
 
                                                 @error('pincode')
                                                 <span class="invalid-feedback" role="alert">
@@ -284,7 +292,8 @@
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-lg-12">
-                                                <label for="courseTitle" class="form-label">Is Permanent Address same as the Correspondence address?</label>
+                                                <label for="courseTitle" class="form-label">Is Permanent Address same as
+                                                    the Correspondence address?</label>
                                                 <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                                                 <label class="form-check-label" for="flexRadioDefault1">
                                                     Yes
@@ -299,13 +308,18 @@
                                 </div>
                                 <!-- Button -->
                                 <div class="row">
-                                    <div class="col-lg-6 text-left">
+                                    <div class="col-lg-4 text-center">
                                         <button type="button" class="btn btn-primary col-lg-6" onclick="courseForm.back()">
                                             Back
                                         </button>
                                     </div>
-                                    <div class="col-lg-6 d-flex justify-content-end">
-                                        <button type="button" class="btn btn-primary col-lg-6" onclick="courseForm.next()">
+                                    <!-- <div class="col-lg-4 text-center">
+                                                <button class="btn btn-primary col-lg-6" onclick="courseForm.next()">
+                                                    Save & Exit
+                                                </button>
+                                            </div> -->
+                                    <div class="col-lg-4 offset-lg-4 text-center">
+                                        <button type="button" id="addcourse2" class="btn btn-primary col-lg-6">
                                             Next
                                         </button>
                                     </div>
@@ -322,29 +336,29 @@
                                         <div class="row mb-3">
                                             <div class="col-lg-4">
                                                 <label for="courseTitle" class="form-label">Leaving Certificate</label>
-                                                <input id="courseTitle" class="form-control" type="file" name="leavingcertificate" id="leavingcertificate" />
+                                                <input id="lc" class="form-control" type="file" name="leavingcertificate" id="leavingcertificate" />
                                             </div>
                                             <div class="col-lg-4">
                                                 <label for="courseTitle" class="form-label">Adharcard</label>
-                                                <input id="courseTitle" class="form-control" type="file" name="aadharcard" />
+                                                <input id="aadharcard" class="form-control" type="file" name="aadharcard" />
                                             </div>
                                             <div class="col-lg-4">
                                                 <label for="courseTitle" class="form-label">10th Marksheet</label>
-                                                <input id="courseTitle" class="form-control" type="file" name="marksheet10" />
+                                                <input id="marksheet10" class="form-control" type="file" name="marksheet10" />
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <div class="col-lg-4" @if( request()->id == 3 ) hidden @endif>
+                                            <div class="col-lg-4" @if( request()->id == 3 ) hidden disabled @endif>
                                                 <label for="courseTitle" class="form-label">12th Marksheet</label>
-                                                <input id="courseTitle" class="form-control" type="file" name="marksheet12" />
+                                                <input @if( request()->id == 3 ) id="" disabled @endif id="marksheet12" class="form-control" type="file" name="marksheet12" />
                                             </div>
-                                            <div class="col-lg-4" @if( request()->id == 1 || request()->id == 3 ) hidden @endif>
+                                            <div class="col-lg-4" @if( request()->id == 1 || request()->id == 3 ) hidden disabled @endif>
                                                 <label for="courseTitle" class="form-label">Graduation Certificate</label>
-                                                <input id="courseTitle" class="form-control" type="file" name="marksheetgraduation" />
+                                                <input @if( request()->id == 1 || request()->id == 3 ) id="" disabled @endif id="marksheetgraduation" class="form-control" type="file" name="marksheetgraduation" />
                                             </div>
-                                            <div class="col-lg-4" @if( request()->id == 1 || request()->id == 2 ) hidden @endif >
+                                            <div class="col-lg-4" @if( request()->id == 1 || request()->id == 2 ) hidden disabled @endif >
                                                 <label for="courseTitle" class="form-label">Marksheet Diploma</label>
-                                                <input id="courseTitle" class="form-control" type="file" name="marksheetdiploma" />
+                                                <input @if( request()->id == 1 || request()->id == 2 ) id="" disabled @endif id="marksheetdiploma" class="form-control" type="file" name="marksheetdiploma" />
                                             </div>
                                         </div>
                                     </div>
@@ -361,8 +375,8 @@
                                                 </button>
                                             </div> -->
                                     <div class="col-lg-6 d-flex justify-content-end">
-                                        <button type="button" class="btn btn-primary col-lg-3" onclick="courseForm.next()">
-                                            Submit
+                                        <button type="button" id="addcourse3" class="btn btn-primary col-lg-3">
+                                            Next
                                         </button>
                                     </div>
                                 </div>
@@ -376,7 +390,7 @@
                                         <div class="row mb-3">
                                             <div class="col-lg-4">
                                                 <label for="courseTitle" class="form-label">Enter Payment Screenshot</label>
-                                                <input id="courseTitle" class="form-control" type="file" name="payment" />
+                                                <input id="payment" class="form-control" type="file" name="payment" />
                                             </div>
                                         </div>
                                     </div>
@@ -393,7 +407,7 @@
                                                 </button>
                                             </div> -->
                                     <div class="col-lg-12 text-center">
-                                        <button type="submit" class="btn btn-primary col-lg-2" onclick="courseForm.next()">
+                                        <button type="submit" id="addcourse4" class="btn btn-primary col-lg-2">
                                             Submit
                                         </button>
                                     </div>
@@ -406,16 +420,10 @@
         </div>
     </div>
 </div>
-@if(session()->has('message'))
-<div class="alert alert-success">
-    {{ session()->get('message') }}
-</div>
-@endif
-<!-- Scripts -->
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
-        // alert(1);
         $("#state").change(function() {
             var stateid = $("#state").find(":selected").val();
             // alert(stateid);
@@ -426,16 +434,16 @@
                     url: "{{url('/getcity')}}?state_id=" + stateid,
                     success: function(res) {
                         if (res) {
-                            
+
                             // $("#city").empty();
                             // $("#city").attr('disabled',false);
                             // $("#city").append('<option value="">--Select jk--</option>');
-                            $.each(res, function (key, value) {
+                            $.each(res, function(key, value) {
                                 $("#city").append('<option value="' + value.id + '">' + value.name + '</option>');
                             });
                             $('#city').selectpicker('refresh');
 
-                            $("#state").append('<option value=' + id + '>' + name + '</option>'); // return empty
+                            // $("#state").append('<option value=' + id + '>' + name + '</option>'); // return empty
                             // alert(res.id);
                         }
 
@@ -444,7 +452,144 @@
             }
 
         });
+        $("#course").change(function() {
+            var courseid = $("#course").find(":selected").val();
+            // alert(courseid);
+            if (courseid) {
+                $.ajax({
+                    type: "GET",
+                    dataType: 'json',
+                    url: "{{url('/getcourse')}}?course_id=" + courseid,
+                    success: function(res) {
+                        if (res) {
+
+                            // $("#city").empty();
+                            // $("#city").attr('disabled',false);
+                            // $("#city").append('<option value="">--Select jk--</option>');
+                            $.each(res, function(key, value) {
+                                $("#specialization").append('<option value="' + value.id + '">' + value.name + '</option>');
+                            });
+                            $('#specialization').selectpicker('refresh');
+
+                            // $("#state").append('<option value=' + id + '>' + name + '</option>'); // return empty
+                            // alert(res.id);
+                        }
+
+                    }
+                });
+            }
+
+        });
+        $('#addcourse').click(function() {
+            if ($('#course').val() == null) {
+                alert("Course Cannot be Empty");
+                return false;
+
+            } else if ($('#specialization').val() == null) {
+                alert("Specialization Cannot be Empty");
+                return false;
+
+            } else {
+                courseForm.next();
+            }
+        });
+        $('#addcourse2').click(function() {
+
+            if ($('#name').val() == "") {
+                alert("Name Cannot be Empty");
+                return false;
+
+            } else if ($('#email').val() == "") {
+                alert("Name Cannot be Empty");
+                return false;
+
+            } else if ($('#mobile').val() == "") {
+                alert("mobile Cannot be Empty");
+                return false;
+
+            } else if ($('#dateofbirth').val() == "") {
+                alert("Date of Birth Cannot be Empty");
+                return false;
+
+            } else if ($('#gender').val() == "") {
+                alert("Gender Cannot be Empty");
+                return false;
+
+            } else if ($('#fathername').val() == "") {
+                alert("Father name Cannot be Empty");
+                return false;
+
+            } else if ($('#fathermobile').val() == "") {
+                alert("Father mobile Cannot be Empty");
+                return false;
+
+            } else if ($('#state').val() == null) {
+                alert("State Cannot be Empty");
+                return false;
+
+            } else if ($('#city').val() == null) {
+                alert("City Cannot be Empty");
+                return false;
+
+            } else if ($('#address').val() == "") {
+                alert("Address Cannot be Empty");
+                return false;
+
+            } else if ($('#pincode').val() == "") {
+                alert("Pincode Cannot be Empty");
+                return false;
+
+            } else {
+                courseForm.next();
+            }
+        });
+
+        $('#addcourse3').click(function() {
+
+            if ($('#lc').val()=="") {
+                alert("Leaving certificate file Cannot be Empty");
+                return false;
+
+            } else if ($('#aadharcard').val() == "") {
+                alert("Aadharcard file Cannot be Empty");
+                return false;
+
+            } else if ($('#marksheet10').val() == "") {
+                alert("10th Marksheet file Cannot be Empty");
+                return false;
+
+            } else if ($('#marksheet12').val() == "") {
+                alert("12th Marksheet file Cannot be Empty");
+                return false;
+
+            } else if ($('#marksheetgraduation').val() == "") {
+                alert("Graduation marksheet file Cannot be Empty");
+                return false;
+
+            } else if ($('#marksheetdiploma').val() == "") {
+                alert("Diploma marksheet file Cannot be Empty");
+                return false;
+
+            } else {
+                courseForm.next();
+            }
+        });
+        $("#addcourse4").click(function(){
+            if($("#payment").val()=="")
+            {
+                alert("Payment screenshot cannot be empty");
+                return false;
+            }
+        });
+
     });
 </script>
+
+@if(session()->has('message'))
+<div class="alert alert-success">
+    {{ session()->get('message') }}
+</div>
+@endif
+<!-- Scripts -->
 <!-- Libs JS -->
 @endsection

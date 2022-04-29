@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\State;
+use App\Models\Program;
 use App\Models\City;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -85,8 +86,9 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         $states= State::all()->pluck('id','name');
-        $cities= City::all()->pluck('id','name','state_id');    
-        return view("auth.login", compact("states","cities"));
+        $cities= City::all()->pluck('id','name','state_id');  
+        $programs=Program::all()->pluck('id','name');
+        return view("auth.login", compact("states","cities","programs"));
         
     }
 }

@@ -117,29 +117,17 @@
                                                         </div>
 
                                                         <div class="form-group label-floating reg_course_id_div CourseId field-select">
-                                                            <select name="course" id="CourseId" class="form-control select-arrow-cust widget_input" data-label="Select Course *" data-none-selected-text="Select Course">
-                                                                <option value="" selected="selected">Select Course *
-                                                                </option>
-                                                                <option value="test" selected>test</option>
-                                                                <option value="Agriculture">Agriculture</option>
-                                                                <option value="Basic Science">Basic Science</option>
-                                                                <option value="Business Management">Business Management</option>
-                                                                <option value="Computer Application">Computer Application</option>
-                                                                <option value="Engineering">Engineering</option>
-                                                                <option value="Hotel Management">Hotel Management</option>
-                                                                <option value="Law">Law</option>
-                                                                <option value="Nursing">Nursing</option>
-                                                                <option value="Paramedical Science">Paramedical Science</option>
-                                                                <option value="Pharmacy">Pharmacy</option>
-                                                                <option value="Physiotherapy">Physiotherapy</option>
+                                                            <select name="course" id="course" class="form-control select-arrow-cust widget_input" data-label="Select Course *" data-none-selected-text="Select Course">
+                                                                <option selected disabled>Select Program</option>
+                                                                @foreach ($programs as $key => $value)
+                                                                <option value="{{$value}}">{{ $key}}</option>
+                                                                @endforeach
                                                             </select>
                                                             <span class="help-block"></span>
                                                         </div>
                                                         <div class="form-group label-floating field-select  reg_specialization_id_div">
-                                                            <select name="specialization" id="SpecializationId" data-label="Select Specialisation *" class="form-control select-arrow-cust widget_input" data-none-selected-text="Select Specialisation">
-                                                                <option value="" selected="selected">Select
-                                                                    Specialisation *</option>
-                                                                <option value="test" selected>test</option>
+                                                            <select name="specialization" id="specialization" data-label="Select Specialisation *" class="form-control select-arrow-cust widget_input" data-none-selected-text="Select Specialisation">
+                                                                <option selected>Select Specialization</option>
                                                             </select>
                                                             <span class="help-block"></span>
                                                         </div>
@@ -437,6 +425,34 @@
                                 $('#city').selectpicker('refresh');
 
                                 $("#state").append('<option value=' + id + '>' + name + '</option>'); // return empty
+                                // alert(res.id);
+                            }
+
+                        }
+                    });
+                }
+
+            });
+            $("#course").change(function() {
+                var courseid = $("#course").find(":selected").val();
+                // alert(courseid);
+                if (courseid) {
+                    $.ajax({
+                        type: "GET",
+                        dataType: 'json',
+                        url: "{{url('/getcourse')}}?course_id=" + courseid,
+                        success: function(res) {
+                            if (res) {
+
+                                // $("#city").empty();
+                                // $("#city").attr('disabled',false);
+                                // $("#city").append('<option value="">--Select jk--</option>');
+                                $.each(res, function(key, value) {
+                                    $("#specialization").append('<option value="' + value.id + '">' + value.name + '</option>');
+                                });
+                                $('#specialization').selectpicker('refresh');
+
+                                // $("#state").append('<option value=' + id + '>' + name + '</option>'); // return empty
                                 // alert(res.id);
                             }
 

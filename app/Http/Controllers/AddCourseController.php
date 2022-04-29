@@ -28,17 +28,23 @@ class AddCourseController extends Controller
     {
         $userid = User::all();
         $Applicationdetail = Applicationdetail::all();
-        // $city= City::all()->pluck('name');
-        // $cities=City::select('name','state_id')->get();
-        $states= State::all()->pluck('id','name');
-        $cities= City::all();
-        // return $cities;
-        $courses= Course::all()->pluck('id','name');
-        $programs= Program::all()->pluck('id','name','course_id');
-        // return compact('city','state');
-        // return compact('states');
-        // return gettype(compact('states'));
-        return view('addcourse.add_course', compact('Applicationdetail', 'userid','cities','states','programs','courses'));
+        $states = State::all()->pluck('id', 'name');
+        $cities = City::all();
+        $courses = Course::all()->pluck('id', 'name');
+        $programs = Program::all()->pluck('id', 'name', 'course_id');
+        $paymentstatus = Payments::where('user_id', \Auth::user()->id)->pluck('paymentstatus');
+        if (!$paymentstatus->isEmpty()) {
+            if ($paymentstatus[0] == 1) {
+                $application = Applicationdetail::all()->where('userid', \Auth::user()->id);
+                $academic = Academicdetail::all()->where('userid', \Auth::user()->id);
+                $user = User::all()->where('id', \Auth::user()->id);
+                //  return gettype(compact('user','application','academic'));  
+                return view('addcourse.application1',compact('application', 'academic', 'user'));
+                // return redirect()->route('application1')->with(compact(['application'=>$application],['academic'=>$academic],['user'=>$user]));
+
+            }
+        }
+        return view('addcourse.add_course', compact('Applicationdetail', 'userid', 'cities', 'states', 'programs', 'courses'));
     }
 
     /**
@@ -48,7 +54,6 @@ class AddCourseController extends Controller
      */
     public function create()
     {
-        
     }
     /**
      * Store a newly created resource in storage.
@@ -67,13 +72,13 @@ class AddCourseController extends Controller
         $add->applicationstatus = 1;
         $add->save();
 
-        
-       $lc=null;
-       $aadharcard=null;
-       $marksheet10=null;
-       $marksheet12=null;
-       $marksheetdiploma=null;
-       $marksheetgraduation=null;
+
+        $lc = null;
+        $aadharcard = null;
+        $marksheet10 = null;
+        $marksheet12 = null;
+        $marksheetdiploma = null;
+        $marksheetgraduation = null;
 
         // $dirname=File::makeDirectory('uploads'.public_path( Auth::user()->id.'_'.$request->name));
         if ($request->hasFile('leavingcertificate')) {
@@ -84,7 +89,7 @@ class AddCourseController extends Controller
             // Get just ext
             $extension = $request->file('leavingcertificate')->getClientOriginalExtension();
             // Filename to store
-            $lc = 'uploads/'.Auth::user()->id . '_' . $request->name . '_' . 'Leaving_certificate' .'.' . $extension;          
+            $lc = 'uploads/' . Auth::user()->id . '_' . $request->name . '_' . 'Leaving_certificate' . '.' . $extension;
             // Upload Image
             $request->file('leavingcertificate')->move(public_path('uploads'), $lc);
         }
@@ -97,11 +102,9 @@ class AddCourseController extends Controller
             // Get just ext
             $extension = $request->file('aadharcard')->getClientOriginalExtension();
             // Filename to store
-            $aadharcard = 'uploads/'.Auth::user()->id . '_' . $request->name . '_' . 'Aadharcard' .'.' . $extension;
+            $aadharcard = 'uploads/' . Auth::user()->id . '_' . $request->name . '_' . 'Aadharcard' . '.' . $extension;
             // Upload Image
             $request->file('aadharcard')->move(public_path('uploads'), $aadharcard);
-
-
         }
 
         if ($request->hasFile('marksheet10')) {
@@ -112,11 +115,9 @@ class AddCourseController extends Controller
             // Get just ext
             $extension = $request->file('marksheet10')->getClientOriginalExtension();
             // Filename to store
-            $marksheet10 = 'uploads/'.Auth::user()->id . '_' . $request->name . '_' . 'Marksheet_10th' .'.' . $extension;
+            $marksheet10 = 'uploads/' . Auth::user()->id . '_' . $request->name . '_' . 'Marksheet_10th' . '.' . $extension;
             // Upload Image
             $request->file('marksheet10')->move(public_path('uploads'), $marksheet10);
-
-            
         }
 
         if ($request->hasFile('marksheet12')) {
@@ -127,11 +128,9 @@ class AddCourseController extends Controller
             // Get just ext
             $extension = $request->file('marksheet12')->getClientOriginalExtension();
             // Filename to store
-            $marksheet12 = 'uploads/'.Auth::user()->id . '_' . $request->name . '_' . 'Marksheet_12th' .'.' . $extension;
+            $marksheet12 = 'uploads/' . Auth::user()->id . '_' . $request->name . '_' . 'Marksheet_12th' . '.' . $extension;
             // Upload Image
             $request->file('marksheet12')->move(public_path('uploads'), $marksheet12);
-
-            
         }
 
         if ($request->hasFile('marksheetdiploma')) {
@@ -142,11 +141,9 @@ class AddCourseController extends Controller
             // Get just ext
             $extension = $request->file('marksheetdiploma')->getClientOriginalExtension();
             // Filename to store
-            $marksheetdiploma = 'uploads/'.Auth::user()->id . '_' . $request->name . '_' . 'Marksheet_Diploma' .'.' . $extension;
+            $marksheetdiploma = 'uploads/' . Auth::user()->id . '_' . $request->name . '_' . 'Marksheet_Diploma' . '.' . $extension;
             // Upload Image
             $request->file('marksheetdiploma')->move(public_path('uploads'), $marksheetdiploma);
-
-           
         }
 
         if ($request->hasFile('marksheetgraduation')) {
@@ -157,12 +154,11 @@ class AddCourseController extends Controller
             // Get just ext
             $extension = $request->file('marksheetgraduation')->getClientOriginalExtension();
             // Filename to store
-            $marksheetgraduation = 'uploads/'.Auth::user()->id . '_' . $request->name . '_' . 'Marksheet_Graduation' .'.' . $extension;
+            $marksheetgraduation = 'uploads/' . Auth::user()->id . '_' . $request->name . '_' . 'Marksheet_Graduation' . '.' . $extension;
             // Upload Image
             $request->file('marksheetgraduation')->move(public_path('uploads'), $marksheetgraduation);
-  
-        } 
-         
+        }
+
         if ($request->hasFile('payment')) {
             // Get filename with the extension
             $filenameWithExt = $request->file('payment')->getClientOriginalName();
@@ -171,11 +167,10 @@ class AddCourseController extends Controller
             // Get just ext
             $extension = $request->file('payment')->getClientOriginalExtension();
             // Filename to store
-            $payment = 'uploads/'.Auth::user()->id . '_' . $request->name . '_' . 'PaymentSS' .'.' . $extension;
+            $payment = 'uploads/' . Auth::user()->id . '_' . $request->name . '_' . 'PaymentSS' . '.' . $extension;
             // Upload Image
             $request->file('payment')->move(public_path('uploads'), $payment);
-  
-        } 
+        }
 
         $addd = new Academicdetail;
         $addd->userid = \Auth::user()->id;
@@ -187,13 +182,13 @@ class AddCourseController extends Controller
         $addd->marksheetgraduation = $marksheetgraduation;
         $addd->save();
 
-        $paymentt=new Payments;
-        $paymentt->user_id=\Auth::user()->id;
-        $paymentt->amount=1500;
-        $paymentt->paymentstatus=1;
-        $paymentt->paymentproof=$payment;
+        $paymentt = new Payments;
+        $paymentt->user_id = \Auth::user()->id;
+        $paymentt->amount = 1500;
+        $paymentt->paymentstatus = 1;
+        $paymentt->paymentproof = $payment;
         $paymentt->save();
-        
+
         $user = User::find(Auth::user()->id);
         $user->update([
             'name' => $request->name,

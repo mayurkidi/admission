@@ -31,6 +31,7 @@ Route::group(['middleware'=>'auth','verified'], function () {
     // Route::post('fetch-cities', [DropdownController::class, 'fetchCity']);  
 });
     Route::get('/getcity', [ApiController::class,'getCityList']);
+    Route::get('/getcourse', [ApiController::class,'getCourseList']);
 
 Auth::routes(['verify' => true]);
 
