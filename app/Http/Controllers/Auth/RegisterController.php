@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\State;
+use App\Models\City;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -50,13 +52,13 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        
+
         return Validator::make($data, [
             'name' => ['required', 'max:50'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
-            'mobile'=>['required','digits:10'],
-            'course'=>['required'],
+            'mobile' => ['required', 'digits:10'],
+            'course' => ['required'],
         ]);
     }
 
@@ -68,16 +70,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        Session::flash('is_register',1);
+        Session::flash('is_register', 1);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'city'=>$data['city'],
-            'mobile'=>$data['mobile'],
+            'city' => $data['city'],
+            'mobile' => $data['mobile'],
             'state' => $data['state'],
-            'course'=>$data['course'],
-            'specialization'=>$data['specialization'],
+            'course' => $data['course'],
+            'specialization' => $data['specialization'],
         ]);
+    }
+    public function showRegistrationForm()
+    {
+        $states= State::all()->pluck('id','name');
+        $cities= City::all()->pluck('id','name','state_id');    
+        return view("auth.login", compact("states","cities"));
+        
     }
 }

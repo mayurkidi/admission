@@ -3,20 +3,6 @@
 @section('content')
 
 <!-- Container fluid -->
-<script>
-    $(document).ready(function() {
-        $("#city").blur(function() {
-            var stateid = $("#state").find(":selected").val();
-            $("#state").each(function() {
-                if ($(this).val() == stateid) {
-                    $(this).show();
-                } else {
-                    $(this).hide();
-                }
-            });
-        });
-    });
-</script>
 <div class="pb-6 pt-6">
     <div class="container-fluid">
         <div id="courseForm" class="bs-stepper">
@@ -106,7 +92,7 @@
                                                     <div class="col-lg-6">
                                                         <label class="form-label">Select Specialization</label>
                                                         <select class="selectpicker" name="specialization" data-width="100%">
-                                                        <option selected disabled>Select Specialization</option>
+                                                            <option selected disabled>Select Specialization</option>
                                                             @foreach ($courses as $key => $value)
                                                             <option value="{{$value}}">{{ $key}}</option>
                                                             @endforeach
@@ -264,10 +250,7 @@
                                             <div class="col-lg-6">
                                                 <label class="form-label">Select City</label>
                                                 <select class="selectpicker @error('city') is-invalid @enderror" name="city" id="city" data-width="100%">
-                                                    <option selected disabled>Select City</option>
-                                                    @foreach ($cities as $key => $value)
-                                                    <option value="{{$value}}">{{ $key}}</option>
-                                                    @endforeach
+                                                    <option selected>Select City</option>
                                                 </select>
                                                 @error('city')
                                                 <span class="invalid-feedback" role="alert">
@@ -429,5 +412,39 @@
 </div>
 @endif
 <!-- Scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // alert(1);
+        $("#state").change(function() {
+            var stateid = $("#state").find(":selected").val();
+            // alert(stateid);
+            if (stateid) {
+                $.ajax({
+                    type: "GET",
+                    dataType: 'json',
+                    url: "{{url('/getcity')}}?state_id=" + stateid,
+                    success: function(res) {
+                        if (res) {
+                            
+                            // $("#city").empty();
+                            // $("#city").attr('disabled',false);
+                            // $("#city").append('<option value="">--Select jk--</option>');
+                            $.each(res, function (key, value) {
+                                $("#city").append('<option value="' + value.id + '">' + value.name + '</option>');
+                            });
+                            $('#city').selectpicker('refresh');
+
+                            $("#state").append('<option value=' + id + '>' + name + '</option>'); // return empty
+                            // alert(res.id);
+                        }
+
+                    }
+                });
+            }
+
+        });
+    });
+</script>
 <!-- Libs JS -->
 @endsection

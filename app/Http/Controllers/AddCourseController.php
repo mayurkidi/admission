@@ -31,7 +31,8 @@ class AddCourseController extends Controller
         // $city= City::all()->pluck('name');
         // $cities=City::select('name','state_id')->get();
         $states= State::all()->pluck('id','name');
-        $cities= City::all()->pluck('id','name','state_id');
+        $cities= City::all();
+        // return $cities;
         $courses= Course::all()->pluck('id','name');
         $programs= Program::all()->pluck('id','name','course_id');
         // return compact('city','state');

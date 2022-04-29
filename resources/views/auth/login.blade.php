@@ -100,19 +100,18 @@
                                                             <span class="help-block"></span>
                                                         </div>
                                                         <div class="form-group label-floating reg_state_id_div StateId field-select">
-                                                            <select name="state" id="StateId" class="form-control select-arrow-cust widget_input" data-label="Select State *" data-none-selected-text="Select State">
+                                                            <select name="state" id="state" class="form-control select-arrow-cust widget_input" data-label="Select State *" data-none-selected-text="Select State">
 
                                                                 <option selected disabled>Select State</option>
-                                                                <option>Gujarat</option>
-                                                                
+                                                                @foreach ($states as $key => $value)
+                                                                <option value="{{$value}}">{{ $key}}</option>
+                                                                @endforeach
                                                             </select>
                                                             <span class="help-block"></span>
                                                         </div>
                                                         <div class="form-group label-floating reg_city_id_div CityId field-select">
-                                                            <select name="city" id="CityId" class="form-control select-arrow-cust widget_input" data-label="Select City *" data-none-selected-text="Select City">
+                                                            <select name="city" id="city" class="form-control select-arrow-cust widget_input" data-label="Select City *" data-none-selected-text="Select City">
                                                                 <option selected disabled>Select City</option>
-                                                                <option>Rajkot</option>
-                                                               
                                                             </select>
                                                             <span class="help-block"></span>
                                                         </div>
@@ -145,7 +144,7 @@
                                                             <span class="help-block"></span>
                                                         </div>
                                                         <div class="form-group agree-group col-md-12 m0">
-                                                            <div class="checkbox"><label><input type="hidden" name="Agree" value="0"><input type="checkbox" name="Agree" value="1" id="Agree" class="widget_input"><span class="agree-condition">I authorize MM (DU) to
+                                                            <div class="checkbox"><label><input type="hidden" name="Agree" value="0"><input type="checkbox" name="Agree" value="1" id="Agree" class="widget_input"><span class="agree-condition">I authorize RK University to
                                                                         contact me with notifications/updates via E
                                                                         Mail/SMS/Whatsapp/Call, which overrides DND/NDNC
                                                                         registration * </span></label></div>
@@ -415,6 +414,39 @@
     <script src="{{asset('js/theme.js?1640168978')}}"></script>
     <script src="{{asset('js/college/bootstrap-datepicker.js?1640168975')}}"></script>
     <script src="{{asset('js/college/bootstrap-datepicker.js?1640168975')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // alert(1);
+            $("#state").change(function() {
+                var stateid = $("#state").find(":selected").val();
+                // alert(stateid);
+                if (stateid) {
+                    $.ajax({
+                        type: "GET",
+                        dataType: 'json',
+                        url: "{{url('/getcity')}}?state_id=" + stateid,
+                        success: function(res) {
+                            if (res) {
+                                // $("#city").empty();
+                                // $("#city").attr('disabled',false);
+                                // $("#city").append('<option value="">--Select jk--</option>');
+                                $.each(res, function(key, value) {
+                                    $("#city").append('<option value="' + value.id + '">' + value.name + '</option>');
+                                });
+                                $('#city').selectpicker('refresh');
+
+                                $("#state").append('<option value=' + id + '>' + name + '</option>'); // return empty
+                                // alert(res.id);
+                            }
+
+                        }
+                    });
+                }
+
+            });
+        });
+    </script>
 </body>
 
 </html>

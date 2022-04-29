@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
+use App\Models\State;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -26,6 +28,11 @@ class LoginController extends Controller
      *
      * @var string
      */
+    public function index()
+    {
+        // return view("auth.login", compact("states","cities"));
+        return "h";
+    }
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
@@ -36,5 +43,12 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+
+    }
+    public function showRegistrationForm()
+    {
+        $states= State::all()->pluck('id','name');
+        $cities= City::all()->pluck('id','name','state_id');    
+        return view("auth.register", compact("states","cities"));  
     }
 }
