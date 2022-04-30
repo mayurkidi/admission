@@ -132,10 +132,15 @@
                                                             <span class="help-block"></span>
                                                         </div>
                                                         <div class="form-group agree-group col-md-12 m0">
-                                                            <div class="checkbox"><label><input type="hidden" name="Agree" value="0"><input type="checkbox" name="Agree" value="1" id="Agree" class="widget_input"><span class="agree-condition">I authorize RK University to
-                                                                        contact me with notifications/updates via E
-                                                                        Mail/SMS/Whatsapp/Call, which overrides DND/NDNC
-                                                                        registration * </span></label></div>
+                                                            <div class="checkbox"><label><input type="hidden" name="Agree" value="0">
+                                                            <input type="checkbox" name="Agree" value="1" id="Agree" class="widget_input @error('Agree') is-invalid @enderror"><span class="agree-condition">I authorize RK University to
+                                                                contact me with notifications/updates via E
+                                                                Mail/SMS/Whatsapp/Call, which overrides DND/NDNC
+                                                                registration * </span></label>
+                                                                @if ($errors->has('Agree'))
+                                                                    <span class="text-danger">{{ $errors->first('Agree') }}</span>
+                                                                @endif
+                                                            </div>
                                                             <span class="help-block"></span>
                                                         </div>
                                                         <!-- 

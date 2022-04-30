@@ -54,65 +54,110 @@
                               <!-- First name -->
                               <div class="mb-3 col-12 col-md-6">
                                  <label class="form-label" for="email">E-mail</label>
-                                 <input type="text" id="email" name="email" class="form-control" placeholder="E-mail" value="{{auth()->user()->email}}" required />
+                                 <input type="text" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="E-mail" value="{{auth()->user()->email}}" required />
+                                 @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                    </span>
+                                 @enderror
                               </div>
                               <div class="mb-3 col-12 col-md-6">
                                  <label class="form-label" for="sname">Student Name</label>
-                                 <input type="text" id="sname" name="name" class="form-control" placeholder="Student Name" value="{{auth()->user()->name}}" required />
+                                 <input type="text" id="sname" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Student Name" value="{{auth()->user()->name}}" required />
+                                 @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                    </span>
+                                 @enderror
                               </div>
                               <!-- Last name -->
                               <div class="mb-3 col-12 col-md-6">
                                  <label class="form-label" for="fname">Father Name</label>
-                                 <input type="text" id="dname" name="fathername" class="form-control" placeholder="Father Name" value="{{auth()->user()->fathername}}" required />
+                                 <input type="text" id="dname" name="fathername" class="form-control @error('fathername') is-invalid @enderror" placeholder="Father Name" value="{{auth()->user()->fathername}}" required />
+                                 @error('fathername')
+                                    <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                    </span>
+                                 @enderror
                               </div>
                               <div class="mb-3 col-12 col-md-6">
                                  <label class="form-label">Gender</label>
-                                 <select name="gender" class="gender form-control" id="gender">
+                                 <select name="gender" class="form-control @error('gender') is-invalid @enderror" id="gender">
                                     <option value="">Select Gender</option>
                                     <option @if(auth()->user()->gender == 'Male')selected @endif>Male</option>
                                     <option @if(auth()->user()->gender == 'Female')selected @endif>Female</option>
                                  </select>
+                                 @error('gender')
+                                    <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                    </span>
+                                 @enderror
                               </div>
                               <!-- Birthday -->
                               <div class="mb-3 col-12 col-md-6">
                                  <label class="form-label" for="birth">Birthday</label>
-                                 <input class="form-control flatpickr" type="date" name="dateofbirth" placeholder="Birth of Date" id="birth"
+                                 <input class="form-control flatpickr @error('dateofbirth') is-invalid @enderror" type="date" name="dateofbirth" placeholder="Birth of Date" id="birth"
                                     value="{{auth()->user()->dateofbirth}}" />
+                                    @error('dateofbirth')
+                                       <span class="invalid-feedback" role="alert">
+                                             <strong>{{ $message }}</strong>
+                                       </span>
+                                    @enderror
                               </div>
                               <!-- Address -->
                               <div class="mb-3 col-12 col-md-6">
                                  <label class="form-label" for="address">Address</label>
-                                 <input type="text" name="address" id="address" class="form-control" placeholder="Address" value="{{auth()->user()->dateofbirth}}" required />
+                                 <input type="text" name="address" id="address" class="form-control @error('address') is-invalid @enderror" placeholder="Address" value="{{auth()->user()->dateofbirth}}" required />
+                                 @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                    </span>
+                                 @enderror
                               </div>
                               <!-- State -->
                               <div class="mb-3 col-12 col-md-6">
                                  <label class="form-label">State</label>
-                                 <select name="state" class="states form-control" id="stateId">
+                                 <select name="state" class="states form-control @error('state') is-invalid @enderror" id="stateId">
                                     <option @if(auth()->user()->state == 'Andaman and Nicobar')selected @endif>Andaman and Nicobar</option>
                                     <option @if(auth()->user()->state == 'Andhra Pradesh')selected @endif>Andhra Pradesh</option>
                                     <option @if(auth()->user()->state == 'Arunachal Pradesh')selected @endif>Arunachal Pradesh</option>
                                     <option @if(auth()->user()->state == 'Uttarakhand')selected @endif>Uttarakhand</option>
                                     <option @if(auth()->user()->state == 'West Bengal')selected @endif>West Bengal</option>
                                  </select>
+                                 @error('state')
+                                    <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                    </span>
+                                 @enderror
                               </div>
                               <!-- city -->
                               <div class="mb-3 col-12 col-md-6">
                                  <label class="form-label">City</label>
-                                 <select name="city" class="cities form-control" id="cityId">
+                                 <select name="city" class="cities form-control @error('city') is-invalid @enderror" id="cityId">
                                     <option @if(auth()->user()->state == 'Test')selected @endif>Test</option>
                                     <option @if(auth()->user()->state == 'Rajkot')selected @endif>Rajkot</option>
                                     <option @if(auth()->user()->state == 'Ahemedabad')selected @endif>Ahemedabad</option>
                                  </select>
+                                 @error('city')
+                                    <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                    </span>
+                                 @enderror
                               </div>
                               <!-- pincode -->
                               <div class="mb-3 col-12 col-md-6">
                                  <label class="form-label" for="pincode">Pincode</label>
-                                 <input type="text" id="pincode" name="pincode" class="form-control" placeholder="Pincode" value="{{auth()->user()->pincode}}" required />
+                                 <input type="text" id="pincode" name="pincode" class="form-control @error('pincode') is-invalid @enderror" placeholder="Pincode" value="{{auth()->user()->pincode}}" required />
+                                 @error('pincode')
+                                    <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                    </span>
+                                 @enderror
                               </div>
                               <!--  admission in -->
                               <div class="mb-3 col-12 col-md-6">
                                  <label class="form-label">Application for Admission in</label>
-                                 <select name="course" class="afoi form-control" id="course">
+                                 <select name="course" class="afoi form-control @error('course') is-invalid @enderror" id="course">
                                     <option @if(auth()->user()->course == 'Test')selected @endif>Test</option>
                                     <option @if(auth()->user()->course == 'Agriculture')selected @endif>Agriculture</option>
                                     <option @if(auth()->user()->course == 'Basic Science')selected @endif>Basic Science</option>
@@ -126,16 +171,31 @@
                                     <option @if(auth()->user()->course == 'Pharmacy')selected @endif>Pharmacy</option>
                                     <option @if(auth()->user()->course == 'Physiotherapy')selected @endif>Physiotherapy</option>
                                  </select>
+                                 @error('course')
+                                    <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                    </span>
+                                 @enderror
                               </div>
                               <!-- Phone -->
                               <div class="mb-3 col-12 col-md-6">
                                  <label class="form-label" for="cnos">Contact Number of Student</label>
-                                 <input type="text" id="cnos" name="mobile" class="form-control" placeholder="Contact Number of Student" value="{{auth()->user()->mobile}}" required />
+                                 <input type="text" id="cnos" name="mobile" class="form-control @error('mobile') is-invalid @enderror" placeholder="Contact Number of Student" value="{{auth()->user()->mobile}}" required />
+                                 @error('mobile')
+                                    <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                    </span>
+                                 @enderror
                               </div>
                               <!-- Phone father-->
                               <div class="mb-3 col-12 col-md-6">
                                  <label class="form-label" for="cnof">Contact Number of Student's Father</label>
-                                 <input type="text" id="cnof" name="fathermobile" class="form-control" placeholder="Contact Number of Student's Father" value="{{auth()->user()->fathermobile}}" required />
+                                 <input type="text" id="cnof" name="fathermobile" class="form-control @error('fathermobile') is-invalid @enderror" placeholder="Contact Number of Student's Father" value="{{auth()->user()->fathermobile}}" required />
+                                 @error('fathermobile')
+                                    <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                    </span>
+                                 @enderror
                               </div>
                               <div class="col-12">
                                  <!-- Button -->

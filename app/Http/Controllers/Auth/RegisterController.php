@@ -60,6 +60,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8'],
             'mobile' => ['required', 'digits:10'],
             'course' => ['required'],
+            'Agree' => ['required'],
         ]);
     }
 
