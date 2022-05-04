@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Payments;
 use App\Models\User;
+use App\Models\State;
 use App\Models\Academicdetail;
 use App\Models\Applicationdetail;
 use Faker\Provider\ar_SA\Payment;
@@ -52,13 +53,16 @@ class HomeController extends Controller
         $paymentstatus = Payments::where('user_id', \Auth::user()->id)->pluck('paymentstatus');
         if (!$paymentstatus->isEmpty()) {
             if ($paymentstatus[0] == 1) {
-                $application = Applicationdetail::all()->where('userid', \Auth::user()->id);
-                $academic = Academicdetail::all()->where('userid', \Auth::user()->id);
-                $user = User::all()->where('id', \Auth::user()->id);
+                $application = Applicationdetail::select('*')->where('userid', \Auth::user()->id)->get();
+                $academic = Academicdetail::select('*')->where('userid', \Auth::user()->id)->get();
+                $user = User::select('*')->where('id',\Auth::user()->id)->get();
                 //  return gettype(compact('user','application','academic'));  
                 return view('addcourse.application1',compact('application', 'academic', 'user'));
             }
         }
-        return view('dashboard');
+        // return "Hello";
+        $application = Applicationdetail::select('*')->where('userid', \Auth::user()->id)->get();
+        // return compact('application');
+        return view('dashboard',compact('application'));
     }
 }
