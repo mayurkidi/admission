@@ -49,6 +49,7 @@ class HomeController extends Controller
             $cities = City::all()->pluck('id', 'name', 'state_id');
             return redirect()->route('login')->with(compact(['states'=>$states]));
         }
+        
         $userid = User::all();
         $paymentstatus = Payments::where('user_id', \Auth::user()->id)->pluck('paymentstatus');
         if (!$paymentstatus->isEmpty()) {
@@ -61,7 +62,7 @@ class HomeController extends Controller
             }
         }
         // return "Hello";
-        $application = Applicationdetail::select('*')->where('userid', \Auth::user()->id)->get();
+        // $application = Applicationdetail::select('*')->where('userid', \Auth::user()->id)->get();
         // return compact('application');
         return view('dashboard',compact('application'));
     }

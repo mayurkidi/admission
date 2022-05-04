@@ -403,7 +403,7 @@
                                                 </button>
                                             </div> -->
                                     <div class="col-lg-6 d-flex justify-content-end">
-                                        <button type="submit" id="addcourse3" class="btn btn-primary col-lg-3">
+                                        <button type="submit" id="addcourse4" class="btn btn-primary col-lg-3">
                                             Submit  
                                         </button>
                                     </div>
@@ -652,8 +652,6 @@
                 }
                 courseForm.next();
             }
-
-
 
         });
         $("#addcourse4").click(function() {
