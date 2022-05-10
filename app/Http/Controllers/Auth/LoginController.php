@@ -49,8 +49,8 @@ class LoginController extends Controller
     public function showRegistrationForm()
     {
         $states= State::all()->pluck('id','name');
-        $cities= City::all()->pluck('id','name','state_id');    
+        $cities= City::all()->pluck('id','name','state_id');
         $programs=Program::all()->pluck('id','name');
-        return view("auth.register", compact("states","cities",'programs'));  
+        return view("auth.register", compact("states","cities",'programs'));
     }
 }

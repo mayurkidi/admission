@@ -143,7 +143,7 @@
                                                             </div>
                                                             <span class="help-block"></span>
                                                         </div>
-                                                        <!-- 
+                                                        <!--
                                              <link rel="stylesheet" href="css/college/bootstrap-datepicker.css?1640168969">
                                              </div>
                                              <div class="custom_college_text"></div> -->
@@ -421,9 +421,9 @@
                         url: "{{url('/getcity')}}?state_id=" + stateid,
                         success: function(res) {
                             if (res) {
-                                // $("#city").empty();
-                                // $("#city").attr('disabled',false);
-                                // $("#city").append('<option value="">--Select jk--</option>');
+                                $("#city").empty();
+                                $("#city").attr('disabled',false);
+                                $("#city").append('<option value="">--Select jk--</option>');
                                 $.each(res, function(key, value) {
                                     $("#city").append('<option value="' + value.id + '">' + value.name + '</option>');
                                 });
