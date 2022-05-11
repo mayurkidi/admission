@@ -1,54 +1,52 @@
 @extends('layouts.main')
 
 @section('content')
-      
-      <!-- Container fluid -->
-      <div class="container-fluid p-4 ">
-      <div class="pt-5 pb-5">
-         <div class="container">
-            <!-- User info -->
-            <div class="row align-items-center">
-               <div class="col-xl-12 col-lg-12 col-md-12 col-12">
-                  <!-- Bg -->
-                  <div class="pt-16 rounded-top-md" style="
+
+<!-- Container fluid -->
+<div class="container-fluid p-4 ">
+   <div class="pt-5 pb-5">
+      <div class="container">
+         <!-- User info -->
+         <div class="row align-items-center">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+               <!-- Bg -->
+               <div class="pt-16 rounded-top-md" style="
                      background-image: linear-gradient(#EA4C46, #F00000
                      );
                      background-color: red;
                      "></div>
-                  <div
-                     class="d-flex align-items-end justify-content-between bg-white px-4 pt-2 pb-4 rounded-none rounded-bottom-md shadow-sm">
-                     <div class="d-flex align-items-center">
-                        <div class="me-2 position-relative d-flex justify-content-end align-items-end mt-n5">
-                           <img src="assets/images/user.png" class="avatar-xl rounded-circle border border-4 border-white"
-                              alt="" />
-                        </div>
-                        <div class="lh-1">
-                           <h2 class="mb-0">
-                            {{auth()->user()->name}} <a href="#" disabled> <i class="fe fe-edit me-2"></i>
-                              </a>
-                           </h2>
-                           <p class="mb-0 d-block">{{auth()->user()->email}}</p>
-                        </div>
+               <div class="d-flex align-items-end justify-content-between bg-white px-4 pt-2 pb-4 rounded-none rounded-bottom-md shadow-sm">
+                  <div class="d-flex align-items-center">
+                     <div class="me-2 position-relative d-flex justify-content-end align-items-end mt-n5">
+                        <img src="assets/images/user.png" class="avatar-xl rounded-circle border border-4 border-white" alt="" />
                      </div>
-                     <div>
-                        <a href="{{ route('dashboard') }}" class="btn btn-outline-primary btn-sm d-none d-md-block">Go to
+                     <div class="lh-1">
+                        <h2 class="mb-0">
+                           {{auth()->user()->name}} <a href="#" disabled> <i class="fe fe-edit me-2"></i>
+                           </a>
+                        </h2>
+                        <p class="mb-0 d-block">{{auth()->user()->email}}</p>
+                     </div>
+                  </div>
+                  <div>
+                     <a href="{{ route('dashboard') }}" class="btn btn-outline-primary btn-sm d-none d-md-block">Go to
                         Dashboard</a>
-                     </div>
                   </div>
                </div>
             </div>
-            <!-- Content -->
-            <div class="row mt-0 mt-md-4">
-               <div class="col-lg-12 col-md-12 col-12">
-                  <!-- Card -->
-                  <div class="card">
-                     <!-- Card header -->
-                     <!-- Card body -->
-                     <div class="card-body">
-                        <div>
-                           <h3 class="mb-3">Personal Details</h3>
-                           <!-- Form -->
-                           <form action="{{route('user.update',auth()->user())}}" method="POST" enctype="multipart/form-data" class="row">
+         </div>
+         <!-- Content -->
+         <div class="row mt-0 mt-md-4">
+            <div class="col-lg-12 col-md-12 col-12">
+               <!-- Card -->
+               <div class="card">
+                  <!-- Card header -->
+                  <!-- Card body -->
+                  <div class="card-body">
+                     <div>
+                        <h3 class="mb-3">Personal Details</h3>
+                        <!-- Form -->
+                        <form action="{{route('user.update',auth()->user())}}" method="POST" enctype="multipart/form-data" class="row">
                            @csrf
                            @method('PUT')
                               <!-- First name -->
@@ -201,10 +199,9 @@
                                  <!-- Button -->
                                  <button class="btn btn-primary" type="submit">
                                  Update Profile
-                                 </button>
-                              </div>
-                           </form>
-                        </div>
+                              </button>
+                           </div>
+                        </form>
                      </div>
                   </div>
                </div>
@@ -212,12 +209,12 @@
          </div>
       </div>
    </div>
-   @if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
-   @endif
-      <!-- Scripts -->
-      <!-- Libs JS -->
+</div>
+@if(session()->has('message'))
+<div class="alert alert-success">
+   {{ session()->get('message') }}
+</div>
+@endif
+<!-- Scripts -->
+<!-- Libs JS -->
 @endsection
-     

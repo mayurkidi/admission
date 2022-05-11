@@ -148,7 +148,7 @@
                                             </div>
                                             <div class="col-lg-4">
                                                 <label for="email" class="form-label">Email</label>
-                                                <input id="email" class="form-control @error('email') is-invalid @enderror" name="email" type="email" value="{{auth()->user()->email}}" placeholder="Enter Email" required />
+                                                <input id="email" disabled class="form-control @error('email') is-invalid @enderror" name="email" type="email" value="{{auth()->user()->email}}" placeholder="Enter Email" required />
 
                                                 @error('email')
                                                 <span class="invalid-feedback" role="alert">
