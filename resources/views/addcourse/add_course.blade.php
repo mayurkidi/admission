@@ -678,4 +678,4 @@
 @endif
 <!-- Scripts -->
 <!-- Libs JS -->
-@endsection
+@endsectiongit 

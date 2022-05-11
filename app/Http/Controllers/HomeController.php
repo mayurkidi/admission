@@ -64,6 +64,6 @@ class HomeController extends Controller
         // return "Hello";
         // $application = Applicationdetail::select('*')->where('userid', \Auth::user()->id)->get();
         // return compact('application');
-        return view('dashboard',compact('application'));
+        return view('dashboard');
     }
 }

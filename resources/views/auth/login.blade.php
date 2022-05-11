@@ -435,7 +435,7 @@
                             if (res) {
                                 $("#city").empty();
                                 $("#city").attr('disabled',false);
-                                $("#city").append('<option value="">--Select jk--</option>');
+                                $("#city").append('<option value="">--Select City--</option>');
                                 $.each(res, function(key, value) {
                                     $("#city").append('<option value="' + value.id + '">' + value.name + '</option>');
                                 });
@@ -452,6 +452,7 @@
             });
             $("#course").change(function() {
                 var courseid = $("#course").find(":selected").val();
+                $("#specialization").empty();
                 // alert(courseid);
                 if (courseid) {
                     $.ajax({
@@ -461,9 +462,9 @@
                         success: function(res) {
                             if (res) {
 
-                                // $("#city").empty();
-                                // $("#city").attr('disabled',false);
-                                // $("#city").append('<option value="">--Select jk--</option>');
+                                $("#specialization").empty();
+                                $("#specialization").attr('disabled',false);
+                                $("#specialization").append('<option value="">--Select Specilization--</option>');
                                 $.each(res, function(key, value) {
                                     $("#specialization").append('<option value="' + value.id + '">' + value.name + '</option>');
                                 });
