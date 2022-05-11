@@ -91,14 +91,18 @@
                                                         <select class="selectpicker" id="course" name="course" data-width="100%" required>
                                                             <option selected disabled value="">Select Program</option>
                                                             @foreach ($programs as $key => $value)
-                                                            <option value="{{$value}}">{{ $key}}</option>
+                                                            <option @if(auth()->user()->course == $value )selected
+                                                                @endif value="{{$value}}">{{$key}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <label class="form-label">Select Specialization</label>
                                                         <select class="selectpicker" id="specialization" name="specialization" data-width="100%" required>
-                                                            <option value="" disabled selected>Select Specialization</option>
+                                                            @foreach ($courses as $key => $value)
+                                                            <option @if(auth()->user()->specialization == $value )selected
+                                                                @endif value="{{$value}}">{{$key}}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
@@ -143,7 +147,7 @@
                                             </div>
                                             <div class="col-lg-4">
                                                 <label for="email" class="form-label">Email</label>
-                                                <input id="email" class="form-control @error('email') is-invalid @enderror" name="email" type="email" value="{{auth()->user()->email}}" placeholder="Enter Email" required />
+                                                <input id="email" disabled class="form-control @error('email') is-invalid @enderror" name="email" type="email" value="{{auth()->user()->email}}" placeholder="Enter Email" required />
 
                                                 @error('email')
                                                 <span class="invalid-feedback" role="alert">
@@ -243,9 +247,10 @@
                                             <div class="col-lg-6">
                                                 <label class="form-label">Select State</label>
                                                 <select class="state selectpicker @error('state') is-invalid @enderror" name="state" id="state" data-width="100%">
-                                                    <option selected disabled>Select State</option>
+                                                    <option selected disabled value="">Select State</option>
                                                     @foreach ($states as $key => $value)
-                                                    <option value="{{$value}}">{{ $key}}</option>
+                                                    <option @if(auth()->user()->state == $value )selected
+                                                        @endif value="{{$value}}">{{$key}}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('state')
@@ -257,7 +262,10 @@
                                             <div class="col-lg-6">
                                                 <label class="form-label">Select City</label>
                                                 <select class="selectpicker @error('city') is-invalid @enderror" name="city" id="city" data-width="100%">
-                                                    <option selected>Select City</option>
+                                                    @foreach ($cities as $key => $value)
+                                                    <option @if(auth()->user()->city == $value )selected
+                                                        @endif value="{{$value}}">{{$key}}</option>
+                                                    @endforeach
                                                 </select>
                                                 @error('city')
                                                 <span class="invalid-feedback" role="alert">
@@ -277,7 +285,7 @@
                                                 </span>
                                                 @enderror
                                             </div>
-                        
+
                                             <div class="col-lg-4">
                                                 <label for="pincode" class="form-label">Pincode</label>
                                                 <input id="pincode" name="pincode" class="form-control @error('pincode') is-invalid @enderror" type="text" placeholder="Enter Pincode" />
@@ -290,20 +298,7 @@
                                             </div>
                                             <!-- <small>Write a 60 character course title.</small> -->
                                         </div>
-                                        <div class="row mb-3">
-                                            <div class="col-lg-12">
-                                                <label for="courseTitle" class="form-label">Is Permanent Address same as
-                                                    the Correspondence address?</label>
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                    Yes
-                                                </label>
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                    No
-                                                </label>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                                 <!-- Button -->
@@ -435,9 +430,9 @@
                     success: function(res) {
                         if (res) {
 
-                            // $("#city").empty();
+                            $("#city").empty();
                             // $("#city").attr('disabled',false);
-                            // $("#city").append('<option value="">--Select jk--</option>');
+                            $("#city").append('<option selected disabled value="">Select City</option>');
                             $.each(res, function(key, value) {
                                 $("#city").append('<option value="' + value.id + '">' + value.name + '</option>');
                             });
@@ -463,9 +458,9 @@
                     success: function(res) {
                         if (res) {
 
-                            // $("#city").empty();
+                            $("#specialization").empty();
                             // $("#city").attr('disabled',false);
-                            // $("#city").append('<option value="">--Select jk--</option>');
+                            $("#specialization").append('<option selected disabled value="">Select Specialization</option>');
                             $.each(res, function(key, value) {
                                 $("#specialization").append('<option value="' + value.id + '">' + value.name + '</option>');
                             });
@@ -494,48 +489,65 @@
             }
         });
         $('#addcourse2').click(function() {
-
             if ($('#name').val() == "") {
                 alert("Name Cannot be Empty");
                 return false;
 
-            } else if ($('#email').val() == "") {
-                alert("Name Cannot be Empty");
+            }
+            if ($('#email').val() == "") {
+                alert("Email Cannot be Empty");
                 return false;
 
-            } else if ($('#mobile').val() == "") {
+            }
+            if ($('#email').val() != "") {
+                var email = $('#email').val();
+                var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                if (regex.test(email) == false) {
+                    alert("Email address is not valid.");
+                    return false;
+                }
+            }
+            if ($('#mobile').val() == "") {
                 alert("mobile Cannot be Empty");
                 return false;
 
-            } else if ($('#dateofbirth').val() == "") {
+            }
+            if ($('#dateofbirth').val() == "") {
                 alert("Date of Birth Cannot be Empty");
                 return false;
 
-            } else if ($('#gender').val() == "") {
+            }
+            if ($('#gender').val() == "") {
                 alert("Gender Cannot be Empty");
                 return false;
 
-            } else if ($('#fathername').val() == "") {
+            }
+            if ($('#fathername').val() == "") {
                 alert("Father name Cannot be Empty");
                 return false;
 
-            } else if ($('#fathermobile').val() == "") {
-                alert("Father mobile Cannot be Empty");
+            }
+            if ($('#fathermobile').val() == "") {
+                alert("Father mobile number Cannot be Empty");
                 return false;
 
-            } else if ($('#state').val() == null) {
+            }
+            if ($('#state').val() == null) {
                 alert("State Cannot be Empty");
                 return false;
 
-            } else if ($('#city').val() == null) {
+            }
+            if ($('#city').val() == null) {
                 alert("City Cannot be Empty");
                 return false;
 
-            } else if ($('#address').val() == "") {
+            }
+            if ($('#address').val() == "") {
                 alert("Address Cannot be Empty");
                 return false;
 
-            } else if ($('#pincode').val() == "") {
+            }
+            if ($('#pincode').val() == "") {
                 alert("Pincode Cannot be Empty");
                 return false;
 
@@ -546,39 +558,93 @@
 
         $('#addcourse3').click(function() {
 
-            if ($('#lc').val()=="") {
+            if ($('#lc').val() == "") {
                 alert("Leaving certificate file Cannot be Empty");
                 return false;
+            }
+            if ($('#lc').val() != "") {
+                var ext = $('#lc').val().split('.').pop().toLowerCase();
+                if ($.inArray(ext, ['pdf', 'png', 'jpg', 'jpeg']) == -1) {
+                    alert("Leaving certificate file format is not allowed.");
+                    return false;
+                }
+            }
 
-            } else if ($('#aadharcard').val() == "") {
+            if ($('#aadharcard').val() == "") {
                 alert("Aadharcard file Cannot be Empty");
                 return false;
 
-            } else if ($('#marksheet10').val() == "") {
+            }
+            if ($('#aadharcard').val() != "") {
+                var ext = $('#aadharcard').val().split('.').pop().toLowerCase();
+                if ($.inArray(ext, ['pdf', 'png', 'jpg', 'jpeg']) == -1) {
+                    alert("Aadhar card file format is not allowed.");
+                    return false;
+                }
+            }
+
+            if ($('#marksheet10').val() == "") {
                 alert("10th Marksheet file Cannot be Empty");
                 return false;
 
-            } else if ($('#marksheet12').val() == "") {
+            }
+            if ($('#marksheet10').val() != "") {
+                var ext = $('#marksheet10').val().split('.').pop().toLowerCase();
+                if ($.inArray(ext, ['pdf', 'png', 'jpg', 'jpeg']) == -1) {
+                    alert("10th Marksheets file format is not allowed.");
+                    return false;
+                }
+            }
+            if ($('#marksheet12').val() == "") {
                 alert("12th Marksheet file Cannot be Empty");
                 return false;
 
-            } else if ($('#marksheetgraduation').val() == "") {
+            }
+            if ($('#marksheet12').val() != "") {
+                var ext = $('#marksheet12').val().split('.').pop().toLowerCase();
+                if ($.inArray(ext, ['pdf', 'png', 'jpg', 'jpeg']) == -1) {
+                    alert("12th Marksheets file format is not allowed.");
+                    return false;
+                }
+            }
+            if ($('#marksheetgraduation').val() == "") {
                 alert("Graduation marksheet file Cannot be Empty");
                 return false;
 
-            } else if ($('#marksheetdiploma').val() == "") {
+            }
+            if ($('#marksheetgraduation').val() != "") {
+                var ext = $('#marksheetgraduation').val().split('.').pop().toLowerCase();
+                if ($.inArray(ext, ['pdf', 'png', 'jpg', 'jpeg']) == -1) {
+                    alert("Graduation Marksheets file format is not allowed.");
+                    return false;
+                }
+            }
+            if ($('#marksheetdiploma').val() == "") {
                 alert("Diploma marksheet file Cannot be Empty");
                 return false;
 
+            }
+            if ($('#marksheetdiploma').val() != "") {
+                var ext = $('#marksheetdiploma').val().split('.').pop().toLowerCase();
+                if ($.inArray(ext, ['pdf', 'png', 'jpg', 'jpeg']) == -1) {
+                    alert("Diploma Marksheets file format is not allowed.");
+                    return false;
+                }
             } else {
                 courseForm.next();
             }
         });
-        $("#addcourse4").click(function(){
-            if($("#payment").val()=="")
-            {
+        $("#addcourse4").click(function() {
+            if ($("#payment").val() == "") {
                 alert("Payment screenshot cannot be empty");
                 return false;
+            }
+            if ($('#payment').val() != "") {
+                var ext = $('#payment').val().split('.').pop().toLowerCase();
+                if ($.inArray(ext, ['pdf', 'png', 'jpg', 'jpeg']) == -1) {
+                    alert("payment proofs file format is not allowed.");
+                    return false;
+                }
             }
         });
 

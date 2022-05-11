@@ -52,10 +52,10 @@ class HomeController extends Controller
         $paymentstatus = Payments::where('user_id', \Auth::user()->id)->pluck('paymentstatus');
         if (!$paymentstatus->isEmpty()) {
             if ($paymentstatus[0] == 1) {
-                $application = Applicationdetail::all()->where('userid', \Auth::user()->id);
-                $academic = Academicdetail::all()->where('userid', \Auth::user()->id);
-                $user = User::all()->where('id', \Auth::user()->id);
-                //  return gettype(compact('user','application','academic'));  
+                $application = Applicationdetail::select('*')->where('userid', \Auth::user()->id)->get();
+                $academic = Academicdetail::select('*')->where('userid', \Auth::user()->id)->get();
+                $user = User::select('*')->where('id',\Auth::user()->id)->get();
+                // return compact('user','application','academic');
                 return view('addcourse.application1',compact('application', 'academic', 'user'));
             }
         }

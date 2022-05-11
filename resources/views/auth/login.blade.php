@@ -416,9 +416,9 @@
                         url: "{{url('/getcity')}}?state_id=" + stateid,
                         success: function(res) {
                             if (res) {
-                                // $("#city").empty();
+                                $("#city").empty();
                                 // $("#city").attr('disabled',false);
-                                // $("#city").append('<option value="">--Select jk--</option>');
+                                $("#city").append('<option selected disabled value="">Select City</option>');
                                 $.each(res, function(key, value) {
                                     $("#city").append('<option value="' + value.id + '">' + value.name + '</option>');
                                 });
@@ -444,9 +444,9 @@
                         success: function(res) {
                             if (res) {
 
-                                // $("#city").empty();
+                                $("#specialization").empty();
                                 // $("#city").attr('disabled',false);
-                                // $("#city").append('<option value="">--Select jk--</option>');
+                                $("#specialization").append('<option selected disabled value="">Select Specialization</option>');
                                 $.each(res, function(key, value) {
                                     $("#specialization").append('<option value="' + value.id + '">' + value.name + '</option>');
                                 });

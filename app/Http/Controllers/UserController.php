@@ -72,11 +72,7 @@ class UserController extends Controller
     {
         $user->update([
             'name' => $request->name,
-            'email' => $request->email,
             'mobile' => $request->mobile,
-            'city' => $request->city,
-            'state' => $request->state,
-            'course'=>$request->course,
             'fathername'=>$request->fathername,
             'gender'=>$request->gender,
             'dateofbirth'=>$request->dateofbirth,
