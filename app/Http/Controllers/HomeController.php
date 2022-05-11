@@ -57,11 +57,7 @@ class HomeController extends Controller
                 $application = Applicationdetail::select('*')->where('userid', \Auth::user()->id)->get();
                 $academic = Academicdetail::select('*')->where('userid', \Auth::user()->id)->get();
                 $user = User::select('*')->where('id',\Auth::user()->id)->get();
-<<<<<<< HEAD
-                // return compact('user','application','academic');
-=======
                 //  return gettype(compact('user','application','academic'));  
->>>>>>> dc7c7870d32f18d8f8d79423651dcc546f40491b
                 return view('addcourse.application1',compact('application', 'academic', 'user'));
             }
         }
