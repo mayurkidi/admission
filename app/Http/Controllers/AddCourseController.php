@@ -31,14 +31,14 @@ class AddCourseController extends Controller
         $states = State::all()->pluck('id', 'name');
         $cities = City::all()->pluck('id', 'name');
         $courses = Course::all()->pluck('id', 'name');
-        $programs = Program::all()->pluck('id', 'name', 'course_id');
+        $programs = Program::all()->pluck('id', 'name',);
         $paymentstatus = Payments::where('user_id', \Auth::user()->id)->pluck('paymentstatus');
         if (!$paymentstatus->isEmpty()) {
             if ($paymentstatus[0] == 1) {
                 $application = Applicationdetail::select('*')->where('userid', \Auth::user()->id)->get();
                 $academic = Academicdetail::select('*')->where('userid', \Auth::user()->id)->get();
                 $user = User::select('*')->where('id',\Auth::user()->id)->get();
-                //  return gettype(compact('user','application','academic'));  
+                //  return compact('user','application','academic');  
                 return view('addcourse.application1',compact('application', 'academic', 'user'));
                 // return redirect()->route('application1')->with(compact(['application'=>$application],['academic'=>$academic],['user'=>$user]));
 

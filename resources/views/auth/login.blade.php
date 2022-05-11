@@ -107,12 +107,18 @@
                                                                 <option value="{{$value}}">{{ $key}}</option>
                                                                 @endforeach
                                                             </select>
+                                                            @if ($errors->has('state'))
+                                                                <span class="text-danger">{{ $errors->first('state') }}</span>
+                                                            @endif
                                                             <span class="help-block"></span>
                                                         </div>
                                                         <div class="form-group label-floating reg_city_id_div CityId field-select">
                                                             <select name="city" id="city" class="form-control select-arrow-cust widget_input" data-label="Select City *" data-none-selected-text="Select City">
                                                                 <option selected disabled>Select City</option>
                                                             </select>
+                                                            @if ($errors->has('city'))
+                                                                <span class="text-danger">{{ $errors->first('city') }}</span>
+                                                            @endif
                                                             <span class="help-block"></span>
                                                         </div>
 
@@ -123,22 +129,33 @@
                                                                 <option value="{{$value}}">{{ $key}}</option>
                                                                 @endforeach
                                                             </select>
+                                                            @if ($errors->has('course'))
+                                                                <span class="text-danger">{{ $errors->first('course') }}</span>
+                                                            @endif
                                                             <span class="help-block"></span>
                                                         </div>
                                                         <div class="form-group label-floating field-select  reg_specialization_id_div">
                                                             <select name="specialization" id="specialization" data-label="Select Specialisation *" class="form-control select-arrow-cust widget_input" data-none-selected-text="Select Specialisation">
-                                                                <option selected>Select Specialization</option>
+                                                                <option value="" selected>Select Specialization</option>
                                                             </select>
+                                                            @if ($errors->has('specialization'))
+                                                                <span class="text-danger">{{ $errors->first('specialization') }}</span>
+                                                            @endif
                                                             <span class="help-block"></span>
                                                         </div>
                                                         <div class="form-group agree-group col-md-12 m0">
-                                                            <div class="checkbox"><label><input type="hidden" name="Agree" value="0"><input type="checkbox" name="Agree" value="1" id="Agree" class="widget_input"><span class="agree-condition">I authorize RK University to
-                                                                        contact me with notifications/updates via E
-                                                                        Mail/SMS/Whatsapp/Call, which overrides DND/NDNC
-                                                                        registration * </span></label></div>
+                                                            <div class="checkbox"><label><input type="hidden" name="Agree" value="0">
+                                                            <input type="checkbox" name="agree" value="1" id="Agree" class="widget_input @error('Agree') is-invalid @enderror"><span class="agree-condition">I authorize RK University to
+                                                                contact me with notifications/updates via E
+                                                                Mail/SMS/Whatsapp/Call, which overrides DND/NDNC
+                                                                registration * </span></label>
+                                                                @if ($errors->has('agree'))
+                                                                    <span class="text-danger">Please check the box above</span>
+                                                                @endif
+                                                            </div>
                                                             <span class="help-block"></span>
                                                         </div>
-                                                        <!-- 
+                                                        <!--
                                              <link rel="stylesheet" href="css/college/bootstrap-datepicker.css?1640168969">
                                              </div>
                                              <div class="custom_college_text"></div> -->
@@ -166,7 +183,7 @@
                                                         <span class="help-block"></span>
                                                     </div>
                                                     <div class="form-group  agree-group">
-                                                        <div class="checkbox"><label><input type="hidden" name="Agree" value="0"><input type="checkbox" name="remember" value="1" id="remember" {{ old('remember') ? 'checked' : '' }}><span class="agree-condition">Check to remember your login
+                                                        <div class="checkbox"><label><input type="hidden" name="remember" value="0"><input type="checkbox" name="remember" value="1" id="remember" {{ old('remember') ? 'checked' : '' }}><span class="agree-condition">Check to remember your login
                                                                     details</span></label></div>
                                                     </div>
                                                     <button type="submit" class="btn btn-primary">
@@ -417,8 +434,8 @@
                         success: function(res) {
                             if (res) {
                                 $("#city").empty();
-                                // $("#city").attr('disabled',false);
-                                $("#city").append('<option selected disabled value="">Select City</option>');
+                                $("#city").attr('disabled',false);
+                                $("#city").append('<option value="">--Select jk--</option>');
                                 $.each(res, function(key, value) {
                                     $("#city").append('<option value="' + value.id + '">' + value.name + '</option>');
                                 });

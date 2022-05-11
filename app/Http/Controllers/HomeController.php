@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Payments;
 use App\Models\User;
+use App\Models\State;
 use App\Models\Academicdetail;
 use App\Models\Applicationdetail;
 use Faker\Provider\ar_SA\Payment;
@@ -48,6 +49,7 @@ class HomeController extends Controller
             $cities = City::all()->pluck('id', 'name', 'state_id');
             return redirect()->route('login')->with(compact(['states'=>$states]));
         }
+        
         $userid = User::all();
         $paymentstatus = Payments::where('user_id', \Auth::user()->id)->pluck('paymentstatus');
         if (!$paymentstatus->isEmpty()) {
@@ -55,10 +57,17 @@ class HomeController extends Controller
                 $application = Applicationdetail::select('*')->where('userid', \Auth::user()->id)->get();
                 $academic = Academicdetail::select('*')->where('userid', \Auth::user()->id)->get();
                 $user = User::select('*')->where('id',\Auth::user()->id)->get();
+<<<<<<< HEAD
                 // return compact('user','application','academic');
+=======
+                //  return gettype(compact('user','application','academic'));  
+>>>>>>> dc7c7870d32f18d8f8d79423651dcc546f40491b
                 return view('addcourse.application1',compact('application', 'academic', 'user'));
             }
         }
-        return view('dashboard');
+        // return "Hello";
+        // $application = Applicationdetail::select('*')->where('userid', \Auth::user()->id)->get();
+        // return compact('application');
+        return view('dashboard',compact('application'));
     }
 }

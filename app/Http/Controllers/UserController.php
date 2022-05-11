@@ -80,6 +80,22 @@ class UserController extends Controller
             'pincode'=>$request->pincode,
             'fathermobile'=>$request->fathermobile   
         ]);
+
+        $request->validate([
+            'email' => 'required',
+            'name' => 'required',
+            'fathername' => 'required',
+            'gender' => 'required',
+            'dateofbirth' => 'required',
+            'address' => 'required',
+            'state' => 'required',
+            'city' => 'required',
+            'pincode' => 'required',
+            'course' => 'required',
+            'mobile' => 'required',
+            'fathermobile' => 'required',
+        ]);
+
         return redirect()->route('dashboard')->with( 'success', 'User Profile Update Successfully');
     }
 

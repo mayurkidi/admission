@@ -3,6 +3,7 @@
 @section('content')
 
 <!-- Container fluid -->
+<input type="hidden" value="{{request()->id}}" name="cid" id="cid">
 <div class="pb-6 pt-6">
     <div class="container-fluid">
         <div id="courseForm" class="bs-stepper">
@@ -304,7 +305,7 @@
                                 <!-- Button -->
                                 <div class="row">
                                     <div class="col-lg-4 text-center">
-                                        <button type="button" class="btn btn-primary col-lg-6" onclick="courseForm.back()">
+                                        <button type="button" class="btn btn-primary col-lg-6" onclick="courseForm.previous()">
                                             Back
                                         </button>
                                     </div>
@@ -360,7 +361,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6 text-right">
-                                        <button type="button" class="btn btn-primary col-lg-3" onclick="courseForm.back()">
+                                        <button type="button" class="btn btn-primary col-lg-3" onclick="courseForm.previous()">
                                             Back
                                         </button>
                                     </div>
@@ -390,20 +391,20 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row text-center">
-                                    <!-- <div class="col-lg-4 text-center">
-                                                <button class="btn btn-primary col-lg-3" onclick="courseForm.back()">
-                                                    Back
-                                                </button>
-                                            </div> -->
+                                <div class="row">
+                                    <div class="col-lg-6 text-right">
+                                        <button type="button" class="btn btn-primary col-lg-3" onclick="courseForm.previous()">
+                                            Back
+                                        </button>
+                                    </div>
                                     <!-- <div class="col-lg-4 text-center">
                                                 <button class="btn btn-primary col-lg-6" onclick="courseForm.next()">
                                                     Save & Exit
                                                 </button>
                                             </div> -->
-                                    <div class="col-lg-12 text-center">
-                                        <button type="submit" id="addcourse4" class="btn btn-primary col-lg-2">
-                                            Submit
+                                    <div class="col-lg-6 d-flex justify-content-end">
+                                        <button type="submit" id="addcourse4" class="btn btn-primary col-lg-3">
+                                            Submit  
                                         </button>
                                     </div>
                                 </div>
@@ -569,7 +570,6 @@
                     return false;
                 }
             }
-
             if ($('#aadharcard').val() == "") {
                 alert("Aadharcard file Cannot be Empty");
                 return false;
@@ -595,44 +595,64 @@
                     return false;
                 }
             }
-            if ($('#marksheet12').val() == "") {
-                alert("12th Marksheet file Cannot be Empty");
-                return false;
-
-            }
-            if ($('#marksheet12').val() != "") {
-                var ext = $('#marksheet12').val().split('.').pop().toLowerCase();
-                if ($.inArray(ext, ['pdf', 'png', 'jpg', 'jpeg']) == -1) {
-                    alert("12th Marksheets file format is not allowed.");
+            if ($("#cid").val() == 1) {
+                if ($('#marksheet12').val() == "") {
+                    alert("12th Marksheet file Cannot be Empty");
                     return false;
+
+                }
+                if ($('#marksheet12').val() != "") {
+                    var ext = $('#marksheet12').val().split('.').pop().toLowerCase();
+                    if ($.inArray(ext, ['pdf', 'png', 'jpg', 'jpeg']) == -1) {
+                        alert("12th Marksheets file format is not allowed.");
+                        return false;
+                    }
+                    courseForm.next();
                 }
             }
-            if ($('#marksheetgraduation').val() == "") {
-                alert("Graduation marksheet file Cannot be Empty");
-                return false;
-
-            }
-            if ($('#marksheetgraduation').val() != "") {
-                var ext = $('#marksheetgraduation').val().split('.').pop().toLowerCase();
-                if ($.inArray(ext, ['pdf', 'png', 'jpg', 'jpeg']) == -1) {
-                    alert("Graduation Marksheets file format is not allowed.");
+            if ($("#cid").val() == 2) {
+                if ($('#marksheet12').val() == "") {
+                    alert("12th Marksheet file Cannot be Empty");
                     return false;
+
+                }
+                if ($('#marksheet12').val() != "") {
+                    var ext = $('#marksheet12').val().split('.').pop().toLowerCase();
+                    if ($.inArray(ext, ['pdf', 'png', 'jpg', 'jpeg']) == -1) {
+                        alert("12th Marksheets file format is not allowed.");
+                        return false;
+                    }
+                }
+                if ($('#marksheetgraduation').val() == "") {
+                    alert("Graduation marksheet file Cannot be Empty");
+                    return false;
+
+                }
+                if ($('#marksheetgraduation').val() != "") {
+                    var ext = $('#marksheetgraduation').val().split('.').pop().toLowerCase();
+                    if ($.inArray(ext, ['pdf', 'png', 'jpg', 'jpeg']) == -1) {
+                        alert("Graduation Marksheets file format is not allowed.");
+                        return false;
+                    }
+                    courseForm.next();
                 }
             }
-            if ($('#marksheetdiploma').val() == "") {
-                alert("Diploma marksheet file Cannot be Empty");
-                return false;
-
-            }
-            if ($('#marksheetdiploma').val() != "") {
-                var ext = $('#marksheetdiploma').val().split('.').pop().toLowerCase();
-                if ($.inArray(ext, ['pdf', 'png', 'jpg', 'jpeg']) == -1) {
-                    alert("Diploma Marksheets file format is not allowed.");
+            if ($("#cid").val() == 3) {
+                if ($('#marksheetdiploma').val() == "") {
+                    alert("Diploma marksheet file Cannot be Empty");
                     return false;
+
                 }
-            } else {
+                if ($('#marksheetdiploma').val() != "") {
+                    var ext = $('#marksheetdiploma').val().split('.').pop().toLowerCase();
+                    if ($.inArray(ext, ['pdf', 'png', 'jpg', 'jpeg']) == -1) {
+                        alert("Diploma Marksheets file format is not allowed.");
+                        return false;
+                    }
+                }
                 courseForm.next();
             }
+
         });
         $("#addcourse4").click(function() {
             if ($("#payment").val() == "") {
