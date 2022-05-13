@@ -12,10 +12,11 @@ class Applicationdetail extends Model
     protected $fillable = [
         'course',
         'specialization',
-        'applicationstatus'
+        'applicationstatus',
+        'graduationtype'
     ];
 
-     public function users(){
+    public function users(){
         return $this->hasMany(User::class,'id');
     }
 }

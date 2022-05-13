@@ -13,21 +13,26 @@
 
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item" id="ug" hidden>
                         <a class="nav-link   collapsed " href="{{ route('stu.addcousrse',['id' => 1]) }}">
                             <i class="nav-icon fe fe-book me-2"></i> Under Graduate Programs
                         </a>
 
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="pg" hidden>
                         <a class="nav-link   collapsed " href="{{ route('stu.addcousrse',['id' => 2]) }}">
                             <i class="nav-icon fe fe-book me-2"></i> Post Graduate Programs
                         </a>
 
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="diploma" hidden>
                         <a class="nav-link   collapsed " href="{{ route('stu.addcousrse',['id' => 3]) }}">
                             <i class="nav-icon fe fe-book me-2"></i> Diploma Programs
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed " id="test" href="{{route('test')}}">
+                            <i class="nav-icon fe fe-book me-2"></i> Test
                         </a>
                     </li>
                     <li class="nav-item">

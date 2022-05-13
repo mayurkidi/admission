@@ -63,15 +63,6 @@
                                                 <form method="POST" action="{{ route('register') }}">
                                                     @csrf
                                                     <div class="form-custom">
-                                                        <div class="form-group label-floating Password reg_password_div">
-                                                            <div class="input password"><label class="control-label  widget_label" for="password">{{ __('Password') }} <span class="required">*</span></label>
-                                                                <input type="password" name="password" id="password" autocomplete="off" class="form-control widget_input registerJsClass @error('password') is-invalid @enderror" placeholder="Enter Password  *">
-                                                                @if ($errors->has('password'))
-                                                                <span class="text-danger">{{ $errors->first('password') }}</span>
-                                                                @endif
-                                                            </div>
-                                                            <span class="help-block"></span>
-                                                        </div>
                                                         <div class="form-group label-floating reg_name_div">
                                                             <div class="input text"><label class="control-label widget_label" for="name">{{ __('Name') }}<span class="required">*</span></label>
                                                                 <input type="text" id="name" name="name" class="form-control widget_input @error('name') is-invalid @enderror" placeholder="Enter Name *" value="{{ old('name') }}">
@@ -81,6 +72,16 @@
                                                             </div>
                                                             <span class="help-block"></span>
                                                         </div>
+                                                        <div class="form-group label-floating Password reg_password_div">
+                                                            <div class="input password"><label class="control-label  widget_label" for="password">{{ __('Password') }} <span class="required">*</span></label>
+                                                                <input type="password" name="password" id="password" autocomplete="off" class="form-control widget_input registerJsClass @error('password') is-invalid @enderror" placeholder="Enter Password  *">
+                                                                @if ($errors->has('password'))
+                                                                <span class="text-danger">{{ $errors->first('password') }}</span>
+                                                                @endif
+                                                            </div>
+                                                            <span class="help-block"></span>
+                                                        </div>
+
                                                         <div class="form-group label-floating reg_email_div Email_email">
                                                             <div class="input text"><label class="control-label widget_label" for="email">{{ __('Email Address') }}<span class="required">*</span></label>
                                                                 <input type="text" id="email" name="email" autocomplete="email" class="form-control widget_input @error('email') is-invalid @enderror" placeholder="Enter Email Address *" value="{{ old('email') }}">
@@ -108,7 +109,7 @@
                                                                 @endforeach
                                                             </select>
                                                             @if ($errors->has('state'))
-                                                                <span class="text-danger">{{ $errors->first('state') }}</span>
+                                                            <span class="text-danger">{{ $errors->first('state') }}</span>
                                                             @endif
                                                             <span class="help-block"></span>
                                                         </div>
@@ -117,7 +118,7 @@
                                                                 <option selected disabled>Select City</option>
                                                             </select>
                                                             @if ($errors->has('city'))
-                                                                <span class="text-danger">{{ $errors->first('city') }}</span>
+                                                            <span class="text-danger">{{ $errors->first('city') }}</span>
                                                             @endif
                                                             <span class="help-block"></span>
                                                         </div>
@@ -130,7 +131,7 @@
                                                                 @endforeach
                                                             </select>
                                                             @if ($errors->has('course'))
-                                                                <span class="text-danger">{{ $errors->first('course') }}</span>
+                                                            <span class="text-danger">{{ $errors->first('course') }}</span>
                                                             @endif
                                                             <span class="help-block"></span>
                                                         </div>
@@ -139,18 +140,18 @@
                                                                 <option value="" selected>Select Specialization</option>
                                                             </select>
                                                             @if ($errors->has('specialization'))
-                                                                <span class="text-danger">{{ $errors->first('specialization') }}</span>
+                                                            <span class="text-danger">{{ $errors->first('specialization') }}</span>
                                                             @endif
                                                             <span class="help-block"></span>
                                                         </div>
                                                         <div class="form-group agree-group col-md-12 m0">
                                                             <div class="checkbox"><label><input type="hidden" name="Agree" value="0">
-                                                            <input type="checkbox" name="agree" value="1" id="Agree" class="widget_input @error('Agree') is-invalid @enderror"><span class="agree-condition">I authorize RK University to
-                                                                contact me with notifications/updates via E
-                                                                Mail/SMS/Whatsapp/Call, which overrides DND/NDNC
-                                                                registration * </span></label>
+                                                                    <input type="checkbox" name="agree" value="1" id="Agree" class="widget_input @error('Agree') is-invalid @enderror"><span class="agree-condition">I authorize RK University to
+                                                                        contact me with notifications/updates via E
+                                                                        Mail/SMS/Whatsapp/Call, which overrides DND/NDNC
+                                                                        registration * </span></label>
                                                                 @if ($errors->has('agree'))
-                                                                    <span class="text-danger">Please check the box above</span>
+                                                                <span class="text-danger">Please check the box above</span>
                                                                 @endif
                                                             </div>
                                                             <span class="help-block"></span>
@@ -434,7 +435,7 @@
                         success: function(res) {
                             if (res) {
                                 $("#city").empty();
-                                $("#city").attr('disabled',false);
+                                $("#city").attr('disabled', false);
                                 $("#city").append('<option value="">--Select City--</option>');
                                 $.each(res, function(key, value) {
                                     $("#city").append('<option value="' + value.id + '">' + value.name + '</option>');
@@ -463,7 +464,7 @@
                             if (res) {
 
                                 $("#specialization").empty();
-                                $("#specialization").attr('disabled',false);
+                                $("#specialization").attr('disabled', false);
                                 $("#specialization").append('<option value="">--Select Specilization--</option>');
                                 $.each(res, function(key, value) {
                                     $("#specialization").append('<option value="' + value.id + '">' + value.name + '</option>');

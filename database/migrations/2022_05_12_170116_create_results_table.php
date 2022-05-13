@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateApplicationdetailsTable extends Migration
+class CreateResultsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateApplicationdetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('applicationdetails', function (Blueprint $table) {
+        Schema::create('results', function (Blueprint $table) {
             $table->id('id');
             $table->string('userid');
-            $table->string('course');
-            $table->string('specialization');
-            $table->string('graduationtype');
-            $table->string('applicationstatus');
+            $table->string('overview')->nullable();
+            $table->string('totalscore');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateApplicationdetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('applicationdetails');
+        Schema::dropIfExists('results');
     }
 }

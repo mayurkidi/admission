@@ -1,9 +1,18 @@
 @extends('layouts.main')
-
 @section('content')
 
 <!-- Container fluid -->
 <input type="hidden" value="{{request()->id}}" name="cid" id="cid">
+@if($application->isEmpty()==false)
+<input type="hidden" value="{{$application[0]->applicationstatus}}" name="status" id="status">
+@else
+<input type="hidden" value="0" name="status" id="status">
+@endif
+@if($paymentstatus->isEmpty()==false)
+<input type="hidden" value="{{$paymentstatus[0]}}" name="pstatus" id="pstatus">
+@else
+<input type="hidden" value="0" name="pstatus" id="pstatus">
+@endif
 <div class="pb-6 pt-6">
     <div class="container-fluid">
         <div id="courseForm" class="bs-stepper">
@@ -41,7 +50,7 @@
                     </div>
                     <!-- Stepper content -->
                     <div class="bs-stepper-content mt-5">
-                        <form action="{{route('app.store')}}" method="POST" enctype="multipart/form-data" class="shadow rounded p-5 form-campus">
+                        <form action="{{route('app.store',['id'=>$_REQUEST['id']])}}" method="POST" enctype="multipart/form-data" class="shadow rounded p-5 form-campus">
                             @csrf
                             <!-- Content one -->
                             <div id="test-l-1" role="tabpanel" class="bs-stepper-pane fade" aria-labelledby="courseFormtrigger1">
@@ -148,7 +157,7 @@
                                             </div>
                                             <div class="col-lg-4">
                                                 <label for="email" class="form-label">Email</label>
-                                                <input id="email" disabled class="form-control @error('email') is-invalid @enderror" name="email" type="email" value="{{auth()->user()->email}}" placeholder="Enter Email" required />
+                                                <input id="email" readonly class="form-control @error('email') is-invalid @enderror" name="email" type="email" value="{{auth()->user()->email}}" placeholder="Enter Email" required />
 
                                                 @error('email')
                                                 <span class="invalid-feedback" role="alert">
@@ -158,7 +167,7 @@
                                             </div>
                                             <div class="col-lg-4">
                                                 <label for="mobile" class="form-label">Mobile No.</label>
-                                                <input id="mobile" class="form-control @error('mobile') is-invalid @enderror" name="mobile" type="text" value="{{auth()->user()->mobile}}" placeholder="Enter Mobile No" required />
+                                                <input id="mobile" class="form-control @error('mobile') is-invalid @enderror" name="mobile" type="number" value="{{auth()->user()->mobile}}" placeholder="Enter Mobile No" required />
 
                                                 @error('mobile')
                                                 <span class="invalid-feedback" role="alert">
@@ -171,7 +180,7 @@
                                         <div class="row mb-3">
                                             <div class="col-lg-6">
                                                 <label for="dateofbirth" class="form-label">Date of Birth</label>
-                                                <input id="dateofbirth" class="form-control @error('dateofbirth') is-invalid @enderror" name="dateofbirth" type="date" required />
+                                                <input id="dateofbirth" class="form-control @error('dateofbirth')  is-invalid @enderror" name="dateofbirth" type="date" value="{{auth()->user()->dateofbirth}}" required />
 
                                                 @error('dateofbirth')
                                                 <span class="invalid-feedback" role="alert">
@@ -182,13 +191,11 @@
                                             <div class="col-lg-6">
                                                 <label class="form-label">Gender</label>
                                                 <select class="selectpicker @error('gender') is-invalid @enderror" id="gender" name="gender" data-width="100%">
-                                                    <option value="">Select Gender</option>
-                                                    <option @if(auth()->user()->gender == 'Male')selected @endif>Male
+                                                    <option selected disabled value="">Select Gender</option>
+                                                    <option @if(auth()->user()->gender == 'Male') selected @endif>Male
                                                     </option>
                                                     <option @if(auth()->user()->gender == 'Female')selected
                                                         @endif>Female</option>
-                                                    <option @if(auth()->user()->gender == 'Transgender')selected
-                                                        @endif>Transgender</option>
                                                 </select>
 
                                                 @error('gender')
@@ -218,7 +225,7 @@
                                                     </div> -->
                                             <div class="col-lg-6">
                                                 <label for="fathername" class="form-label">Father Name</label>
-                                                <input id="fathername" class="form-control @error('fathername') is-invalid @enderror" type="text" name="fathername" placeholder="Enter Father Name" />
+                                                <input id="fathername" class="form-control @error('fathername') is-invalid @enderror" type="text" name="fathername" value="{{auth()->user()->fathername}}" placeholder="Enter Father Name" />
 
                                                 @error('fathername')
                                                 <span class="invalid-feedback" role="alert">
@@ -228,7 +235,7 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <label for="fathermobile" class="form-label">Father Mobile Number.</label>
-                                                <input id="fathermobile" class="form-control @error('fathermobile') is-invalid @enderror" type="text" name="fathermobile" placeholder="Enter Father Mobile No." />
+                                                <input id="fathermobile" class="form-control @error('fathermobile') is-invalid @enderror" type="number" name="fathermobile" value="{{auth()->user()->fathermobile}}" placeholder="Enter Father Mobile No." />
 
                                                 @error('fathermobile')
                                                 <span class="invalid-feedback" role="alert">
@@ -278,7 +285,7 @@
                                         <div class="row mb-3">
                                             <div class="col-lg-8">
                                                 <label for="address" class="form-label">Address.</label>
-                                                <input id="address" name="address" class="form-control @error('address') is-invalid @enderror" type="text" placeholder="Enter Address Line 1" />
+                                                <input id="address" name="address" class="form-control @error('address') is-invalid @enderror" value="{{auth()->user()->address}}" type="text" placeholder="Enter Address Line 1" />
 
                                                 @error('address')
                                                 <span class="invalid-feedback" role="alert">
@@ -289,7 +296,7 @@
 
                                             <div class="col-lg-4">
                                                 <label for="pincode" class="form-label">Pincode</label>
-                                                <input id="pincode" name="pincode" class="form-control @error('pincode') is-invalid @enderror" type="text" placeholder="Enter Pincode" />
+                                                <input id="pincode" name="pincode" class="form-control @error('pincode') is-invalid @enderror" type="number" value="{{auth()->user()->pincode}}" placeholder="Enter Pincode" />
 
                                                 @error('pincode')
                                                 <span class="invalid-feedback" role="alert">
@@ -329,34 +336,77 @@
                                         <h4 class="mb-0"><strong class="text-danger"> Academic Details </strong></h4>
                                     </div>
                                     <div class="card-body">
+                                        @if($academic->isEmpty())
                                         <div class="row mb-3">
-                                            <div class="col-lg-4">
-                                                <label for="courseTitle" class="form-label">Leaving Certificate</label>
-                                                <input id="lc" class="form-control" type="file" name="leavingcertificate" id="leavingcertificate" />
+                                            <div class="row mb-3">
+                                                <div class="col-lg-4">
+                                                    <label for="courseTitle" class="form-label">Leaving Certificate</label>
+                                                    <input id="lc" class="form-control" type="file" name="leavingcertificate" id="lc" />
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label for="courseTitle" class="form-label">Adharcard</label>
+                                                    <input id="aadharcard" class="form-control" type="file" name="aadharcard" />
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label for="courseTitle" class="form-label">10th Marksheet</label>
+                                                    <input id="marksheet10" class="form-control" type="file" name="marksheet10" />
+                                                </div>
                                             </div>
-                                            <div class="col-lg-4">
-                                                <label for="courseTitle" class="form-label">Adharcard</label>
-                                                <input id="aadharcard" class="form-control" type="file" name="aadharcard" />
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <label for="courseTitle" class="form-label">10th Marksheet</label>
-                                                <input id="marksheet10" class="form-control" type="file" name="marksheet10" />
+                                            <div class="row mb-3">
+                                                <div class="col-lg-4" @if( request()->id == 3 ) hidden disabled @endif>
+                                                    <label for="courseTitle" class="form-label">12th Marksheet</label>
+                                                    <input @if( request()->id == 3 ) id="" disabled @endif id="marksheet12" class="form-control" type="file" name="marksheet12" />
+                                                </div>
+                                                <div class="col-lg-4" @if( request()->id == 1 || request()->id == 3 ) hidden disabled @endif>
+                                                    <label for="courseTitle" class="form-label">Graduation Certificate</label>
+                                                    <input @if( request()->id == 1 || request()->id == 3 ) disabled @endif id="marksheetgraduation" class="form-control" type="file" name="marksheetgraduation" />
+                                                </div>
+                                                <div class="col-lg-4" @if( request()->id == 1 || request()->id == 2 ) hidden disabled @endif >
+                                                    <label for="courseTitle" class="form-label">Marksheet Diploma</label>
+                                                    <input @if( request()->id == 1 || request()->id == 2 ) disabled @endif id="marksheetdiploma" class="form-control" type="file" name="marksheetdiploma" />
+                                                </div>
                                             </div>
                                         </div>
+                                        @else
                                         <div class="row mb-3">
-                                            <div class="col-lg-4" @if( request()->id == 3 ) hidden disabled @endif>
-                                                <label for="courseTitle" class="form-label">12th Marksheet</label>
-                                                <input @if( request()->id == 3 ) id="" disabled @endif id="marksheet12" class="form-control" type="file" name="marksheet12" />
+                                            <div class="row mb-3">
+                                                <div class="col-lg-4" @if($academic->isEmpty()) disabled @endif>
+                                                    <label for="courseTitle" class="form-label">Leaving Certificate</label>
+                                                    <input id="lc" @if($academic[0]->leavingcertificate!=null) @endif class="form-control" type="file" name="leavingcertificate" value="{{$academic[0]->leavingcertificate}}" />
+                                                    <span><a @if($academic[0]->leavingcertificate==null) hidden @endif id="lc" href="{{$academic[0]->leavingcertificate}}" download>Leaving Certificate (uploaded)</a></span>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label for="courseTitle" class="form-label">Adharcard</label>
+                                                    <input @if($academic[0]->aadharcard!=null) @endif id="aadharcard" class="form-control" type="file" name="aadharcard" value="{{$academic[0]->aadharcard}}" />
+                                                    <span><a @if($academic[0]->aadharcard==null) hidden @endif id="lc" href="{{$academic[0]->aadharcard}}" download>Aadhar Card (uploaded)</a></span>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label for="courseTitle" class="form-label">10th Marksheet</label>
+                                                    <input @if($academic[0]->marksheet10!=null) @endif id="marksheet10" class="form-control" type="file" name="marksheet10" value="{{$academic[0]->marksheet10}}" />
+                                                    <span><a @if($academic[0]->marksheet10==null) hidden @endif id="lc" href="{{$academic[0]->marksheet10}}" download>Marksheet 10 (uploaded)</a></span>
+                                                </div>
                                             </div>
-                                            <div class="col-lg-4" @if( request()->id == 1 || request()->id == 3 ) hidden disabled @endif>
-                                                <label for="courseTitle" class="form-label">Graduation Certificate</label>
-                                                <input @if( request()->id == 1 || request()->id == 3 ) id="" disabled @endif id="marksheetgraduation" class="form-control" type="file" name="marksheetgraduation" />
-                                            </div>
-                                            <div class="col-lg-4" @if( request()->id == 1 || request()->id == 2 ) hidden disabled @endif >
-                                                <label for="courseTitle" class="form-label">Marksheet Diploma</label>
-                                                <input @if( request()->id == 1 || request()->id == 2 ) id="" disabled @endif id="marksheetdiploma" class="form-control" type="file" name="marksheetdiploma" />
+                                            <div class="row mb-3">
+                                                <div class="col-lg-4" @if( request()->id == 3 ) hidden disabled @endif>
+                                                    <label for="courseTitle" class="form-label">12th Marksheet</label>
+                                                    <input @if($academic[0]->marksheet12!=null) @endif @if( request()->id == 3 ) id="" disabled @endif id="marksheet12" class="form-control" type="file" name="marksheet12" value="{{$academic[0]->marksheet12}}" />
+                                                    <span><a @if($academic[0]->marksheet12==null) hidden @endif id="lc" href="{{$academic[0]->marksheet12}}" download>Marksheet 12 (uploaded)</a></span>
+                                                </div>
+                                                <div class="col-lg-4" @if( request()->id == 1 || request()->id == 3 ) hidden disabled @endif>
+                                                    <label for="courseTitle" class="form-label">Graduation Certificate</label>
+                                                    <input @if($academic[0]->marksheetgraduation!=null) @endif @if( request()->id == 1 || request()->id == 3 ) disabled @endif id="marksheetgraduation" class="form-control" type="file" name="marksheetgraduation" value="{{$academic[0]->marksheetgraduation}}" />
+                                                    <span><a @if($academic[0]->marksheetgraduation==null) hidden @endif id="lc" href="{{$academic[0]->marksheetgraduation}}" download>Marksheet Graduation (uploaded)</a></span>
+                                                </div>
+
+                                                <div class="col-lg-4" @if( request()->id == 1 || request()->id == 2 ) hidden disabled @endif >
+                                                    <label for="courseTitle" class="form-label">Marksheet Diploma</label>
+                                                    <input @if($academic[0]->marksheetdiploma!=null) @endif @if( request()->id == 1 || request()->id == 2 ) disabled @endif id="marksheetdiploma" class="form-control" type="file" name="marksheetdiploma" value="{{$academic[0]->marksheetdiploma}}" />
+                                                    <span><a @if($academic[0]->marksheetdiploma==null) hidden @endif id="lc" href="{{$academic[0]->marksheetdiploma}}" download>Marksheet Diploma (uploaded)</a></span>
+                                                </div>
                                             </div>
                                         </div>
+                                        @endif
+
                                     </div>
                                 </div>
                                 <div class="row">
@@ -371,8 +421,8 @@
                                                 </button>
                                             </div> -->
                                     <div class="col-lg-6 d-flex justify-content-end">
-                                        <button type="button" id="addcourse3" class="btn btn-primary col-lg-3">
-                                            Next
+                                        <button type="submit" id="addcourse3" class="btn btn-primary col-lg-3">
+                                            Save
                                         </button>
                                     </div>
                                 </div>
@@ -404,7 +454,7 @@
                                             </div> -->
                                     <div class="col-lg-6 d-flex justify-content-end">
                                         <button type="submit" id="addcourse4" class="btn btn-primary col-lg-3">
-                                            Submit  
+                                            Submit
                                         </button>
                                     </div>
                                 </div>
@@ -420,6 +470,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
+        var status = $("#status").val();
+        var pstatus = $("#pstatus").val();
+        if (pstatus == 0) {
+            $("#test").removeAttr('href');
+        }
+        if (status == 1) {
+            courseForm.to(4);
+        }
+        // alert(status);
         $("#state").change(function() {
             var stateid = $("#state").find(":selected").val();
             // alert(stateid);
@@ -470,7 +529,6 @@
                             // $("#state").append('<option value=' + id + '>' + name + '</option>'); // return empty
                             // alert(res.id);
                         }
-
                     }
                 });
             }
@@ -495,6 +553,13 @@
                 return false;
 
             }
+            if ($('#name').val() != "") {
+                var regex = /^[a-zA-Z ]*$/;
+                if (regex.test($('#name').val()) == false) {
+                    alert("Invalid name !")
+                    return false;
+                }
+            }
             if ($('#email').val() == "") {
                 alert("Email Cannot be Empty");
                 return false;
@@ -513,6 +578,12 @@
                 return false;
 
             }
+            if ($('#mobile').val() != "") {
+                if ($('#mobile').val().length != 10) {
+                    alert("Mobile number must be 10 Digits !")
+                    return false;
+                }
+            }
             if ($('#dateofbirth').val() == "") {
                 alert("Date of Birth Cannot be Empty");
                 return false;
@@ -528,10 +599,23 @@
                 return false;
 
             }
+            if ($('#fathername').val() != "") {
+                var regex = /^[a-zA-Z ]*$/;
+                if (regex.test($('#fathername').val()) == false) {
+                    alert("Invalid Fathers Name !")
+                    return false;
+                }
+            }
             if ($('#fathermobile').val() == "") {
                 alert("Father mobile number Cannot be Empty");
                 return false;
 
+            }
+            if ($('#fathermobile').val() != "") {
+                if ($('#fathermobile').val().length != 10) {
+                    alert("Fathers Mobile number must be 10 Digits !")
+                    return false;
+                }
             }
             if ($('#state').val() == null) {
                 alert("State Cannot be Empty");
@@ -552,14 +636,21 @@
                 alert("Pincode Cannot be Empty");
                 return false;
 
-            } else {
+            }
+            if ($('#pincode').val() != "") {
+                if ($('#pincode').val().length != 6) {
+                    alert("Pincode must be 6 Digits !")
+                    return false;
+                }
+            }
+            if ($('#pincode').val() != "") {
                 courseForm.next();
             }
         });
 
         $('#addcourse3').click(function() {
 
-            if ($('#lc').val() == "") {
+            if ($('#lc').val() == "" && status == 0) {
                 alert("Leaving certificate file Cannot be Empty");
                 return false;
             }
@@ -569,8 +660,12 @@
                     alert("Leaving certificate file format is not allowed.");
                     return false;
                 }
+                if ($("#lc")[0].files[0].size >= 1000000) {
+                    alert("Leaving certificates size is too big.");
+                    return false
+                }
             }
-            if ($('#aadharcard').val() == "") {
+            if ($('#aadharcard').val() == "" && status == 0) {
                 alert("Aadharcard file Cannot be Empty");
                 return false;
 
@@ -581,9 +676,13 @@
                     alert("Aadhar card file format is not allowed.");
                     return false;
                 }
+                if ($("#aadharcard")[0].files[0].size >= 1000000) {
+                    alert("Aadhar cards size is too big.");
+                    return false
+                }
             }
 
-            if ($('#marksheet10').val() == "") {
+            if ($('#marksheet10').val() == "" && status == 0) {
                 alert("10th Marksheet file Cannot be Empty");
                 return false;
 
@@ -594,9 +693,13 @@
                     alert("10th Marksheets file format is not allowed.");
                     return false;
                 }
+                if ($("#marksheet10")[0].files[0].size >= 1000000) {
+                    alert("10th marksheets size is too big.");
+                    return false
+                }
             }
             if ($("#cid").val() == 1) {
-                if ($('#marksheet12').val() == "") {
+                if ($('#marksheet12').val() == "" && status == 0) {
                     alert("12th Marksheet file Cannot be Empty");
                     return false;
 
@@ -606,12 +709,16 @@
                     if ($.inArray(ext, ['pdf', 'png', 'jpg', 'jpeg']) == -1) {
                         alert("12th Marksheets file format is not allowed.");
                         return false;
+                    }
+                    if ($("#marksheet12")[0].files[0].size >= 1000000) {
+                        alert("12th marksheets size is too big.");
+                        return false
                     }
                     courseForm.next();
                 }
             }
             if ($("#cid").val() == 2) {
-                if ($('#marksheet12').val() == "") {
+                if ($('#marksheet12').val() == "" && status == 0) {
                     alert("12th Marksheet file Cannot be Empty");
                     return false;
 
@@ -622,8 +729,12 @@
                         alert("12th Marksheets file format is not allowed.");
                         return false;
                     }
+                    if ($("#marksheet12")[0].files[0].size >= 1000000) {
+                        alert("12th marksheets size is too big.");
+                        return false
+                    }
                 }
-                if ($('#marksheetgraduation').val() == "") {
+                if ($('#marksheetgraduation').val() == "" && status == 0) {
                     alert("Graduation marksheet file Cannot be Empty");
                     return false;
 
@@ -634,11 +745,15 @@
                         alert("Graduation Marksheets file format is not allowed.");
                         return false;
                     }
+                    if ($("#marksheetgraduation")[0].files[0].size >= 1000000) {
+                        alert("Graduation marksheets size is too big.");
+                        return false
+                    }
                     courseForm.next();
                 }
             }
             if ($("#cid").val() == 3) {
-                if ($('#marksheetdiploma').val() == "") {
+                if ($('#marksheetdiploma').val() == "" && status == 0) {
                     alert("Diploma marksheet file Cannot be Empty");
                     return false;
 
@@ -648,6 +763,10 @@
                     if ($.inArray(ext, ['pdf', 'png', 'jpg', 'jpeg']) == -1) {
                         alert("Diploma Marksheets file format is not allowed.");
                         return false;
+                    }
+                    if ($("#marksheetdiploma")[0].files[0].size >= 1000000) {
+                        alert("Diploma marksheets size is too big.");
+                        return false
                     }
                 }
                 courseForm.next();
@@ -665,6 +784,10 @@
                     alert("payment proofs file format is not allowed.");
                     return false;
                 }
+                if ($("#payment")[0].files[0].size >= 1000000) {
+                    alert("Payments files size is too big.");
+                    return false
+                }
             }
         });
 
@@ -678,4 +801,4 @@
 @endif
 <!-- Scripts -->
 <!-- Libs JS -->
-@endsectiongit 
+@endsection

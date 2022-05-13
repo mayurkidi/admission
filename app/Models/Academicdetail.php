@@ -18,7 +18,7 @@ class Academicdetail extends Model
         'marksheetgraduation',
     ];
 
-     public function users(){
+    public function users(){
         return $this->hasMany(User::class,'id');
     }
 }

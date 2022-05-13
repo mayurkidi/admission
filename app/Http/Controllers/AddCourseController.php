@@ -10,12 +10,15 @@ use App\Models\User;
 use App\Models\City;
 use App\Models\Course;
 use App\Models\Program;
+use App\Models\Result;
 use App\Models\State;
 use Illuminate\Console\Application;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use SebastianBergmann\Environment\Console;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+
+use function PHPUnit\Framework\isEmpty;
 
 class AddCourseController extends Controller
 {
@@ -24,27 +27,40 @@ class AddCourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $teststatus = Result::where('userid', \Auth::user()->id)->pluck('totalscore');
         $userid = User::all();
         $Applicationdetail = Applicationdetail::all();
         $states = State::all()->pluck('id', 'name');
         $cities = City::all()->pluck('id', 'name');
         $courses = Course::all()->pluck('id', 'name');
         $programs = Program::all()->pluck('id', 'name',);
+        $application = Applicationdetail::select('*')->where('userid', \Auth::user()->id)->get();
+        $academic = Academicdetail::select('*')->where('userid', \Auth::user()->id)->get();
+        $user = User::select('*')->where('id', \Auth::user()->id)->get();
         $paymentstatus = Payments::where('user_id', \Auth::user()->id)->pluck('paymentstatus');
+        $graduationtype = Applicationdetail::where('userid', \Auth::user()->id)->pluck('graduationtype');
+
+        $applicationstatus = Applicationdetail::where('userid', \Auth::user()->id)->pluck('applicationstatus');
         if (!$paymentstatus->isEmpty()) {
             if ($paymentstatus[0] == 1) {
-                $application = Applicationdetail::select('*')->where('userid', \Auth::user()->id)->get();
-                $academic = Academicdetail::select('*')->where('userid', \Auth::user()->id)->get();
-                $user = User::select('*')->where('id',\Auth::user()->id)->get();
                 //  return compact('user','application','academic');  
-                return view('addcourse.application1',compact('application', 'academic', 'user'));
+                // return compact('application', 'academic', 'user', 'paymentstatus', 'teststatus');
+                return view('addcourse.application1', compact('application', 'academic', 'user', 'paymentstatus', 'teststatus','graduationtype'));
                 // return redirect()->route('application1')->with(compact(['application'=>$application],['academic'=>$academic],['user'=>$user]));
-
             }
         }
-        return view('addcourse.add_course', compact('Applicationdetail', 'userid', 'cities', 'states', 'programs', 'courses'));
+        // if (!$applicationstatus->isEmpty()) {
+        //     if ($applicationstatus[0] == 1 && $request->get('id') != 4) {
+        //         //  return compact('user','application','academic');  
+        //         return view('addcourse.application1', compact('application', 'academic', 'user', 'paymentstatus'));
+        //         // return redirect()->route('application1')->with(compact(['application'=>$application],['academic'=>$academic],['user'=>$user]));
+        //     }
+        // }
+
+        // return $application;
+        return view('addcourse.add_course', compact('application', 'academic', 'user', 'programs', 'courses', 'cities', 'states', 'paymentstatus'));
     }
 
     /**
@@ -63,15 +79,38 @@ class AddCourseController extends Controller
      */
     public function store(Request $request)
     {
+        $graduationtype = $request->get('id');
+        if ($graduationtype == 1)
+            $graduationtype = "UG";
+        if ($graduationtype == 2)
+            $graduationtype = "PG";
+        if ($graduationtype == 3)
+            $graduationtype = "DIPLOMA";
+        // return "hello";
         info($request->all());
         // dd(\Auth::check());
-        $add = new Applicationdetail;
-        $add->userid = \Auth::user()->id;
-        $add->course = $request->course;
-        $add->specialization = $request->specialization;
-        $add->applicationstatus = 1;
-        $add->save();
-
+        $application_status = Applicationdetail::where('userid', \Auth::user()->id)->pluck('applicationstatus');
+        if ($application_status->isEmpty() == false) {
+            if ($application_status[0] == 1) {
+                // $application_update = Applicationdetail::find(Auth::user()->id);
+                $application_update = Applicationdetail::select("*")->where('userid', \Auth::user()->id)->get();
+                $application_update[0]->update([
+                    'userid' => \Auth::user()->id,
+                    'course' => $request->course,
+                    'specialization' => $request->specialization,
+                    'graduationtype' => $graduationtype,
+                    'applicationstatus' => 1
+                ]);
+            }
+        } else {
+            $add = new Applicationdetail;
+            $add->userid = \Auth::user()->id;
+            $add->course = $request->course;
+            $add->specialization = $request->specialization;
+            $add->graduationtype = $graduationtype;
+            $add->applicationstatus = 1;
+            $add->save();
+        }
 
         $lc = null;
         $aadharcard = null;
@@ -158,7 +197,7 @@ class AddCourseController extends Controller
             // Upload Image
             $request->file('marksheetgraduation')->move(public_path('uploads'), $marksheetgraduation);
         }
-
+        $payment = null;
         if ($request->hasFile('payment')) {
             // Get filename with the extension
             $filenameWithExt = $request->file('payment')->getClientOriginalName();
@@ -171,24 +210,55 @@ class AddCourseController extends Controller
             // Upload Image
             $request->file('payment')->move(public_path('uploads'), $payment);
         }
+        $academic_update = Academicdetail::select('*')->where('userid', \Auth::user()->id)->get();
 
-        $addd = new Academicdetail;
-        $addd->userid = \Auth::user()->id;
-        $addd->leavingcertificate = $lc;
-        $addd->aadharcard = $aadharcard;
-        $addd->marksheet10 = $marksheet10;
-        $addd->marksheet12 = $marksheet12;
-        $addd->marksheetdiploma = $marksheetdiploma;
-        $addd->marksheetgraduation = $marksheetgraduation;
-        $addd->save();
+        if ($application_status->isEmpty() == false) {
+            if ($application_status[0] == 1) {
+                if ($lc == null && $academic_update[0]->leavingcertificate != null)
+                    $lc = $academic_update[0]->leavingcertificate;
 
-        $paymentt = new Payments;
-        $paymentt->user_id = \Auth::user()->id;
-        $paymentt->amount = 1500;
-        $paymentt->paymentstatus = 1;
-        $paymentt->paymentproof = $payment;
-        $paymentt->save();
+                if ($aadharcard == null && $academic_update[0]->aadharcard != null)
+                    $aadharcard = $academic_update[0]->aadharcard;
 
+                if ($marksheet10 == null && $academic_update[0]->marksheet10 != null)
+                    $marksheet10 = $academic_update[0]->marksheet10;
+
+                if ($marksheet12 == null && $academic_update[0]->marksheet12 != null)
+                    $marksheet12 = $academic_update[0]->marksheet12;
+
+                if ($marksheetdiploma == null && $academic_update[0]->marksheetdiploma != null)
+                    $marksheetdiploma = $academic_update[0]->marksheetdiploma;
+
+                if ($marksheetgraduation == null && $academic_update[0]->marksheetgraduation != null)
+                    $marksheetgraduation = $academic_update[0]->marksheetgraduation;
+                $academic_update[0]->update([
+                    'leavingcertificate' => $lc,
+                    'aadharcard' => $aadharcard,
+                    'marksheet10' => $marksheet10,
+                    'marksheet12' => $marksheet12,
+                    'marksheetdiploma' => $marksheetdiploma,
+                    'marksheetgraduation' => $marksheetgraduation
+                ]);
+            }
+        } else {
+            $addd = new Academicdetail;
+            $addd->userid = \Auth::user()->id;
+            $addd->leavingcertificate = $lc;
+            $addd->aadharcard = $aadharcard;
+            $addd->marksheet10 = $marksheet10;
+            $addd->marksheet12 = $marksheet12;
+            $addd->marksheetdiploma = $marksheetdiploma;
+            $addd->marksheetgraduation = $marksheetgraduation;
+            $addd->save();
+        }
+        if ($payment != null) {
+            $paymentt = new Payments;
+            $paymentt->user_id = \Auth::user()->id;
+            $paymentt->amount = 1500;
+            $paymentt->paymentstatus = 1;
+            $paymentt->paymentproof = $payment;
+            $paymentt->save();
+        }
         $user = User::find(Auth::user()->id);
         $user->update([
             'name' => $request->name,
@@ -201,7 +271,9 @@ class AddCourseController extends Controller
             'dateofbirth' => $request->dateofbirth,
             'address' => $request->address,
             'pincode' => $request->pincode,
-            'fathermobile' => $request->fathermobile
+            'fathermobile' => $request->fathermobile,
+            'specialization' => $request->specialization,
+            'course' => $request->course
         ]);
 
         $request->validate([
