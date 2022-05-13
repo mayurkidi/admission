@@ -43,31 +43,31 @@
       <tr id="trlc">
         <!-- <th scope="col">3</th> -->
         <td>Leaving Certificate</td>
-        <td><a id="lc" href="{{$academic[0]->leavingcertificate}}" download>Leaving Certificate</a></td>
+        <td><a id="lc" href="storage/{{$academic[0]->leavingcertificate}}" download>Leaving Certificate</a></td>
       </tr>
       <tr id="trac">
         <td>Aadhar Card</td>
-        <td><a id="ac" href="{{$academic[0]->aadharcard}}" download>Aadhar Card</a></td>
+        <td><a id="ac" href="storage/{{$academic[0]->aadharcard}}" download>Aadhar Card</a></td>
       </tr>
       <tr id="trm10">
         <!-- <th scope="col">3</th> -->
         <td>10th Marksheet</td>
-        <td><a id="m10" href="{{$academic[0]->marksheet10}}" download>10th Marksheet</a></td>
+        <td><a id="m10" href="storage/{{$academic[0]->marksheet10}}" download>10th Marksheet</a></td>
       </tr>
       <tr id="trm12">
         <!-- <th scope="col">3</th> -->
         <td>12th Marksheet</td>
-        <td><a id="m12" href="{{$academic[0]->marksheet12}}" download>12th Marksheet</a></td>
+        <td><a id="m12" href="storage/{{$academic[0]->marksheet12}}" download>12th Marksheet</a></td>
       </tr>
       <tr id="trmd">
         <!-- <th scope="col">3</th> -->
         <td>Diploma Marksheet</td>
-        <td><a id="md" href="{{$academic[0]->marksheetdiploma}}" download>Diploma Marksheet</a></td>
+        <td><a id="md" href="storage/{{$academic[0]->marksheetdiploma}}" download>Diploma Marksheet</a></td>
       </tr>
       <tr id="trmg">
         <!-- <th scope="col">3</th> -->
         <td>Graduation Marksheet</td>
-        <td><a id="mg" href="{{$academic[0]->marksheetgraduation}}" download>Graduation Marksheet</a></td>
+        <td><a id="mg" href="storage/{{$academic[0]->marksheetgraduation}}" download>Graduation Marksheet</a></td>
       </tr>
       <tr id="pstatus">
         <!-- <th scope="col">3</th> -->
