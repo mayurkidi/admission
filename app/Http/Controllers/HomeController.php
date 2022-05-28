@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Payments;
 use App\Models\User;
+use App\Models\Course;
+use App\Models\Program;
 use App\Models\State;
 use App\Models\Academicdetail;
 use App\Models\Applicationdetail;
@@ -37,10 +39,9 @@ class HomeController extends Controller
     public function index()
     {
         // return "Hello";
-
-        $teststatus = Result::where('userid', \Auth::user()->id)->pluck('totalscore');
-        $paymentstatus = Payments::where('user_id', \Auth::user()->id)->pluck('paymentstatus');
+        $isapproved = Applicationdetail::where('userid', \Auth::user()->id)->pluck('isapproved');
         $applicationstatus = Applicationdetail::where('userid', \Auth::user()->id)->pluck('applicationstatus');
+        $paymentstatus = Payments::where('user_id', \Auth::user()->id)->pluck('paymentstatus');
         // return  compact('paymentstatus', 'teststatus','applicationstatus');
         $graduationtype = Applicationdetail::where('userid', \Auth::user()->id)->pluck('graduationtype');
         if (!$paymentstatus->isEmpty()) {
@@ -50,10 +51,23 @@ class HomeController extends Controller
                 $user = User::select('*')->where('id', \Auth::user()->id)->get();
                 //  return gettype(compact('user','application','academic'));  
                 $applicationstatus = Applicationdetail::where('userid', \Auth::user()->id)->pluck('applicationstatus');
-                return view('addcourse.application1', compact('application', 'academic', 'user', 'paymentstatus', 'applicationstatus','teststatus','graduationtype'));
+                return view('addcourse.application1', compact('application', 'academic', 'user', 'paymentstatus', 'applicationstatus', 'graduationtype'));
             }
         }
-        return view('dashboard', compact('paymentstatus', 'teststatus','applicationstatus','graduationtype'));
+        if (\Auth::user()->id == 1) {
+
+            $application = Applicationdetail::select('*')->get();
+            $user = User::select('*')->get();
+            $academic = Academicdetail::select('*')->get();
+            $payment = Payments::select('*')->get();
+            $courses = Course::all()->pluck('id', 'name');
+            $programs = Program::all()->pluck('id', 'name');
+            // return $payment;
+            // $merged_array=array_merge(array($user),array($application));
+            // return $merged_array;
+            return view('admin',compact("application","academic","payment","user","courses","programs"));
+        }
+        return view('dashboard', compact('paymentstatus', 'applicationstatus', 'graduationtype','isapproved'));
     }
 
     public function dashboard()

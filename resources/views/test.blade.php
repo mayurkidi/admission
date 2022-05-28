@@ -1,8 +1,10 @@
 @extends('layouts.main')
 @section('content')
 
-@if($testresult->isEmpty()==false)
+@if($teststatus[0]!=NULL)
 <div class="alert alert-success ">Test already submitted.</div>
+@elseif($isapproved[0]==0)
+<div class="alert alert-success ">You can attempt test after we Approve your application.</div>
 @else
 <h1 class="text-center">MCQ Test</h1>
 <p class="text-center">The test will be of 30  minutes with 30 questions.</p>
@@ -85,7 +87,6 @@
       setTimeout(function() {
         calc();
         document.getElementById("quiz").submit();
-        // alert(1);
       }, 5000);
 
       $('#quiz').attr('hidden', false);

@@ -7,8 +7,8 @@
 @if($graduationtype->isEmpty()==false))
 <input type="hidden" value="{{$graduationtype[0]}}" id="gtype" name="gtype">
 @endif
-@if($paymentstatus->isEmpty()==false)
-<input type="hidden" name="pstatus" id="pstatus" value="{{$paymentstatus[0]}}">
+@if($isapproved->isEmpty()==false)
+<input type="hidden" name="pstatus" id="pstatus" value="{{$isapproved[0]}}">
 @else
 <input type="hidden" name="pstatus" id="pstatus" value="0">
 @endif
@@ -185,7 +185,6 @@
     }
     // alert(gtype);
     if (gtype == "PG") {
-        alert(1);
         $('#pg').removeAttr('hidden');
         $('#tableug').attr('hidden', true);
         $('#tablediploma').attr('hidden', true);

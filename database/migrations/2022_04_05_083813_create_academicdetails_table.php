@@ -14,8 +14,8 @@ class CreateAcademicdetailsTable extends Migration
     public function up()
     {
         Schema::create('academicdetails', function (Blueprint $table) {
-            $table->id('id');
-            $table->string('userid');
+            $table->increments('id');
+            $table->bigInteger('userid')->unsigned();
             $table->string('leavingcertificate')->nullable();
             $table->string('aadharcard')->nullable();
             $table->string('marksheet10')->nullable();
@@ -23,6 +23,12 @@ class CreateAcademicdetailsTable extends Migration
             $table->string('marksheet12')->nullable();
             $table->string('marksheetgraduation')->nullable();
             $table->timestamps();
+
+            $table->foreign('userid')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+            
         });
     }
 

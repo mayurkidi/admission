@@ -38,8 +38,8 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function appdetail()
-    {
-        return $this->belongsToMany(Applicationdetail::class,'id'); 
-    }
+    // public function appdetail()
+    // {
+    //     return $this->belongsTo('App\Models\Applicationdetail');
+    // }
 }

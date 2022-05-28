@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth', 'verified'], function () {
     Route::resource('user', UserController::class);
     // Route::view('dashboard','dashboard')->name('dashboard');
     Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('admin', [HomeController::class, 'index'])->name('admin');
 
     Route::get('test', [QuizController::class, 'index'])->name('test');
     // Route::view('test','test')->name('test');
@@ -39,5 +40,7 @@ Route::group(['middleware' => 'auth', 'verified'], function () {
 });
 Route::get('/getcity', [ApiController::class, 'getCityList']);
 Route::get('/getcourse', [ApiController::class, 'getCourseList']);
+Route::get('/isapproved', [ApiController::class, 'isApproved']);
+Route::post('/uploadoc', [ApiController::class, 'UploadOC'])->name('uploadoc');
 
 Auth::routes(['verify' => true]);

@@ -14,13 +14,21 @@ class CreateApplicationdetailsTable extends Migration
     public function up()
     {
         Schema::create('applicationdetails', function (Blueprint $table) {
-            $table->id('id');
-            $table->string('userid');
+            $table->increments('id');
+            $table->bigInteger('userid')->unsigned();
             $table->string('course');
             $table->string('specialization');
             $table->string('graduationtype');
             $table->string('applicationstatus');
+            $table->string('isapproved')->default(0);
+            $table->string('offerletter')->nullable();
+            $table->string('testresult')->nullable();
             $table->timestamps();
+
+            $table->foreign('userid')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

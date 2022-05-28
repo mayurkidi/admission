@@ -15,11 +15,17 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id('id');
-            $table->string('user_id');
+            $table->bigInteger('user_id')->unsigned();
             $table->string('amount');
             $table->string('paymentstatus');
-            $table->string('paymentproof');
+            $table->string('paymentproof')->nullable();
+            $table->string('isapproved')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')
+            ->references('id')
+            ->on('users')
+            ->onDelete('cascade');
         });
     }
 

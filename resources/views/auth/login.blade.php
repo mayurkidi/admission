@@ -64,7 +64,7 @@
                                                     @csrf
                                                     <div class="form-custom">
                                                         <div class="form-group label-floating reg_name_div">
-                                                            <div class="input text"><label class="control-label widget_label" for="name">{{ __('Name') }}<span class="required">*</span></label>
+                                                            <div class="input text"><label class="control-label widget_label" for="name">Full Name<span class="required">*</span></label>
                                                                 <input type="text" id="name" name="name" class="form-control widget_input @error('name') is-invalid @enderror" placeholder="Enter Name *" value="{{ old('name') }}">
                                                                 @if ($errors->has('name'))
                                                                 <span class="text-danger">{{ $errors->first('name') }}</span>
@@ -424,6 +424,7 @@
     <script>
         $(document).ready(function() {
             // alert(1);
+
             $("#state").change(function() {
                 var stateid = $("#state").find(":selected").val();
                 // alert(stateid);

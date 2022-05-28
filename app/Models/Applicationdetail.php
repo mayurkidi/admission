@@ -16,7 +16,5 @@ class Applicationdetail extends Model
         'graduationtype'
     ];
 
-    public function users(){
-        return $this->hasMany(User::class,'id');
-    }
+    
 }

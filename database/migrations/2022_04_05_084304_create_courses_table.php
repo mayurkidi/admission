@@ -17,6 +17,7 @@ class CreateCoursesTable extends Migration
             $table->id('id');
             $table->string('name');
             $table->bigInteger('program_id')->unsigned();
+            $table->string('graduationtype');
         });
     }
 

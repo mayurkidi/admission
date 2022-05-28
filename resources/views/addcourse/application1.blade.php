@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-@if($paymentstatus->isEmpty()==false && $teststatus->isEmpty()==true)
+@if($paymentstatus->isEmpty()==false)
 <input type="hidden" value="{{$paymentstatus[0]}}" name="pstatus" id="pstatus">
 @else
 <input type="hidden" value="0" name="pstatus" id="pstatus">
@@ -79,6 +79,26 @@
         @else
         <td>Payment Done</td>
         @endif
+      </tr>
+      <tr id="astatus">
+        <!-- <th scope="col">3</th> -->
+        <td>Application Status</td>
+        @if($application[0]->isapproved==0)
+        <td><b>Application under process</b>
+        </td>
+        @else
+        <td>Application Approved</td>
+        @endif
+      </tr>
+      <tr id="offerletter">
+        <!-- <th scope="col">3</th> -->
+        <td>Offer Letter</td>
+        @if($application[0]->offerletter==NULL)
+        <td><b>It will be uploaded after verification</b>
+      </td>
+      @else
+        <td><a href="{{$application[0]->offerletter }}">Offer Letter</a></td>
+      @endif
       </tr>
     </tbody>
   </table>
