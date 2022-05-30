@@ -19,24 +19,36 @@ class ApiController extends Controller
     }
     public function getCourseList(Request $request)
     {
-        if($request->_id==2)
-            $type="PG";
-        else if($request->_id==3)
-            $type="UG-D";
-        else
-            $type="UG";
-        $courses = Course::select('id', 'name')->where("program_id", $request->course_id)->where("graduationtype",$type)->get();
+        if ($request->login == 1) {
+            $courses = Course::select('id', 'name')->where("program_id", $request->course_id)->get();
+        } else {
+            if ($request->_id == 2) {
+                $type = "PG";
+                $_type = "";
+            } else if ($request->_id == 3) {
+                $type = "UG-D";
+                $_type = "";
+            } else
+            if ($request->course_id == 4) {
+                $type = "UG";
+                $_type = "UG-D";
+            } else {
+                $type = "UG";
+                $_type = "";
+            }
+            $courses = Course::select('id', 'name')->where("program_id", $request->course_id)->where("graduationtype", $type)->orwhere("graduationtype", $_type)->get();
+        }
         return response()->json($courses);
     }
     public function isApproved(Request $request)
     {
 
-        Applicationdetail::where('userid',$request->id)->update(["isapproved" => 1]);
+        Applicationdetail::where('userid', $request->id)->update(["isapproved" => 1]);
         return redirect('dashboard');
     }
     public function UploadOC(Request $request)
     {
-        $offerletter=null;
+        $offerletter = null;
         if ($request->hasFile('offerletter')) {
             // Get filename with the extension
             $filenameWithExt = $request->file('offerletter')->getClientOriginalName();
@@ -45,12 +57,12 @@ class ApiController extends Controller
             // Get just ext
             $extension = $request->file('offerletter')->getClientOriginalExtension();
             // Filename to store
-            $offerletter = 'uploads/'.'' . $request->id . '/' . '' . 'OfferLetter' . '.' . $extension;
+            $offerletter = 'uploads/' . '' . $request->id . '/' . '' . 'OfferLetter' . '.' . $extension;
             // Upload Image
             $request->file('offerletter')->storeAs('public/', $offerletter);
         }
-        
-        Applicationdetail::where('userid',$request->id)->update(["offerletter" => $offerletter]);
+
+        Applicationdetail::where('userid', $request->id)->update(["offerletter" => $offerletter]);
         return redirect('dashboard');
     }
 }

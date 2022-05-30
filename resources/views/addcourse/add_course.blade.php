@@ -85,7 +85,7 @@
                                                         <span class="text-dark">
                                                             Please keep scanned copies handy of your Coloured
                                                             Photograph, Signature, 10th Marksheet & 12th Marksheet (If
-                                                            passed) for uploading . Upload size is limited to 1 MB only.
+                                                            passed) for uploading . Upload size is limited to 1xamo MB only.
                                                         </span>
                                                     </li>
                                                     <li>
@@ -470,8 +470,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
-        var program_id=$("#specialization");
-        var city_id=$("#city");
+        var program_id=$("#specialization").val();
+        var city_id=$("#city").val();
         var status = $("#status").val();
         var _id=$("#cid").val();
         var pstatus = $("#pstatus").val();
@@ -490,20 +490,24 @@
                     url: "{{url('/getcourse')}}?course_id=" + courseid+"&_id="+_id,
                     success: function(res) {
                         if (res) {
-
                             $("#specialization").empty();
                             // $("#city").attr('disabled',false);
                             $("#specialization").append('<option selected disabled value="">Select Specialization</option>');
                             $.each(res, function(key, value) {
-                                $("#specialization").append('<option value="' + value.id + '">' + value.name + '</option>');
+                                if(value.id==program_id)
+                                    $("#specialization").append('<option value="' + value.id + '"selected >' + value.name + '</option>');
+                                else
+                                    $("#specialization").append('<option value="' + value.id + '">' + value.name + '</option>');
                             });
                             $('#specialization').selectpicker('refresh');
 
                             // $("#state").append('<option value=' + id + '>' + name + '</option>'); // return empty
                             // alert(res.id);
                         }
-                        
-                    }
+                    },
+                    error: function(res){
+                        alert("Errro"+res);
+                    }    
                 });
                 // alert(1);
             }
@@ -521,7 +525,11 @@
                             // $("#city").attr('disabled',false);
                             $("#city").append('<option selected disabled value="">Select City</option>');
                             $.each(res, function(key, value) {
-                                $("#city").append('<option value="' + value.id + '">' + value.name + '</option>');
+                                if(value.id==city_id)
+                                    $("#city").append('<option value="' + value.id + '" selected>' + value.name + '</option>');
+                                else
+                                    $("#city").append('<option value="' + value.id + '">' + value.name + '</option>');
+
                             });
                             $('#city').selectpicker('refresh');
 
@@ -532,7 +540,7 @@
                     }
                 });
             }
-            
+            // $("#specialization option[value='+program_id+']").attr("selected", "selected");
             
             // END
         // alert(status);

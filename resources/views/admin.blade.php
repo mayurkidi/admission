@@ -46,7 +46,6 @@
                         <td class="w-8">{{$key}}</td>
                         @endif 
                         @endforeach
-
                             @foreach ($courses as $key => $value)
                             @if($a->specialization == $value)
                             <td class="w-8">{{$key}}</td>
@@ -62,12 +61,12 @@
                 @foreach($academic as $ac)
                     @if($ac->userid==$user[$i]->id)
                     <td class="w-25">
-                        <a  href="{{$ac->leavingcertificate}}" download>Leaving Certificate</a> |
-                        <a  href="{{$ac->aadharcard}}" download>Aadhar Card</a> |
-                        <a  href="{{$ac->marksheet10}}" download>Marksheet 10</a> |
-                        <a  @if($ac->marksheetdiploma==null)hidden @endif href="{{$ac->marksheetdiploma}}" download>Marksheet Diploma</a> |
-                        <a  @if($ac->marksheet12==null)hidden @endif href="{{$ac->marksheet12}}" download>Marksheet 12</a> |
-                        <a  @if($ac->marksheetgraduation==null)hidden @endif href="{{$ac->marksheetgraduation}}" download>Marksheet Graduation</a>
+                        <a  href="storage/{{$ac->leavingcertificate}}" download>Leaving Certificate</a> |
+                        <a  href="storage/{{$ac->aadharcard}}" download>Aadhar Card</a> |
+                        <a  href="storage/{{$ac->marksheet10}}" download>Marksheet 10</a> |
+                        <a  @if($ac->marksheetdiploma==null)hidden @endif href="storage/{{$ac->marksheetdiploma}}" download>Marksheet Diploma</a> |
+                        <a  @if($ac->marksheet12==null)hidden @endif href="storage/{{$ac->marksheet12}}" download>Marksheet 12</a> |
+                        <a  @if($ac->marksheetgraduation==null)hidden @endif href="storage/{{$ac->marksheetgraduation}}" download>Marksheet Graduation</a>
                     </td>
                     @endif
                 @endforeach
@@ -78,6 +77,7 @@
                 @endforeach
                 @foreach($application as $a)
                     @if($a->userid==$user[$i]->id)
+                    
                     <td class="w-4">@if($a->isapproved==0)<a onclick="return confirm('Do you want to Approve the application ?')"  href="{{url('/isapproved')}}?id={{$user[$i]->id}}" class="btn btn-danger" id="approve">Approve</a> @else <i class="bi bi-check h1"></i> @endif</td>
                     <td class="w-4">
                         @if($a->offerletter==NULL || $a->offerletter=="NULL")
@@ -87,7 +87,7 @@
                         <input type="file" id="offerletter" name="offerletter">
                         <input class="btn btn-danger" type="submit" value="Upload" id="btnUpload">
                         </form>
-                        @else <i class="bi bi-download"></i> <a href="{{$a->offerletter}}">Offerletter</a>
+                        @else <i class="bi bi-download"></i> <a href="storage/{{$a->offerletter}}">Offerletter</a>
                         @endif
                     </td>
                     @endif

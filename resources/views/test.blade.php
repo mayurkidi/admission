@@ -1,6 +1,5 @@
 @extends('layouts.main')
 @section('content')
-
 @if($teststatus[0]!=NULL)
 <div class="alert alert-success ">Test already submitted.</div>
 @elseif($isapproved[0]==0)

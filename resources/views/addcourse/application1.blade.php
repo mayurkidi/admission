@@ -103,7 +103,7 @@
         <td><b>It will be uploaded after verification</b>
       </td>
       @else
-        <td><a href="{{$application[0]->offerletter }}">Offer Letter</a></td>
+        <td><i class="bi bi-download text-danger"> </i><a href="storage/{{$application[0]->offerletter }}">Offer Letter</a></td>
       @endif
       </tr>
     </tbody>

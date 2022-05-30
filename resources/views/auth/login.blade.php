@@ -460,7 +460,7 @@
                     $.ajax({
                         type: "GET",
                         dataType: 'json',
-                        url: "{{url('/getcourse')}}?course_id=" + courseid,
+                        url: "{{url('/getcourse')}}?course_id=" + courseid+"&login="+1,
                         success: function(res) {
                             if (res) {
 
