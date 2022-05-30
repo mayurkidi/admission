@@ -78,7 +78,7 @@
                 @endforeach
                 @foreach($application as $a)
                     @if($a->userid==$user[$i]->id)
-                    <td class="w-4">@if($a->isapproved==0)<a onclick="return confirm('Do you want to Approve the application ?')"  href="{{url('/isapproved')}}?id={{$user[$i]->id}}" class="btn btn-danger" id="approve">Approve</a> @else <label class="btn btn-success">Approved.</label> @endif</td>
+                    <td class="w-4">@if($a->isapproved==0)<a onclick="return confirm('Do you want to Approve the application ?')"  href="{{url('/isapproved')}}?id={{$user[$i]->id}}" class="btn btn-danger" id="approve">Approve</a> @else <i class="bi bi-check h1"></i> @endif</td>
                     <td class="w-4">
                         @if($a->offerletter==NULL || $a->offerletter=="NULL")
                         <form action="{{url('/uploadoc')}}" method="post" enctype="multipart/form-data">

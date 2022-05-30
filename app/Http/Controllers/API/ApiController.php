@@ -19,7 +19,13 @@ class ApiController extends Controller
     }
     public function getCourseList(Request $request)
     {
-        $courses = Course::select('id', 'name')->where("program_id", $request->course_id)->get();
+        if($request->_id==2)
+            $type="PG";
+        else if($request->_id==3)
+            $type="UG-D";
+        else
+            $type="UG";
+        $courses = Course::select('id', 'name')->where("program_id", $request->course_id)->where("graduationtype",$type)->get();
         return response()->json($courses);
     }
     public function isApproved(Request $request)

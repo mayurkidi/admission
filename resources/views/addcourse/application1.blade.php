@@ -43,32 +43,38 @@
       <tr id="trlc">
         <!-- <th scope="col">3</th> -->
         <td>Leaving Certificate</td>
-        <td><a id="lc" href="storage/{{$academic[0]->leavingcertificate}}" download>Leaving Certificate</a></td>
+        <td><i class="bi bi-download text-danger"> </i><a id="lc" href="storage/{{$academic[0]->leavingcertificate}}" download>Leaving Certificate</a></td>
       </tr>
       <tr id="trac">
         <td>Aadhar Card</td>
-        <td><a id="ac" href="storage/{{$academic[0]->aadharcard}}" download>Aadhar Card</a></td>
+        <td><i class="bi bi-download text-danger"> </i><a id="ac" href="storage/{{$academic[0]->aadharcard}}" download>Aadhar Card</a></td>
       </tr>
       <tr id="trm10">
         <!-- <th scope="col">3</th> -->
         <td>10th Marksheet</td>
-        <td><a id="m10" href="storage/{{$academic[0]->marksheet10}}" download>10th Marksheet</a></td>
+        <td><i class="bi bi-download text-danger"> </i><a id="m10" href="storage/{{$academic[0]->marksheet10}}" download>10th Marksheet</a></td>
       </tr>
+      @if($academic[0]->marksheet12!=NULL)
       <tr id="trm12">
         <!-- <th scope="col">3</th> -->
         <td>12th Marksheet</td>
-        <td><a id="m12" href="storage/{{$academic[0]->marksheet12}}" download>12th Marksheet</a></td>
+        <td><i class="bi bi-download text-danger"> </i><a id="m12" href="storage/{{$academic[0]->marksheet12}}" download>12th Marksheet</a></td>
       </tr>
+      @endif
+      @if($academic[0]->marksheetdiploma!=NULL)
       <tr id="trmd">
         <!-- <th scope="col">3</th> -->
         <td>Diploma Marksheet</td>
-        <td><a id="md" href="storage/{{$academic[0]->marksheetdiploma}}" download>Diploma Marksheet</a></td>
+        <td><i class="bi bi-download text-danger"> </i><a id="md" href="storage/{{$academic[0]->marksheetdiploma}}" download>Diploma Marksheet</a></td>
       </tr>
+      @endif
+      @if($academic[0]->marksheetgraduation!=NULL)
       <tr id="trmg">
         <!-- <th scope="col">3</th> -->
         <td>Graduation Marksheet</td>
-        <td><a id="mg" href="storage/{{$academic[0]->marksheetgraduation}}" download>Graduation Marksheet</a></td>
+        <td><i class="bi bi-download text-danger"> </i><a id="mg" href="storage/{{$academic[0]->marksheetgraduation}}" download>Graduation Marksheet</a></td>
       </tr>
+      @endif
       <tr id="pstatus">
         <!-- <th scope="col">3</th> -->
         <td>Payment Status</td>
@@ -124,24 +130,6 @@
     });
     if (pstatus == 0) {
       $("#test").removeAttr('href');
-    }
-    if ($("#lc").attr('href') == "") {
-      $("#trlc").hide();
-    }
-    if ($("#ac").attr('href') == "") {
-      $("#trac").hide();
-    }
-    if ($("#m10").attr('href') == "") {
-      $("#trm10").hide();
-    }
-    if ($("#m12").attr('href') == "") {
-      $("#trm12").hide();
-    }
-    if ($("#md").attr('href') == "") {
-      $("#trmd").hide();
-    }
-    if ($("#mg").attr('href') == "") {
-      $("#trmg").hide();
     }
   });
 </script>
