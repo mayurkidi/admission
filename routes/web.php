@@ -42,5 +42,9 @@ Route::get('/getcity', [ApiController::class, 'getCityList']);
 Route::get('/getcourse', [ApiController::class, 'getCourseList']);
 Route::get('/isapproved', [ApiController::class, 'isApproved']);
 Route::post('/uploadoc', [ApiController::class, 'UploadOC'])->name('uploadoc');
+Route::get('generate-pdf', 'App\Http\Controllers\PDFController@generatePDF')->name('generate-pdf');
+Route::view('admitcard', 'admitcard')->name('admitcard');
+
+
 
 Auth::routes(['verify' => true]);

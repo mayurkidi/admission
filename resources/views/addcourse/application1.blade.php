@@ -78,14 +78,20 @@
       <tr id="pstatus">
         <!-- <th scope="col">3</th> -->
         <td>Payment Status</td>
-        @if($paymentstatus->isEmpty()==true)
+        @if($paymentstatus[0]==0)
         <td><b>Payment Pending</b>
-          <br><span><a href="{{ route('stu.addcousrse',['id' => 4]) }}">Make Payment</a></span>
+          <br><span><a href="{{ route('stu.addcousrse',['id' => $id[0]]) }}">Make Payment</a></span>
         </td>
         @else
         <td>Payment Done</td>
         @endif
       </tr>
+      <tr id="admitcard" @if($application[0]->isapproved==0)hidden  @endif>
+        <!-- <th scope="col">3</th> -->
+        <td>Admit Card</td>
+        <td><i class="bi bi-download text-danger"> </i><a target="_blank" id="ac" href="{{url('generate-pdf')}}?app_id={{\Auth::user()->id}}">Admit card</a></td>
+      </tr>
+
       <tr id="astatus">
         <!-- <th scope="col">3</th> -->
         <td>Application Status</td>
@@ -130,6 +136,7 @@
     });
     if (pstatus == 0) {
       $("#test").removeAttr('href');
+      $("#admitcard").hide();
     }
   });
 </script>

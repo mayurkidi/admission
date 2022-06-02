@@ -19,7 +19,6 @@ class CreatePaymentsTable extends Migration
             $table->string('amount');
             $table->string('paymentstatus');
             $table->string('paymentproof')->nullable();
-            $table->string('isapproved')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')

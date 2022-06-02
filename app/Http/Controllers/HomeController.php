@@ -39,19 +39,28 @@ class HomeController extends Controller
     public function index()
     {
         // return "Hello";
+        $application = Applicationdetail::select('*')->where('userid', \Auth::user()->id)->get();
         $isapproved = Applicationdetail::where('userid', \Auth::user()->id)->pluck('isapproved');
         $applicationstatus = Applicationdetail::where('userid', \Auth::user()->id)->pluck('applicationstatus');
         $paymentstatus = Payments::where('user_id', \Auth::user()->id)->pluck('paymentstatus');
         // return  compact('paymentstatus', 'teststatus','applicationstatus');
         $graduationtype = Applicationdetail::where('userid', \Auth::user()->id)->pluck('graduationtype');
-        if (!$paymentstatus->isEmpty()) {
-            if ($paymentstatus[0] == 1) {
+        if (!$applicationstatus->isEmpty()) {
+            if ($applicationstatus[0] == 1) {
+                $id = Applicationdetail::where('userid', \Auth::user()->id)->pluck('graduationtype');
+                if($id[0]=="UG")
+                    $id[0]=1;
+                if($id[0]=="PG")
+                    $id[0]=2;
+                if($id[0]=="UG-D")
+                    $id[0]=3;               
+
                 $application = Applicationdetail::select('*')->where('userid', \Auth::user()->id)->get();
                 $academic = Academicdetail::select('*')->where('userid', \Auth::user()->id)->get();
                 $user = User::select('*')->where('id', \Auth::user()->id)->get();
                 //  return gettype(compact('user','application','academic'));  
                 $applicationstatus = Applicationdetail::where('userid', \Auth::user()->id)->pluck('applicationstatus');
-                return view('addcourse.application1', compact('application', 'academic', 'user', 'paymentstatus', 'applicationstatus', 'graduationtype'));
+                return view('addcourse.application1', compact('application', 'academic', 'user', 'paymentstatus', 'applicationstatus', 'graduationtype','id'));
             }
         }
         if (\Auth::user()->id == 1) {
@@ -67,7 +76,7 @@ class HomeController extends Controller
             // return $merged_array;
             return view('admin',compact("application","academic","payment","user","courses","programs"));
         }
-        return view('dashboard', compact('paymentstatus', 'applicationstatus', 'graduationtype','isapproved'));
+        return view('dashboard', compact('paymentstatus', 'applicationstatus', 'graduationtype','isapproved','application'));
     }
 
     public function dashboard()

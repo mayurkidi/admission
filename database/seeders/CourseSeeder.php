@@ -36,14 +36,25 @@ class CourseSeeder extends Seeder
                 array('name'=> "M.Pharm",'program_id'=>3,'graduationtype'=>'PG'),
                 array('name'=> "Pharm.D",'program_id'=>3,'graduationtype'=>'UG'),
                 array('name'=> "Ph.D",'program_id'=>3,'graduationtype'=>'PG'),
+                
                 array('name'=> "B.Tech(Computer Engineering)",'program_id'=>4,'graduationtype'=>'UG-D'),
+                array('name'=> "B.Tech(Artificial Intelligence)",'program_id'=>4,'graduationtype'=>'UG-D'),
                 array('name'=> "B.Tech(Cyber security)",'program_id'=>4,'graduationtype'=>'UG-D'),
                 array('name'=> "B.Tech(Electrical Engineering)",'program_id'=>4,'graduationtype'=>'UG-D'),
                 array('name'=> "B.Tech(Information and Technology)",'program_id'=>4,'graduationtype'=>'UG-D'),
                 array('name'=> "B.Tech(Mechanical Engineering)",'program_id'=>4,'graduationtype'=>'UG-D'),
                 array('name'=> "B.Tech(Civil Engineering)",'program_id'=>4,'graduationtype'=>'UG-D'),
-                array('name'=> "M.Tech",'program_id'=>4,'graduationtype'=>'PG'),
+                
+                
+                array('name'=> "M.Tech(Thermal Science (Mechanical Engineering))",'program_id'=>4,'graduationtype'=>'PG'),
+                array('name'=> "M.Tech()",'program_id'=>4,'graduationtype'=>'PG'),
+                array('name'=> "M.Tech()",'program_id'=>4,'graduationtype'=>'PG'),
+                array('name'=> "M.Tech()",'program_id'=>4,'graduationtype'=>'PG'),
+                array('name'=> "M.Tech()",'program_id'=>4,'graduationtype'=>'PG'),
+                array('name'=> "M.Tech()",'program_id'=>4,'graduationtype'=>'PG'),
+                
                 array('name'=> "Ph.D",'program_id'=>4,'graduationtype'=>'PG'),
+                
                 array('name'=> "BCA",'program_id'=>5,'graduationtype'=>'UG'),
                 array('name'=> "MCA",'program_id'=>5,'graduationtype'=>'PG'),
                 array('name'=> "Ph.D",'program_id'=>5,'graduationtype'=>'PG'),

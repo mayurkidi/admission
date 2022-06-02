@@ -4,7 +4,7 @@
 @if(!empty($successmsg))
 <div class="alert alert-success"> {{ $successmsg }}</div>
 @endif
-@if($graduationtype->isEmpty()==false))
+@if($graduationtype->isEmpty()==false)
 <input type="hidden" value="{{$graduationtype[0]}}" id="gtype" name="gtype">
 @endif
 @if($isapproved->isEmpty()==false)
@@ -33,8 +33,8 @@
                         <tbody>
                             <tr>
                                 <td>UG Application Form</td>
-                                <td class=" text-end">-</td>
-                                <td class=" text-end ">-</td>
+                                <td class=" text-end">@if(!$application->isEmpty()){{$application[0]->id}}@else -- @endif</td>
+                                <td class=" text-end ">@if(!$application->isEmpty()){{$application[0]->created_at->format('d/m/Y')}}@else -- @endif</td>
                                 <td class=" text-end ">1500</td>
                                 <td class=" text-end "><a href="{{ route('stu.addcousrse',['id' => 1]) }}" class="btn btn-primary">Register</a></td>
                             </tr>
@@ -65,9 +65,9 @@
                         <tbody>
                             <tr>
                                 <td>PG Application Form</td>
-                                <td class=" text-end">-</td>
-                                <td class=" text-end ">-</td>
-                                <td class=" text-end ">1200</td>
+                                <td class=" text-end">@if(!$application->isEmpty()){{$application[0]->id}}@else -- @endif</td>
+                                <td class=" text-end ">@if(!$application->isEmpty()){{$application[0]->created_at->format('d/m/Y')}}@else -- @endif</td>
+                                <td class=" text-end ">1500</td>
                                 <td class=" text-end "><a href="{{ route('stu.addcousrse',['id' => 2]) }}" class="btn btn-primary">Register</a></td>
                             </tr>
                         </tbody>
@@ -96,9 +96,9 @@
                         <tbody>
                             <tr>
                                 <td>Diploma Application Form</td>
-                                <td class=" text-end">-</td>
-                                <td class=" text-end ">-</td>
-                                <td class=" text-end ">1200</td>
+                                <td class=" text-end">@if(!$application->isEmpty()){{$application[0]->id}}@else -- @endif</td>
+                                <td class=" text-end ">@if(!$application->isEmpty()){{$application[0]->created_at->format('d/m/Y')}}@else -- @endif</td>    
+                                <td class=" text-end ">1500</td>
                                 <td class=" text-end "><a href="{{ route('stu.addcousrse',['id' => 3]) }}" class="btn btn-primary">Register</a></td>
                             </tr>
                         </tbody>
