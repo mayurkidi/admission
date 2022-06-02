@@ -28,10 +28,11 @@ class ApiController extends Controller
             } else if ($request->_id == 3) {
                 $type = "UG-D";
                 $_type = "";
-            } else
+            } 
+            else
             if ($request->course_id == 4) {
                 $type = "UG";
-                $_type = "UG-D";
+                $_type = "";
             } else {
                 $type = "UG";
                 $_type = "";

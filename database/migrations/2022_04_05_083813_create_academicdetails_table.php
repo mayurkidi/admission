@@ -28,7 +28,6 @@ class CreateAcademicdetailsTable extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
-            
         });
     }
 
