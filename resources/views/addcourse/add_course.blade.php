@@ -474,7 +474,7 @@
         var city_id=$("#city").val();
         var status = $("#status").val();
         var _id=$("#cid").val();
-        alert(_id);
+        // alert(_id);
         var pstatus = $("#pstatus").val();
         if (pstatus == 0) {
             $("#test").removeAttr('href');

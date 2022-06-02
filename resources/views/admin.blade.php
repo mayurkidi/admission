@@ -62,12 +62,12 @@
                 @foreach($academic as $ac)
                 @if($ac->userid==$user[$i]->id)
                 <td class="w-50">
-                    <a href="storage/{{$ac->leavingcertificate}}" download>Leaving Certificate</a> |
-                    <a href="storage/{{$ac->aadharcard}}" download>Aadhar Card</a> |
-                    <a href="storage/{{$ac->marksheet10}}" download>Marksheet 10</a> |
-                    <a @if($ac->marksheetdiploma==null)hidden @endif href="storage/{{$ac->marksheetdiploma}}" download>Marksheet Diploma</a> |
-                    <a @if($ac->marksheet12==null)hidden @endif href="storage/{{$ac->marksheet12}}" download>Marksheet 12</a> |
-                    <a @if($ac->marksheetgraduation==null)hidden @endif href="storage/{{$ac->marksheetgraduation}}" download>Marksheet Graduation</a>
+                    <a target="_blank" href="storage/{{$ac->leavingcertificate}}" download>Leaving Certificate</a> |
+                    <a target="_blank" href="storage/{{$ac->aadharcard}}" download>Aadhar Card</a> |
+                    <a target="_blank" href="storage/{{$ac->marksheet10}}" download>Marksheet 10</a> |
+                    <a target="_blank" @if($ac->marksheetdiploma==null)hidden @endif href="storage/{{$ac->marksheetdiploma}}" download>Marksheet Diploma</a> |
+                    <a target="_blank" @if($ac->marksheet12==null)hidden @endif href="storage/{{$ac->marksheet12}}" download>Marksheet 12</a> |
+                    <a target="_blank" @if($ac->marksheetgraduation==null)hidden @endif href="storage/{{$ac->marksheetgraduation}}" download>Marksheet Graduation</a>
                 </td>
                 @endif
                 @endforeach
