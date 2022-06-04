@@ -251,7 +251,7 @@ class AddCourseController extends Controller
             $addd->save();
             $paymentt = new Payments;
             $paymentt->user_id = \Auth::user()->id;
-            $paymentt->amount = 1500;
+            $paymentt->amount = 2000;
             $paymentt->paymentstatus = 0;
             $paymentt->paymentproof = NULL;
             $paymentt->save();

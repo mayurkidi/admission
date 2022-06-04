@@ -373,35 +373,35 @@
                                                 <div class="col-lg-4" @if($academic->isEmpty()) disabled @endif>
                                                     <label for="courseTitle" class="form-label">Leaving Certificate</label>
                                                     <input id="lc" @if($academic[0]->leavingcertificate!=null) @endif class="form-control" type="file" name="leavingcertificate" value="{{$academic[0]->leavingcertificate}}" />
-                                                    <span><a @if($academic[0]->leavingcertificate==null) hidden @endif id="lc" href="{{$academic[0]->leavingcertificate}}" download>Leaving Certificate (uploaded)</a></span>
+                                                    <span><a @if($academic[0]->leavingcertificate==null) hidden @endif id="lc" target="_blank" href="storage/{{$academic[0]->leavingcertificate}}" download>Leaving Certificate (uploaded)</a></span>
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <label for="courseTitle" class="form-label">Adharcard</label>
                                                     <input @if($academic[0]->aadharcard!=null) @endif id="aadharcard" class="form-control" type="file" name="aadharcard" value="{{$academic[0]->aadharcard}}" />
-                                                    <span><a @if($academic[0]->aadharcard==null) hidden @endif id="lc" href="{{$academic[0]->aadharcard}}" download>Aadhar Card (uploaded)</a></span>
+                                                    <span><a @if($academic[0]->aadharcard==null) hidden @endif id="lc" target="_blank" href="storage/{{$academic[0]->aadharcard}}" download>Aadhar Card (uploaded)</a></span>
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <label for="courseTitle" class="form-label">10th Marksheet</label>
                                                     <input @if($academic[0]->marksheet10!=null) @endif id="marksheet10" class="form-control" type="file" name="marksheet10" value="{{$academic[0]->marksheet10}}" />
-                                                    <span><a @if($academic[0]->marksheet10==null) hidden @endif id="lc" href="{{$academic[0]->marksheet10}}" download>Marksheet 10 (uploaded)</a></span>
+                                                    <span><a @if($academic[0]->marksheet10==null) hidden @endif id="lc" target="_blank" href="storage/{{$academic[0]->marksheet10}}" download>Marksheet 10 (uploaded)</a></span>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-lg-4" @if( request()->id == 3 ) hidden disabled @endif>
                                                     <label for="courseTitle" class="form-label">12th Marksheet</label>
                                                     <input @if($academic[0]->marksheet12!=null) @endif @if( request()->id == 3 ) id="" disabled @endif id="marksheet12" class="form-control" type="file" name="marksheet12" value="{{$academic[0]->marksheet12}}" />
-                                                    <span><a @if($academic[0]->marksheet12==null) hidden @endif id="lc" href="{{$academic[0]->marksheet12}}" download>Marksheet 12 (uploaded)</a></span>
+                                                    <span><a @if($academic[0]->marksheet12==null) hidden @endif id="lc" target="_blank" href="storage/{{$academic[0]->marksheet12}}" download>Marksheet 12 (uploaded)</a></span>
                                                 </div>
                                                 <div class="col-lg-4" @if( request()->id == 1 || request()->id == 3 ) hidden disabled @endif>
                                                     <label for="courseTitle" class="form-label">Graduation Certificate</label>
                                                     <input @if($academic[0]->marksheetgraduation!=null) @endif @if( request()->id == 1 || request()->id == 3 ) disabled @endif id="marksheetgraduation" class="form-control" type="file" name="marksheetgraduation" value="{{$academic[0]->marksheetgraduation}}" />
-                                                    <span><a @if($academic[0]->marksheetgraduation==null) hidden @endif id="lc" href="{{$academic[0]->marksheetgraduation}}" download>Marksheet Graduation (uploaded)</a></span>
+                                                    <span><a @if($academic[0]->marksheetgraduation==null) hidden @endif id="lc" target="_blank" href="storage/{{$academic[0]->marksheetgraduation}}" download>Marksheet Graduation (uploaded)</a></span>
                                                 </div>
 
                                                 <div class="col-lg-4" @if( request()->id == 1 || request()->id == 2 ) hidden disabled @endif >
                                                     <label for="courseTitle" class="form-label">Marksheet Diploma</label>
                                                     <input @if($academic[0]->marksheetdiploma!=null) @endif @if( request()->id == 1 || request()->id == 2 ) disabled @endif id="marksheetdiploma" class="form-control" type="file" name="marksheetdiploma" value="{{$academic[0]->marksheetdiploma}}" />
-                                                    <span><a @if($academic[0]->marksheetdiploma==null) hidden @endif id="lc" href="{{$academic[0]->marksheetdiploma}}" download>Marksheet Diploma (uploaded)</a></span>
+                                                    <span><a @if($academic[0]->marksheetdiploma==null) hidden @endif id="lc" target="_blank" href="storage/{{$academic[0]->marksheetdiploma}}" download>Marksheet Diploma (uploaded)</a></span>
                                                 </div>
                                             </div>
                                         </div>

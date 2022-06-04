@@ -5,7 +5,7 @@
 @else
 <input type="hidden" value="0" name="pstatus" id="pstatus">
 @endif
-@if($graduationtype->isEmpty()==false))
+@if($graduationtype->isEmpty()==false)
 <input type="hidden" value="{{$graduationtype[0]}}" id="gtype" name="gtype">
 @endif
 

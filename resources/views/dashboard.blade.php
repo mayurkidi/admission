@@ -35,7 +35,7 @@
                                 <td>UG Application Form</td>
                                 <td class=" text-end">@if(!$application->isEmpty()){{$application[0]->id}}@else -- @endif</td>
                                 <td class=" text-end ">@if(!$application->isEmpty()){{$application[0]->created_at->format('d/m/Y')}}@else -- @endif</td>
-                                <td class=" text-end ">1500</td>
+                                <td class=" text-end ">2000</td>
                                 <td class=" text-end "><a href="{{ route('stu.addcousrse',['id' => 1]) }}" class="btn btn-primary">Register</a></td>
                             </tr>
                         </tbody>
@@ -67,7 +67,7 @@
                                 <td>PG Application Form</td>
                                 <td class=" text-end">@if(!$application->isEmpty()){{$application[0]->id}}@else -- @endif</td>
                                 <td class=" text-end ">@if(!$application->isEmpty()){{$application[0]->created_at->format('d/m/Y')}}@else -- @endif</td>
-                                <td class=" text-end ">1500</td>
+                                <td class=" text-end ">2000</td>
                                 <td class=" text-end "><a href="{{ route('stu.addcousrse',['id' => 2]) }}" class="btn btn-primary">Register</a></td>
                             </tr>
                         </tbody>
@@ -98,7 +98,7 @@
                                 <td>Diploma Application Form</td>
                                 <td class=" text-end">@if(!$application->isEmpty()){{$application[0]->id}}@else -- @endif</td>
                                 <td class=" text-end ">@if(!$application->isEmpty()){{$application[0]->created_at->format('d/m/Y')}}@else -- @endif</td>    
-                                <td class=" text-end ">1500</td>
+                                <td class=" text-end ">2000</td>
                                 <td class=" text-end "><a href="{{ route('stu.addcousrse',['id' => 3]) }}" class="btn btn-primary">Register</a></td>
                             </tr>
                         </tbody>
@@ -122,7 +122,7 @@
                             <p class="mb-2">Application Form : Under Graduate Form</p>
                             <p class="mb-2">Application Number : 1200</p>
                             <p class="mb-2">Application Submitted On : 21/02/22</p>
-                            <p class="mb-2">Application Fees : 1500</p>
+                            <p class="mb-2">Application Fees : 2000</p>
                         </div>
                     </div>
                 </div>
@@ -144,7 +144,7 @@
                             <p class="mb-2">Application Form : Post Graduate Form</p>
                             <p class="mb-2">Application Number : 1200</p>
                             <p class="mb-2">Application Submitted On : 21/02/22</p>
-                            <p class="mb-2">Application Fees : 1500</p>
+                            <p class="mb-2">Application Fees : 2000</p>
                         </div>
                     </div>
                 </div>
