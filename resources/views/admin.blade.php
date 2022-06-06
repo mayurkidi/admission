@@ -56,7 +56,7 @@
                 @endforeach
                 @foreach($payment as $p)
                 @if($p->user_id==$user[$i]->id)
-                <td class="w-4">@if($p->paymentstatus==1)<a href="{{$p->paymentproof}}" target="_blank" download><i class="bi bi-download"></i></a> @else Pending @endif</td>
+                <td class="w-4">@if($p->paymentstatus==1)<a href="storage/{{$p->paymentproof}}" target="_blank" download><i class="bi bi-download"></i></a> @else Pending @endif</td>
                 @endif
                 @endforeach
                 @foreach($academic as $ac)
