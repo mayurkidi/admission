@@ -51,17 +51,15 @@ class ApiController extends Controller
         Applicationdetail::where('userid', $request->id)->update(["isapproved" => 1]);
         $username = User::where('id',$request->id)->pluck('name');
         $email = User::where('id',$request->id)->pluck('email');
-        $courseid=Applicationdetail::where('userid',$request->id)->pluck('course');
         $id=Applicationdetail::where('userid',$request->id)->pluck('id');
-        $programid=Applicationdetail::where('userid',$request->id)->pluck('specialization');
-        $course=Course::where('id',$courseid)->pluck('name');
-        $program=Program::where('id',$programid)->pluck('name');
+        $app_all = Applicationdetail::select('*')->where('userid', $request->id)->get();
+        $course = Course::where('id', $app_all[0]->specialization)->pluck('name');
+        
         $data = [
             'id'=>$id,
             'name' =>$username,
             'logo'=>public_path().'/logo.png',
             'course'=>$course,
-            'program'=>$program,
         ];
         Mail::send('mail',$data,function($message)use($email){
             $message->to($email[0])->subject('Your application is approved');

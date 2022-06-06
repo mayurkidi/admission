@@ -81,13 +81,11 @@
                            <div class="mb-3 col-12 col-md-6">
                               <label class="form-label">Gender</label>
                               <select name="gender" class="form-control @error('gender') is-invalid @enderror" id="gender">
-                                 <option disabled value="">Select Gender</option>
+                                 <option disabled selected value="">Select Gender</option>
                                  <option @if(auth()->user()->gender == 'Male')selected @endif>Male
                                  </option>
                                  <option @if(auth()->user()->gender == 'Female')selected
                                     @endif>Female</option>
-                                 <option @if(auth()->user()->gender == 'Transgender')selected
-                                    @endif>Transgender</option>
                               </select>
                               @error('gender')
                               <span class="invalid-feedback" role="alert">

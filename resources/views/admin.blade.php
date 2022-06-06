@@ -10,7 +10,7 @@
     }
 </style>
 <h1 class="text-center">Admin panel</h1>
-<div class="p-2" >
+<div class="p-2">
     <table class="">
         <thead>
             <th>Name</th>
@@ -85,7 +85,7 @@
                     <form action="{{url('/uploadoc')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" id="id" name="id" value="{{$user[$i]->id}}">
-                        <input type="file" id="offerletter" name="offerletter">
+                        <input type="file" id="offerletter" class="offerletter" name="offerletter">
                         <button type="submit" class="btn btn-primary btn-xs" id="btnUpload">
                             <i class="bi bi-upload"></i>
                         </button>
@@ -103,9 +103,16 @@
 <script>
     $(document).ready(function() {
         $("#btnUpload").click(function() {
-            if ($("#offerletter").val() == "") {
+            if ($(".offerletter").val() == "") {
                 alert("Select the offer letter");
                 return false;
+            }
+            if ($(".offerletter").val() != "") {
+                var ext = $('.offerletter').val().split('.').pop().toLowerCase();
+                if ($.inArray(ext, ['pdf', 'png', 'jpg', 'jpeg']) == -1) {
+                    alert("Offer letter file format is not valid.");
+                    return false;
+                }
             }
         });
     });

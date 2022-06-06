@@ -181,7 +181,7 @@ class AddCourseController extends Controller
             // Filename to store
             $marksheetdiploma = 'uploads/'.Auth::user()->email.'_' . Auth::user()->id . '/' . $request->name . '_' . 'Marksheet_Diploma' . '.' . $extension;
             // Upload Image
-            $request->file('marksheetdiploma')->storeAs('public/', $lc);
+            $request->file('marksheetdiploma')->storeAs('public/', $marksheetdiploma);
         }
 
         if ($request->hasFile('marksheetgraduation')) {

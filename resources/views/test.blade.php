@@ -45,7 +45,7 @@
 
         <div>
             <p>4. What should come in place of both x in the equation</p>
-            <p></p>
+            <p>&emsp;<img src="assets/images/q6.png" height="100" width="100" alt=""></p>
             <p><input type="radio" name="question4" value="12">12</p>
             <p><input type="radio" name="question4" value="18">18</p>
             <p><input type="radio" name="question4" value="100">100</p>
@@ -63,7 +63,6 @@
 
         <div>
             <p>6. The sum of first five prime numbers is _______.</p>
-            <p>&emsp;<img src="assets/images/q6.png" height="100" width="100" alt=""></p>
             <p><input type="radio" name="question6" value="11">11</p>
             <p><input type="radio" name="question6" value="18">18</p>
             <p><input type="radio" name="question6" value="26">26</p>
