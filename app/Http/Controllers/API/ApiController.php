@@ -65,7 +65,7 @@ class ApiController extends Controller
         ];
         Mail::send('mail',$data,function($message)use($email){
             $message->to($email[0])->subject('Your application is approved');
-            $message->from('mayursbank@gmail.com',"RK University");
+            $message->from('national.rku.ac.in',"RK University");
         });
         return redirect('dashboard');
     }
