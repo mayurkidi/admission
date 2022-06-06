@@ -7,7 +7,12 @@ use App\Models\Applicationdetail;
 use App\Models\State;
 use App\Models\City;
 use App\Models\Course;
+use App\Models\Program;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use League\CommonMark\Extension\Embed\Embed;
 
 class ApiController extends Controller
 {
@@ -43,8 +48,25 @@ class ApiController extends Controller
     }
     public function isApproved(Request $request)
     {
-
         Applicationdetail::where('userid', $request->id)->update(["isapproved" => 1]);
+        $username = User::where('id',$request->id)->pluck('name');
+        $email = User::where('id',$request->id)->pluck('email');
+        $courseid=Applicationdetail::where('userid',$request->id)->pluck('course');
+        $id=Applicationdetail::where('userid',$request->id)->pluck('id');
+        $programid=Applicationdetail::where('userid',$request->id)->pluck('specialization');
+        $course=Course::where('id',$courseid)->pluck('name');
+        $program=Program::where('id',$programid)->pluck('name');
+        $data = [
+            'id'=>$id,
+            'name' =>$username,
+            'logo'=>public_path().'/logo.png',
+            'course'=>$course,
+            'program'=>$program,
+        ];
+        Mail::send('mail',$data,function($message)use($email){
+            $message->to($email[0])->subject('Your application is approved');
+            $message->from('mayursbank@gmail.com',"RK University");
+        });
         return redirect('dashboard');
     }
     public function UploadOC(Request $request)
