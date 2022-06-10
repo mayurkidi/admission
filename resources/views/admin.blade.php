@@ -15,6 +15,7 @@
         <thead>
             <th>Name</th>
             <th>Email</th>
+            <th>Fathername</th>
             <th>Application ID</th>
             <th>Application Course</th>
             <th>Application Program</th>
@@ -39,6 +40,7 @@
             @for($i=1 ; $i < count($user); $i++) <tr>
                 <td class="w-10">{{$user[$i]->name}}</td>
                 <td class="w-15">{{$user[$i]->email}}</td>
+                <td class="w-15">{{$user[$i]->fathername}}</td>
                 @foreach($application as $a)
                 @if($a->userid==$user[$i]->id)
                 <td class="w-5">{{$a->id}}</td>
@@ -101,6 +103,7 @@
     </table>
 </div>
 <script>
+    $("#test").hide();
     $(document).ready(function() {
         $("#btnUpload").click(function() {
             if ($(".offerletter").val() == "") {
