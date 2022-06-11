@@ -38,27 +38,27 @@
             <td></td>
             <td></td>
             @for($i=1 ; $i < count($user); $i++) <tr>
-                <td class="w-10">{{$user[$i]->name}}</td>
+                <td class="w-10 text-capitalize">{{$user[$i]->name}}</td>
                 <td class="w-15">{{$user[$i]->email}}</td>
-                <td class="w-15">{{$user[$i]->fathername}}</td>
+                <td class="w-15 text-capitalize">{{$user[$i]->fathername}}</td>
                 @foreach($application as $a)
                 @if($a->userid==$user[$i]->id)
                 <td class="w-5">{{$a->id}}</td>
                 @foreach ($programs as $key => $value)
                 @if($a->course == $value)
-                <td class="w-8">{{$key}}</td>
+                <td class="w-8 text-capitalize">{{$key}}</td>
                 @endif
                 @endforeach
                 @foreach ($courses as $key => $value)
                 @if($a->specialization == $value)
-                <td class="w-8">{{$key}}</td>
+                <td class="w-8 text-capitalize">{{$key}}</td>
                 @endif
                 @endforeach
                 @endif
                 @endforeach
                 @foreach($payment as $p)
                 @if($p->user_id==$user[$i]->id)
-                <td class="w-4">@if($p->paymentstatus==1)<a href="storage/{{$p->paymentproof}}" target="_blank" download><i class="bi bi-download"></i></a> @else Pending @endif</td>
+                <td class="w-4 text-capitalize">@if($p->paymentstatus==1)<a href="storage/{{$p->paymentproof}}" target="_blank" download><i class="bi bi-download"></i></a> @else Pending @endif</td>
                 @endif
                 @endforeach
                 @foreach($academic as $ac)
