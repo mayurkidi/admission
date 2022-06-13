@@ -38,7 +38,7 @@
             <td></td>
             <td></td>
             @for($i=1 ; $i < count($user); $i++) <tr>
-                <td class="w-10 text-capitalize">{{$user[$i]->name}}</td>
+                <td class="w-10 text-capitalize">{{ucwords($user[$i]->name)}}</td>
                 <td class="w-15">{{$user[$i]->email}}</td>
                 <td class="w-15 text-capitalize">{{$user[$i]->fathername}}</td>
                 @foreach($application as $a)
