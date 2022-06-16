@@ -8,10 +8,17 @@
         border-collapse: collapse;
         text-align: center;
     }
+
+    /* table td:first-child::first-letter {
+        text-transform: uppercase;
+    } */
+    .capitalize {
+        text-transform: capitalize;
+    }
 </style>
 <h1 class="text-center">Admin panel</h1>
 <div class="p-2">
-    <table class="">
+    <table class="capitalize" id="adminTable" style="font-size:12px ;">
         <thead>
             <th>Name</th>
             <th>Email</th>
@@ -39,7 +46,7 @@
             <td></td>
             @for($i=1 ; $i < count($user); $i++) <tr>
                 <td class="w-10">{{$user[$i]->name}}</td>
-                <td class="w-15">{{$user[$i]->email}}</td>
+                <td class="w-15 text-lowercase">{{$user[$i]->email}}</td>
                 <td class="w-15">{{$user[$i]->fathername}}</td>
                 @foreach($application as $a)
                 @if($a->userid==$user[$i]->id)
@@ -102,9 +109,16 @@
         </tbody>
     </table>
 </div>
+<div class="text-center mt-10">
+
+</div>
+<!-- <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> -->
 <script>
     $("#test").hide();
     $(document).ready(function() {
+        // $('#adminTable').dataTable({
+        //     // parameters
+        // });
         $("#btnUpload").click(function() {
             if ($(".offerletter").val() == "") {
                 alert("Select the offer letter");
