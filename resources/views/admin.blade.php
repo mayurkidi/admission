@@ -8,13 +8,21 @@
         border-collapse: collapse;
         text-align: center;
     }
+
+    /* table td:first-child::first-letter {
+        text-transform: uppercase;
+    } */
+    .capitalize {
+        text-transform: capitalize;
+    }
 </style>
 <h1 class="text-center">Admin panel</h1>
-<div class="p-2" >
-    <table class="">
+<div class="p-2">
+    <table class="capitalize" id="adminTable" style="font-size:12px ;">
         <thead>
             <th>Name</th>
             <th>Email</th>
+            <th>Fathername</th>
             <th>Application ID</th>
             <th>Application Course</th>
             <th>Application Program</th>
@@ -38,7 +46,8 @@
             <td></td>
             @for($i=1 ; $i < count($user); $i++) <tr>
                 <td class="w-10">{{$user[$i]->name}}</td>
-                <td class="w-15">{{$user[$i]->email}}</td>
+                <td class="w-15 text-lowercase">{{$user[$i]->email}}</td>
+                <td class="w-15">{{$user[$i]->fathername}}</td>
                 @foreach($application as $a)
                 @if($a->userid==$user[$i]->id)
                 <td class="w-5">{{$a->id}}</td>
@@ -56,7 +65,7 @@
                 @endforeach
                 @foreach($payment as $p)
                 @if($p->user_id==$user[$i]->id)
-                <td class="w-4">@if($p->paymentstatus==1)Paid @else Pending @endif</td>
+                <td class="w-4">@if($p->paymentstatus==1)<a href="storage/{{$p->paymentproof}}" target="_blank" download><i class="bi bi-download"></i></a> @else Pending @endif</td>
                 @endif
                 @endforeach
                 @foreach($academic as $ac)
@@ -85,12 +94,12 @@
                     <form action="{{url('/uploadoc')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" id="id" name="id" value="{{$user[$i]->id}}">
-                        <input type="file" id="offerletter" name="offerletter">
+                        <input type="file" id="offerletter" class="offerletter" name="offerletter">
                         <button type="submit" class="btn btn-primary btn-xs" id="btnUpload">
                             <i class="bi bi-upload"></i>
                         </button>
                     </form>
-                    @else <i class="bi bi-download"></i> <a href="storage/{{$a->offerletter}}"></a>
+                    @else <a href="storage/{{$a->offerletter}}" target="_blank" download><i class="bi bi-download"></i></a>
                     @endif
                 </td>
                 @endif
@@ -100,12 +109,27 @@
         </tbody>
     </table>
 </div>
+<div class="text-center mt-10">
+
+</div>
+<!-- <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> -->
 <script>
+    $("#test").hide();
     $(document).ready(function() {
+        // $('#adminTable').dataTable({
+        //     // parameters
+        // });
         $("#btnUpload").click(function() {
-            if ($("#offerletter").val() == "") {
+            if ($(".offerletter").val() == "") {
                 alert("Select the offer letter");
                 return false;
+            }
+            if ($(".offerletter").val() != "") {
+                var ext = $('.offerletter').val().split('.').pop().toLowerCase();
+                if ($.inArray(ext, ['pdf', 'png', 'jpg', 'jpeg']) == -1) {
+                    alert("Offer letter file format is not valid.");
+                    return false;
+                }
             }
         });
     });

@@ -657,7 +657,7 @@
                 return false;
 
             }
-            if ($('#gender').val() == "") {
+            if ($('#gender').val() == null) {
                 alert("Gender Cannot be Empty");
                 return false;
 

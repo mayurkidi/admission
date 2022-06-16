@@ -12,6 +12,7 @@ use App\Models\Academicdetail;
 use App\Models\Applicationdetail;
 use App\Models\Result;
 use Faker\Provider\ar_SA\Payment;
+use Illuminate\Console\Application;
 use Illuminate\Support\Facades\Auth;
 
 use Session;
@@ -67,11 +68,13 @@ class HomeController extends Controller
 
             $application = Applicationdetail::select('*')->get();
             $user = User::select('*')->get();
-            $academic = Academicdetail::select('*')->get();
+            $academic = Academicdetail::select('*')->paginate();
             $payment = Payments::select('*')->get();
             $courses = Course::all()->pluck('id', 'name');
             $programs = Program::all()->pluck('id', 'name');
-            // return $payment;
+            // $user = User::select('*')->get();            
+            // $application=Applicationdetail::select('*')->paginate(10);
+            // return $user;
             // $merged_array=array_merge(array($user),array($application));
             // return $merged_array;
             return view('admin',compact("application","academic","payment","user","courses","programs"));
