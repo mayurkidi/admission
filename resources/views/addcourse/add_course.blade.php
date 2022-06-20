@@ -341,7 +341,7 @@
                                             <div class="row mb-3">
                                                 <div class="col-lg-4">
                                                     <label for="courseTitle" class="form-label">Leaving Certificate</label>
-                                                    <input id="lc" class="form-control" type="file" name="leavingcertificate" />
+                                                    <input id="lc" class="form-control" type="file" name="leavingcertificate" id="lc" />
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <label for="courseTitle" class="form-label">Adharcard</label>
@@ -373,35 +373,35 @@
                                                 <div class="col-lg-4" @if($academic->isEmpty()) disabled @endif>
                                                     <label for="courseTitle" class="form-label">Leaving Certificate</label>
                                                     <input id="lc" @if($academic[0]->leavingcertificate!=null) @endif class="form-control" type="file" name="leavingcertificate" value="{{$academic[0]->leavingcertificate}}" />
-                                                    <span><a @if($academic[0]->leavingcertificate==null) hidden @endif  target="_blank" href="storage/{{$academic[0]->leavingcertificate}}" download>Leaving Certificate (uploaded)</a></span>
+                                                    <span><a @if($academic[0]->leavingcertificate==null) hidden @endif id="lc" target="_blank" href="storage/{{$academic[0]->leavingcertificate}}" download>Leaving Certificate (uploaded)</a></span>
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <label for="courseTitle" class="form-label">Adharcard</label>
                                                     <input @if($academic[0]->aadharcard!=null) @endif id="aadharcard" class="form-control" type="file" name="aadharcard" value="{{$academic[0]->aadharcard}}" />
-                                                    <span><a @if($academic[0]->aadharcard==null) hidden @endif  target="_blank" href="storage/{{$academic[0]->aadharcard}}" download>Aadhar Card (uploaded)</a></span>
+                                                    <span><a @if($academic[0]->aadharcard==null) hidden @endif id="lc" target="_blank" href="storage/{{$academic[0]->aadharcard}}" download>Aadhar Card (uploaded)</a></span>
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <label for="courseTitle" class="form-label">10th Marksheet</label>
                                                     <input @if($academic[0]->marksheet10!=null) @endif id="marksheet10" class="form-control" type="file" name="marksheet10" value="{{$academic[0]->marksheet10}}" />
-                                                    <span><a @if($academic[0]->marksheet10==null) hidden @endif  target="_blank" href="storage/{{$academic[0]->marksheet10}}" download>Marksheet 10 (uploaded)</a></span>
+                                                    <span><a @if($academic[0]->marksheet10==null) hidden @endif id="lc" target="_blank" href="storage/{{$academic[0]->marksheet10}}" download>Marksheet 10 (uploaded)</a></span>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-lg-4" @if( request()->id == 3 ) hidden disabled @endif>
                                                     <label for="courseTitle" class="form-label">12th Marksheet</label>
                                                     <input @if($academic[0]->marksheet12!=null) @endif @if( request()->id == 3 ) id="" disabled @endif id="marksheet12" class="form-control" type="file" name="marksheet12" value="{{$academic[0]->marksheet12}}" />
-                                                    <span><a @if($academic[0]->marksheet12==null) hidden @endif  target="_blank" href="storage/{{$academic[0]->marksheet12}}" download>Marksheet 12 (uploaded)</a></span>
+                                                    <span><a @if($academic[0]->marksheet12==null) hidden @endif id="lc" target="_blank" href="storage/{{$academic[0]->marksheet12}}" download>Marksheet 12 (uploaded)</a></span>
                                                 </div>
                                                 <div class="col-lg-4" @if( request()->id == 1 || request()->id == 3 ) hidden disabled @endif>
                                                     <label for="courseTitle" class="form-label">Graduation Certificate</label>
                                                     <input @if($academic[0]->marksheetgraduation!=null) @endif @if( request()->id == 1 || request()->id == 3 ) disabled @endif id="marksheetgraduation" class="form-control" type="file" name="marksheetgraduation" value="{{$academic[0]->marksheetgraduation}}" />
-                                                    <span><a @if($academic[0]->marksheetgraduation==null) hidden @endif  target="_blank" href="storage/{{$academic[0]->marksheetgraduation}}" download>Marksheet Graduation (uploaded)</a></span>
+                                                    <span><a @if($academic[0]->marksheetgraduation==null) hidden @endif id="lc" target="_blank" href="storage/{{$academic[0]->marksheetgraduation}}" download>Marksheet Graduation (uploaded)</a></span>
                                                 </div>
 
                                                 <div class="col-lg-4" @if( request()->id == 1 || request()->id == 2 ) hidden disabled @endif >
                                                     <label for="courseTitle" class="form-label">Marksheet Diploma</label>
                                                     <input @if($academic[0]->marksheetdiploma!=null) @endif @if( request()->id == 1 || request()->id == 2 ) disabled @endif id="marksheetdiploma" class="form-control" type="file" name="marksheetdiploma" value="{{$academic[0]->marksheetdiploma}}" />
-                                                    <span><a @if($academic[0]->marksheetdiploma==null) hidden @endif  target="_blank" href="storage/{{$academic[0]->marksheetdiploma}}" download>Marksheet Diploma (uploaded)</a></span>
+                                                    <span><a @if($academic[0]->marksheetdiploma==null) hidden @endif id="lc" target="_blank" href="storage/{{$academic[0]->marksheetdiploma}}" download>Marksheet Diploma (uploaded)</a></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -431,6 +431,12 @@
                             <!-- Content four -->
                             <div id="test-l-4" role="tabpanel" class="bs-stepper-pane fade" aria-labelledby="courseFormtrigger4">
                                 <!-- Card -->
+                                <div class="text-center">
+                                    <img src="assets/images/paytmQR.jpeg" height="300" width="300">
+                                </div>
+                                <div class="text-center">
+                                    <h2><a href="https://m.paytm.me/rkurafna_nrweb" target="_blank">Scan or click here.</a></h2>
+                                </div>
                                 <div class="card mb-3  border-0">
                                     <div class="card-body">
                                         <div class="row mb-3">
@@ -470,10 +476,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
-        var program_id=$("#specialization").val();
-        var city_id=$("#city").val();
+        var program_id = $("#specialization").val();
+        var city_id = $("#city").val();
         var status = $("#status").val();
-        var _id=$("#cid").val();
+        var _id = $("#cid").val();
         // alert(_id);
         var pstatus = $("#pstatus").val();
         if (pstatus == 0) {
@@ -485,65 +491,65 @@
         // START
         var courseid = $("#course").find(":selected").val();
         if (courseid) {
-                $.ajax({
-                    type: "GET",
-                    dataType: 'json',
-                    url: "{{url('/getcourse')}}?course_id=" + courseid+"&_id="+_id,
-                    success: function(res) {
-                        if (res) {
-                            $("#specialization").empty();
-                            // $("#city").attr('disabled',false);
-                            $("#specialization").append('<option selected disabled value="">Select Specialization</option>');
-                            $.each(res, function(key, value) {
-                                if(value.id==program_id)
-                                    $("#specialization").append('<option value="' + value.id + '"selected >' + value.name + '</option>');
-                                else
-                                    $("#specialization").append('<option value="' + value.id + '">' + value.name + '</option>');
-                            });
-                            $('#specialization').selectpicker('refresh');
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: "{{url('/getcourse')}}?course_id=" + courseid + "&_id=" + _id,
+                success: function(res) {
+                    if (res) {
+                        $("#specialization").empty();
+                        // $("#city").attr('disabled',false);
+                        $("#specialization").append('<option selected disabled value="">Select Specialization</option>');
+                        $.each(res, function(key, value) {
+                            if (value.id == program_id)
+                                $("#specialization").append('<option value="' + value.id + '"selected >' + value.name + '</option>');
+                            else
+                                $("#specialization").append('<option value="' + value.id + '">' + value.name + '</option>');
+                        });
+                        $('#specialization').selectpicker('refresh');
 
-                            // $("#state").append('<option value=' + id + '>' + name + '</option>'); // return empty
-                            // alert(res.id);
-                        }
-                    },
-                    error: function(res){
-                        alert("Errro"+res);
-                    }    
-                });
-                // alert(1);
-            }
-            var stateid = $("#state").find(":selected").val();
-            // alert(stateid);
-            if (stateid) {
-                $.ajax({
-                    type: "GET",
-                    dataType: 'json',
-                    url: "{{url('/getcity')}}?state_id=" + stateid,
-                    success: function(res) {
-                        if (res) {
-
-                            $("#city").empty();
-                            // $("#city").attr('disabled',false);
-                            $("#city").append('<option selected disabled value="">Select City</option>');
-                            $.each(res, function(key, value) {
-                                if(value.id==city_id)
-                                    $("#city").append('<option value="' + value.id + '" selected>' + value.name + '</option>');
-                                else
-                                    $("#city").append('<option value="' + value.id + '">' + value.name + '</option>');
-
-                            });
-                            $('#city').selectpicker('refresh');
-
-                            // $("#state").append('<option value=' + id + '>' + name + '</option>'); // return empty
-                            // alert(res.id);
-                        }
-
+                        // $("#state").append('<option value=' + id + '>' + name + '</option>'); // return empty
+                        // alert(res.id);
                     }
-                });
-            }
-            // $("#specialization option[value='+program_id+']").attr("selected", "selected");
-            
-            // END
+                },
+                error: function(res) {
+                    alert("Errro" + res);
+                }
+            });
+            // alert(1);
+        }
+        var stateid = $("#state").find(":selected").val();
+        // alert(stateid);
+        if (stateid) {
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: "{{url('/getcity')}}?state_id=" + stateid,
+                success: function(res) {
+                    if (res) {
+
+                        $("#city").empty();
+                        // $("#city").attr('disabled',false);
+                        $("#city").append('<option selected disabled value="">Select City</option>');
+                        $.each(res, function(key, value) {
+                            if (value.id == city_id)
+                                $("#city").append('<option value="' + value.id + '" selected>' + value.name + '</option>');
+                            else
+                                $("#city").append('<option value="' + value.id + '">' + value.name + '</option>');
+
+                        });
+                        $('#city').selectpicker('refresh');
+
+                        // $("#state").append('<option value=' + id + '>' + name + '</option>'); // return empty
+                        // alert(res.id);
+                    }
+
+                }
+            });
+        }
+        // $("#specialization option[value='+program_id+']").attr("selected", "selected");
+
+        // END
         // alert(status);
         $("#state").change(function() {
             var stateid = $("#state").find(":selected").val();
@@ -580,7 +586,7 @@
                 $.ajax({
                     type: "GET",
                     dataType: 'json',
-                    url: "{{url('/getcourse')}}?course_id=" + courseid+"&_id="+_id,
+                    url: "{{url('/getcourse')}}?course_id=" + courseid + "&_id=" + _id,
                     success: function(res) {
                         if (res) {
 
@@ -595,7 +601,7 @@
                             // $("#state").append('<option value=' + id + '>' + name + '</option>'); // return empty
                             // alert(res.id);
                         }
-                        
+
                     }
                 });
                 // alert(1);
