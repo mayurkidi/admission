@@ -50,9 +50,9 @@
             <td></td>
             @foreach($userdata as $user)
             <tr>
-                <td class="w-10">{{$user->name}}</td>
+                <td class="w-10 text-capitalize">{{$user->name}}</td>
                 <td class="w-15 text-lowercase">{{$user->email}}</td>
-                <td class="w-15">{{$user->fathername}}</td>
+                <td class="w-15 text-capitalize">{{$user->fathername}}</td>
                 <td class="w-5">{{$user->aid}}</td>
                 <td class="w-8">{{$user->pname}}</td>
                 <td class="w-8">{{$user->cname}}</td>
@@ -86,18 +86,15 @@
             @endforeach
         </tbody>
     </table>
-    <div class="text-center mt-5">
-        {{ $userdata->links() }}
-    </div>
 </div>
 <div class="text-center mt-10">
 
 </div>
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script>
-    $(function() {
-        $('#adminTable').DataTable({});
-    });
+    // $(function() {
+    //     $('#adminTable').DataTable({});
+    // });
 </script>
 <script>
     $("#test").hide();

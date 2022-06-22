@@ -80,7 +80,7 @@ class HomeController extends Controller
             ->leftJoin('courses','courses.id','=','applicationdetails.specialization')
             ->select('users.id as uid','users.name','users.email','users.fathername','applicationdetails.id as aid','applicationdetails.offerletter','courses.name as cname','programs.name as pname','payments.paymentproof','payments.paymentstatus','academicdetails.*','applicationdetails.testresult','applicationdetails.isapproved')
             ->where('users.id','!=',1)
-            ->orderBy('applicationdetails.id','DESC')->paginate(10);
+            ->orderBy('applicationdetails.id','DESC')->get();
             // ->orderByRaw('ISNULL(applicationdetails.id), applicationdetails.id  ASC');
             // return $userdata;
             // $user = User::select('*')->get();            
