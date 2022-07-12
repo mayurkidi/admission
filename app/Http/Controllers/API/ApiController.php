@@ -54,12 +54,15 @@ class ApiController extends Controller
         $id=Applicationdetail::where('userid',$request->id)->pluck('id');
         $app_all = Applicationdetail::select('*')->where('userid', $request->id)->get();
         $course = Course::where('id', $app_all[0]->specialization)->pluck('name');
+        $date=Applicationdetail::where('userid',$request->id)->pluck('created_at');
+        $_date=date_format($date[0],"d/m/Y");
         
         $data = [
             'id'=>$id,
             'name' =>$username,
             'logo'=>public_path().'/logo.png',
             'course'=>$course,
+            'date'=>$_date,
         ];
         Mail::send('mail',$data,function($message)use($email){
             $message->to($email[0])->subject('Your application is approved');
