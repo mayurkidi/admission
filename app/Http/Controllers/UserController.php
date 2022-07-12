@@ -95,6 +95,7 @@ class UserController extends Controller
             'mobile' => 'required',
             'fathermobile' => 'required',
         ]);
+        // return "Hello";
 
         return redirect()->route('dashboard')->with( 'success', 'User Profile Update Successfully');
     }

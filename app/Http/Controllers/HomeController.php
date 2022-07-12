@@ -14,7 +14,7 @@ use App\Models\Result;
 use Faker\Provider\ar_SA\Payment;
 use Illuminate\Console\Application;
 use Illuminate\Support\Facades\Auth;
-
+use DB;
 use Session;
 
 use function PHPSTORM_META\type;
@@ -66,18 +66,30 @@ class HomeController extends Controller
         }
         if (\Auth::user()->id == 1) {
 
-            $application = Applicationdetail::select('*')->get();
-            $user = User::select('*')->get();
-            $academic = Academicdetail::select('*')->paginate();
-            $payment = Payments::select('*')->get();
-            $courses = Course::all()->pluck('id', 'name');
-            $programs = Program::all()->pluck('id', 'name');
+            // $application = Applicationdetail::select('*')->get();
+            // $user = User::select('*')->get();
+            // $academic = Academicdetail::select('*')->paginate();
+            // $payment = Payments::select('*')->get();
+            // $courses = Course::all()->pluck('id', 'name');
+            // $programs = Program::all()->pluck('id', 'name');
+            $userdata=DB::table('users')
+            ->leftJoin('applicationdetails','applicationdetails.userid','=','users.id')
+            ->leftJoin('academicdetails','academicdetails.userid','=','users.id')
+            ->leftJoin('payments','payments.user_id','=','users.id')
+            ->leftJoin('programs','programs.id','=','applicationdetails.course')
+            ->leftJoin('courses','courses.id','=','applicationdetails.specialization')
+            ->select('users.id as uid','users.name','users.email','users.fathername','applicationdetails.id as aid','applicationdetails.offerletter','courses.name as cname','programs.name as pname','payments.paymentproof','payments.paymentstatus','academicdetails.*','applicationdetails.testresult','applicationdetails.isapproved')
+            ->where('users.id','!=',1)
+            ->orderBy('applicationdetails.id','DESC')->get();
+            // ->orderByRaw('ISNULL(applicationdetails.id), applicationdetails.id  ASC');
+            // return $userdata;
             // $user = User::select('*')->get();            
             // $application=Applicationdetail::select('*')->paginate(10);
             // return $user;
             // $merged_array=array_merge(array($user),array($application));
             // return $merged_array;
-            return view('admin',compact("application","academic","payment","user","courses","programs"));
+            // return view('admin',compact("application","academic","payment","user","courses","programs"));
+            return view('admin',compact('userdata'));
         }
         return view('dashboard', compact('paymentstatus', 'applicationstatus', 'graduationtype','isapproved','application'));
     }

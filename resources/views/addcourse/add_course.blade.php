@@ -431,6 +431,12 @@
                             <!-- Content four -->
                             <div id="test-l-4" role="tabpanel" class="bs-stepper-pane fade" aria-labelledby="courseFormtrigger4">
                                 <!-- Card -->
+                                <div class="text-center">
+                                    <img src="assets/images/paytmQR.jpeg" height="300" width="300">
+                                </div>
+                                <div class="text-center">
+                                    <h2><a href="https://m.paytm.me/rkurafna_nrweb" target="_blank">Scan or click here.</a></h2>
+                                </div>
                                 <div class="card mb-3  border-0">
                                     <div class="card-body">
                                         <div class="row mb-3">
@@ -470,10 +476,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
-        var program_id=$("#specialization").val();
-        var city_id=$("#city").val();
+        var program_id = $("#specialization").val();
+        var city_id = $("#city").val();
         var status = $("#status").val();
-        var _id=$("#cid").val();
+        var _id = $("#cid").val();
         // alert(_id);
         var pstatus = $("#pstatus").val();
         if (pstatus == 0) {
@@ -485,65 +491,65 @@
         // START
         var courseid = $("#course").find(":selected").val();
         if (courseid) {
-                $.ajax({
-                    type: "GET",
-                    dataType: 'json',
-                    url: "{{url('/getcourse')}}?course_id=" + courseid+"&_id="+_id,
-                    success: function(res) {
-                        if (res) {
-                            $("#specialization").empty();
-                            // $("#city").attr('disabled',false);
-                            $("#specialization").append('<option selected disabled value="">Select Specialization</option>');
-                            $.each(res, function(key, value) {
-                                if(value.id==program_id)
-                                    $("#specialization").append('<option value="' + value.id + '"selected >' + value.name + '</option>');
-                                else
-                                    $("#specialization").append('<option value="' + value.id + '">' + value.name + '</option>');
-                            });
-                            $('#specialization').selectpicker('refresh');
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: "{{url('/getcourse')}}?course_id=" + courseid + "&_id=" + _id,
+                success: function(res) {
+                    if (res) {
+                        $("#specialization").empty();
+                        // $("#city").attr('disabled',false);
+                        $("#specialization").append('<option selected disabled value="">Select Specialization</option>');
+                        $.each(res, function(key, value) {
+                            if (value.id == program_id)
+                                $("#specialization").append('<option value="' + value.id + '"selected >' + value.name + '</option>');
+                            else
+                                $("#specialization").append('<option value="' + value.id + '">' + value.name + '</option>');
+                        });
+                        $('#specialization').selectpicker('refresh');
 
-                            // $("#state").append('<option value=' + id + '>' + name + '</option>'); // return empty
-                            // alert(res.id);
-                        }
-                    },
-                    error: function(res){
-                        alert("Errro"+res);
-                    }    
-                });
-                // alert(1);
-            }
-            var stateid = $("#state").find(":selected").val();
-            // alert(stateid);
-            if (stateid) {
-                $.ajax({
-                    type: "GET",
-                    dataType: 'json',
-                    url: "{{url('/getcity')}}?state_id=" + stateid,
-                    success: function(res) {
-                        if (res) {
-
-                            $("#city").empty();
-                            // $("#city").attr('disabled',false);
-                            $("#city").append('<option selected disabled value="">Select City</option>');
-                            $.each(res, function(key, value) {
-                                if(value.id==city_id)
-                                    $("#city").append('<option value="' + value.id + '" selected>' + value.name + '</option>');
-                                else
-                                    $("#city").append('<option value="' + value.id + '">' + value.name + '</option>');
-
-                            });
-                            $('#city').selectpicker('refresh');
-
-                            // $("#state").append('<option value=' + id + '>' + name + '</option>'); // return empty
-                            // alert(res.id);
-                        }
-
+                        // $("#state").append('<option value=' + id + '>' + name + '</option>'); // return empty
+                        // alert(res.id);
                     }
-                });
-            }
-            // $("#specialization option[value='+program_id+']").attr("selected", "selected");
-            
-            // END
+                },
+                error: function(res) {
+                    alert("Errro" + res);
+                }
+            });
+            // alert(1);
+        }
+        var stateid = $("#state").find(":selected").val();
+        // alert(stateid);
+        if (stateid) {
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: "{{url('/getcity')}}?state_id=" + stateid,
+                success: function(res) {
+                    if (res) {
+
+                        $("#city").empty();
+                        // $("#city").attr('disabled',false);
+                        $("#city").append('<option selected disabled value="">Select City</option>');
+                        $.each(res, function(key, value) {
+                            if (value.id == city_id)
+                                $("#city").append('<option value="' + value.id + '" selected>' + value.name + '</option>');
+                            else
+                                $("#city").append('<option value="' + value.id + '">' + value.name + '</option>');
+
+                        });
+                        $('#city').selectpicker('refresh');
+
+                        // $("#state").append('<option value=' + id + '>' + name + '</option>'); // return empty
+                        // alert(res.id);
+                    }
+
+                }
+            });
+        }
+        // $("#specialization option[value='+program_id+']").attr("selected", "selected");
+
+        // END
         // alert(status);
         $("#state").change(function() {
             var stateid = $("#state").find(":selected").val();
@@ -580,7 +586,7 @@
                 $.ajax({
                     type: "GET",
                     dataType: 'json',
-                    url: "{{url('/getcourse')}}?course_id=" + courseid+"&_id="+_id,
+                    url: "{{url('/getcourse')}}?course_id=" + courseid + "&_id=" + _id,
                     success: function(res) {
                         if (res) {
 
@@ -595,7 +601,7 @@
                             // $("#state").append('<option value=' + id + '>' + name + '</option>'); // return empty
                             // alert(res.id);
                         }
-                        
+
                     }
                 });
                 // alert(1);
