@@ -183,7 +183,6 @@
     if (pstatus == 0) {
         $("#test").removeAttr('href');
     }
-    
     // alert(gtype);
     if (gtype == "PG") {
         $('#pg').removeAttr('hidden');
