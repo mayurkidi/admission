@@ -190,7 +190,8 @@
                                                     <button type="submit" class="btn btn-primary">
                                                         {{ __('Login') }}
                                                     </button>
-                                                    <div class="form-group agree-group col-md-12 text-center fpass"><a href="javascript:void(0);" onclick="$('#login_form_without_popup').hide(); $('#forgot_pwd_form_without_popup').fadeIn();">Forgot
+                                                    <!-- onclick="$('#login_form_without_popup').hide(); $('#forgot_pwd_form_without_popup').fadeIn();" -->
+                                                    <div class="form-group agree-group col-md-12 text-center fpass"><a href="{{ route('auth.passwords.email') }}">Forgot
                                                             Password?</a></div>
                                                 </form>
                                             </div>

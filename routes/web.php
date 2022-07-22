@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AddCourseController;
 use App\Http\Controllers\API\ApiController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\ForgotPassword;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,13 +38,18 @@ Route::group(['middleware' => 'auth', 'verified'], function () {
     Route::Post('test', [QuizController::class, 'save_quiz'])->name('save_quiz');
     // Route::post('fetch-states', [DropdownController::class, 'fetchState']);
     // Route::post('fetch-cities', [DropdownController::class, 'fetchCity']);  
+    
 });
+Route::post('reset_password_without_token', 'App\Http\Controllers\ForgotPassword@validatePasswordRequest');
+Route::post('reset_password_with_token', 'App\Http\Controllers\ForgotPassword@resetPassword');
+
 Route::get('/getcity', [ApiController::class, 'getCityList']);
 Route::get('/getcourse', [ApiController::class, 'getCourseList']);
 Route::get('/isapproved', [ApiController::class, 'isApproved']);
 Route::post('/uploadoc', [ApiController::class, 'UploadOC'])->name('uploadoc');
 Route::get('generate-pdf', 'App\Http\Controllers\PDFController@generatePDF')->name('generate-pdf');
 Route::view('admitcard', 'admitcard')->name('admitcard');
+Route::view('forgotpassword','auth.passwords.email')->name('auth.passwords.email');
 
 
 

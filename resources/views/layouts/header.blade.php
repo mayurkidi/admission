@@ -1,7 +1,7 @@
  <div class="header">
                 <!-- navbar -->
                 <nav class="navbar-default navbar navbar-expand-lg">
-                    <a id="nav-toggle" href="#">
+                    <a id="nav-toggle" id="menu" href="#">
                         <i class="fe fe-menu"></i>
                     </a>
                     <div class="ms-lg-3 d-none d-md-none d-lg-block">
@@ -35,7 +35,7 @@
                                 <div class="dropdown-divider"></div>
                                 <ul class="list-unstyled">
                                     <li>
-                                        <a class="dropdown-item" href="{{route('user.profile')}}">
+                                        <a class="dropdown-item" id="profile" href="{{route('user.profile')}}">
                                             <i class="fe fe-user me-2"></i> Profile
                                         </a>
                                     </li>
@@ -47,7 +47,7 @@
                                                      document.getElementById('logout-form').submit();">
                                             <i class="fe fe-power me-2"></i> Sign Out
                                         </a> -->
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                        <a class="dropdown-item" id="logout" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         <i class="fe fe-power me-2"></i> Sign Out

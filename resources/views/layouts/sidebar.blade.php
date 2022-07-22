@@ -7,7 +7,7 @@
                 <!-- Navbar nav -->
                 <ul class="navbar-nav flex-column" id="sideNavbar">
                     <li class="nav-item">
-                        <a class="nav-link" style="color: white ;" href="{{route('dashboard')}}">
+                        <a class="nav-link" id="dashboard" style="color: white ;" href="{{route('dashboard')}}">
                             <i class="nav-icon fe fe-home me-2"></i> Dashboard
                         </a>
 
