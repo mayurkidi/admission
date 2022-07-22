@@ -17,7 +17,7 @@
         text-transform: uppercase;
     } */
     .capitalize {
-        text-transform: lowercase;
+        text-transform: capitalize;
     }
 </style>
 <h1 class="text-center">Admin panel</h1>
@@ -50,9 +50,15 @@
             <td></td>
             @foreach($userdata as $user)
             <tr>
+<<<<<<< HEAD
                 <td id="name" class="w-10 text-capitalize">{{$user->name}}</td>
                 <td class="w-15 text-lowercase">{{$user->email}}</td>
                 <td id=" class="w-15 text-capitalize">{{$user->fathername}}</td>
+=======
+                <td class="w-10 text-capitalize">{{$user->name}}</td>
+                <td class="w-15 text-lowercase">{{$user->email}}</td>
+                <td class="w-15 text-capitalize">{{$user->fathername}}</td>
+>>>>>>> 1619651fd325d3a7550a9c7d5ae48ff9dac00a16
                 <td class="w-5">{{$user->aid}}</td>
                 <td class="w-8">{{$user->pname}}</td>
                 <td class="w-8">{{$user->cname}}</td>
